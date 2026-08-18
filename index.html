@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kakde Research | Emerging Markets Research &amp; Advisory</title>
+  <meta name="description" content="Independent emerging-markets research and advisory for global investors. Deep specialist coverage of India, read against the markets competing for the same capital.">
+  <link rel="canonical" href="https://kakderesearch.com/">
+
+  <meta property="og:title" content="Kakde Research | Emerging Markets Research &amp; Advisory">
+  <meta property="og:description" content="Independent emerging-markets research and advisory. Deep India expertise, read against the markets competing for the same capital.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kakderesearch.com/">
+  <meta property="og:site_name" content="Kakde Research">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%2314294B'/%3E%3Cg fill='%23F4F0E6'%3E%3Crect x='20' y='54' width='10' height='22'/%3E%3Crect x='34' y='40' width='10' height='36'/%3E%3Crect x='48' y='20' width='10' height='56'/%3E%3Crect x='56' y='43' width='36' height='10' transform='rotate(-42 56 48)'/%3E%3Crect x='56' y='43' width='38' height='10' transform='rotate(42 56 48)'/%3E%3C/g%3E%3C/svg%3E">
+
+  <link rel="preload" href="assets/fonts/SourceSerif4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/SourceSerif4-Italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Inter-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script>
+    /* Arms the animation start-states only when JS is alive and the reader
+       has not asked for reduced motion. The watchdog un-arms them if the
+       animation layer never reports in. */
+    (function () {
+      var d = document.documentElement;
+      d.className += ' js';
+      try {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.className += ' anim';
+          window.setTimeout(function () {
+            if (!window.__kr_ready) d.className = d.className.replace(' anim', '');
+          }, 2500);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <script defer src="js/vendor/lenis.min.js"></script>
+  <script defer src="js/vendor/gsap.min.js"></script>
+  <script defer src="js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="js/vendor/SplitText.min.js"></script>
+  <script defer src="assets/data/macro.js"></script>
+  <script defer src="assets/data/macro-em.js"></script>
+  <script defer src="js/app.js"></script>
+  <script defer src="js/charts.js"></script>
+  <script defer src="js/dash.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Kakde Research",
+    "url": "https://kakderesearch.com/",
+    "email": "inquiries@kakderesearch.com",
+    "description": "Independent emerging-markets research and advisory firm, with deep specialist coverage of India, read against the markets competing for the same global capital.",
+    "foundingDate": "2025",
+    "founder": {
+      "@type": "Person",
+      "name": "Pranav Prakash Kakde",
+      "jobTitle": "Founder",
+      "url": "https://kakderesearch.com/about/founder/"
+    },
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" }
+  }
+  </script>
+</head>
+<body class="has-dark-hero">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header on-hero" id="siteHeader">
+    <div class="header-inner">
+      <a class="wordmark" href="./" aria-label="Kakde Research, home">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="20 20 68 58" width="26" height="22" role="presentation" focusable="false">
+            <rect x="20" y="54" width="10" height="22" fill="currentColor"/>
+            <rect x="34" y="40" width="10" height="36" fill="currentColor"/>
+            <rect x="48" y="20" width="10" height="56" fill="currentColor"/>
+            <rect x="56" y="43" width="36" height="10" fill="currentColor" transform="rotate(-42 56 48)"/>
+            <rect x="56" y="43" width="38" height="10" fill="currentColor" transform="rotate(42 56 48)"/>
+          </svg>
+        </span>
+        <span class="wordmark-text">Kakde Research</span>
+      </a>
+
+      <nav class="site-nav" id="siteNav" aria-label="Primary">
+        <a class="nav-link" href="emerging-markets/">Emerging Markets</a>
+        <a class="nav-link" href="india-desk/">India Desk</a>
+        <div class="nav-item has-menu">
+          <button class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-research">Research</button>
+          <div class="drop-menu" id="menu-research">
+            <a href="research/">All research</a>
+            <a href="research/the-india-you-cant-buy/">Flagship: The India You Can&rsquo;t Buy</a>
+            <a href="research/india-in-em/">India in EM</a>
+            <a href="research/what-the-coverage-misses/">What the coverage misses</a>
+            <a href="data/">The data desk</a>
+            <a href="insights/">Insights</a>
+          </div>
+        </div>
+        <a class="nav-link" href="advisory/">Advisory</a>
+        <div class="nav-item has-menu">
+          <button class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-about">About</button>
+          <div class="drop-menu" id="menu-about">
+            <a href="about/">The practice</a>
+            <a href="about/founder/">The researcher</a>
+            <a href="methodology/">Methodology</a>
+          </div>
+        </div>
+        <a class="nav-link" href="contact/">Contact</a>
+      </nav>
+
+      <div class="header-right">
+        <a class="btn btn-primary header-cta" href="contact/">Discuss a mandate</a>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============
+         Dark ground, the founding principle, and one real chart: India's
+         nominal GDP since 1960, drawn from the World Bank series on load.
+         India is the deepest market, so it carries the hero; the words set
+         the emerging-markets frame the whole practice reads through. -->
+    <section class="hero-dark">
+      <!-- The plate: south-central Mumbai in clear light under a navy duotone,
+           the desk's window rather than stock photography. Decorative, so the
+           wrapper is aria-hidden and the alt is empty. -->
+      <div class="hero-plate" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 720px)" srcset="assets/img/mumbai-skyline-1200.jpg">
+          <img src="assets/img/mumbai-skyline-2400.jpg" alt="" width="2400" height="1324" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+
+      <div class="container">
+        <p class="hero-dateline a-hero-el">
+          <span>Emerging markets research &amp; advisory</span>
+          <span>Deep India expertise</span>
+          <span>Est. 2025</span>
+        </p>
+
+        <h1 class="a-hero-el">Emerging markets compete for the same capital. <em>Research should compare them that way.</em></h1>
+
+        <div class="hero-row">
+          <div>
+            <p class="hero-sub a-hero-el">Independent research and advisory across emerging markets, with our deepest desk on India &mdash; and every country read against the alternatives competing for the same allocation.</p>
+            <div class="hero-actions a-hero-el">
+              <a class="btn btn-primary" href="research/">Read the research</a>
+              <a class="text-link" href="contact/">Discuss a mandate <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+
+          <figure class="hero-fig figure" role="group"
+                  data-figure="india_gdp_usd_bn"
+                  data-hero
+                  data-mode="usdbn"
+                  data-draw="load"
+                  data-delay="0.9"
+                  data-area="0.05"
+                  data-subject-label="India"
+                  data-notes='[{"year":1991,"label":"Liberalisation"},{"year":2020,"label":"Pandemic"}]'
+                  data-alt="Line chart of India's nominal GDP in current US dollars from 1960 to 2025, rising from about 37 billion dollars to about 3.96 trillion, with the slope steepening after the 1991 liberalisation.">
+            <div class="hero-readout a-hero-el">
+              <p class="hero-readout-fig" data-readout-fig>$3.96tn</p>
+              <p class="hero-readout-meta">Indian GDP, <b data-readout-year>2025</b><br>current US$ &middot; our deepest market</p>
+            </div>
+            <div class="hero-chart figure-frame a-hero-el" style="aspect-ratio: 1000 / 430; min-height: 0;"></div>
+            <figcaption class="hero-source a-hero-el">Source: World Bank Open Data, NY.GDP.MKTP.CD, retrieved 12 August 2026. Reported annual values, current US dollars.</figcaption>
+          </figure>
+        </div>
+
+        <!-- The snapshot strip: four real India readouts, each carrying its own
+             source and date. India leads the strip because it is the deepest
+             desk; the comparative view opens on the data desk below. -->
+        <div class="strip">
+          <div class="strip-grid">
+            <div class="strip-cell a-hero-el">
+              <p class="strip-label">Real GDP growth, 2025</p>
+              <p class="strip-value"><span data-count="7.57" data-dp="1" data-sign></span><span class="unit">%</span></p>
+              <div class="strip-spark" data-mini-spark="gdp_growth:IND" aria-hidden="true"></div>
+              <p class="strip-note">World Bank, since 2000</p>
+            </div>
+            <div class="strip-cell a-hero-el">
+              <p class="strip-label">CPI inflation, 2025</p>
+              <p class="strip-value"><span data-count="2.4" data-dp="1"></span><span class="unit">%</span></p>
+              <div class="strip-spark" data-mini-spark="cpi:IND" aria-hidden="true"></div>
+              <p class="strip-note">World Bank, annual average</p>
+            </div>
+            <div class="strip-cell a-hero-el">
+              <p class="strip-label">Policy repo rate</p>
+              <p class="strip-value"><span data-count="5.25" data-dp="2"></span><span class="unit">%</span></p>
+              <p class="strip-note">RBI, held 5 August 2026</p>
+            </div>
+            <div class="strip-cell a-hero-el">
+              <p class="strip-label">Services exports, 2025</p>
+              <p class="strip-value"><span data-count="412" data-dp="0" data-prefix="$"></span><span class="unit">bn</span></p>
+              <div class="strip-spark" data-mini-spark="svc_exports_bn:IND" aria-hidden="true"></div>
+              <p class="strip-note">World Bank</p>
+            </div>
+          </div>
+          <p class="strip-foot">India snapshot &mdash; our deepest market. Sources: World Bank Open Data and the Reserve Bank of India, as dated in each cell.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPARED WITH WHAT ============ -->
+    <section class="section">
+      <div class="container intro-grid">
+        <p class="intro-mark mono-label">The principle</p>
+        <div class="intro-body">
+          <p class="statement-lg a-rise">Underneath every emerging-market conclusion sits another question: <em>compared with what?</em></p>
+          <p class="a-rise">An allocator weighing India is rarely weighing India alone. The same capital could go to China, Indonesia, Vietnam, Brazil, Mexico, Taiwan, Korea or a Gulf market; it could sit in the broad EM index; or it could never leave developed markets at all. The comparison set is chosen, not inherited &mdash; and choosing it correctly is the first analytical act, not a footnote.</p>
+          <p class="a-rise">Most country coverage skips that step. It is written to sell a market, or assembled from the same secondary sources the reader has already seen. Neither survives contact with an investment committee.</p>
+          <p class="statement-lg a-rise" style="margin-top: var(--s3)">A country conclusion that cannot survive comparison with the markets competing for the same capital is not yet an investment conclusion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COVERAGE — the three-layer model ============ -->
+    <section class="section field-dn">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Coverage</h2>
+          <p class="mono-label">India is our deepest market &middot; emerging markets are the opportunity set</p>
+        </div>
+        <p class="section-intro a-rise" style="margin-bottom: var(--s5)">Three layers, read together. A shock in the third moves the second and lands in the first: the Fed sets the dollar, the dollar moves EM flows, and the flows reach an Indian balance sheet. We work the chain in both directions.</p>
+
+        <ul class="principles a-rise">
+          <li class="principle">
+            <p class="mono-label" style="margin-bottom: var(--s2)">Layer 01 &middot; Core market</p>
+            <h3>India</h3>
+            <p>Continuous, deep specialist coverage: macro, policy, the RBI, banking and credit, corporate profits, ownership and market structure. The one market we track without interruption &mdash; and where a foreign allocator most needs a local reading.</p>
+          </li>
+          <li class="principle">
+            <p class="mono-label" style="margin-bottom: var(--s2)">Layer 02 &middot; Comparative EM</p>
+            <h3>Emerging markets</h3>
+            <p>China, Indonesia, Vietnam, Brazil, Mexico, Taiwan, Korea, South Africa and selected Gulf markets &mdash; analysed comparatively, according to the research question and the capital-allocation decision, not maintained as equal-depth country desks.</p>
+          </li>
+          <li class="principle">
+            <p class="mono-label" style="margin-bottom: var(--s2)">Layer 03 &middot; Global transmission</p>
+            <h3>Global macro</h3>
+            <p>The dollar, US rates, oil and commodities, trade and geopolitics &mdash; not covered for their own sake, but through the channel by which they reach emerging-market earnings, currencies and valuations.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ THE CYCLE, ON REAL DATA ============
+         India's real GDP growth 1998-2025 draws itself as you scroll; the
+         readout tracks the year the line has reached; the phase strip lights
+         as the line passes through it; and past the midpoint three comparator
+         economies fade in, which is the practice's actual argument: a country
+         is never read in isolation. -->
+    <section class="section stage"
+             data-figure="india_gdp_growth"
+             data-draw="scrub"
+             data-mode="pct"
+             data-area="0.10"
+             data-peers="china_gdp_growth,us_gdp_growth,euro_gdp_growth"
+             data-subject-label="India"
+             data-peer-labels="China,United States,Euro area"
+             data-alt="Line chart of India's annual real GDP growth from 1998 to 2025, with China, the United States and the euro area shown for comparison. India falls to minus 5.8 percent in 2020 and rebounds to 9.7 percent in 2021."
+             data-notes='[{"year":2008,"label":"Global financial crisis"},{"year":2020,"label":"Pandemic contraction"},{"year":2021,"label":"Rebound"}]'>
+      <div class="container">
+
+        <div class="stage-sticky">
+          <figure class="figure">
+            <div class="figure-head">
+              <p class="figure-title">A growth rate is not a story</p>
+              <p class="figure-unit">India, real GDP growth, annual %, 1998-2025</p>
+            </div>
+
+            <div class="readout">
+              <p class="readout-fig"><span data-readout-fig>+6.2</span></p>
+              <p class="readout-meta">Year <span class="readout-year" data-readout-year>1998</span></p>
+            </div>
+
+            <div class="figure-frame"></div>
+
+            <p class="figure-source">Source: World Bank Open Data, series NY.GDP.MKTP.KD.ZG, retrieved 12 August 2026. Reported annual values, not estimates.</p>
+          </figure>
+        </div>
+
+        <div class="stage-steps">
+          <div class="stage-step is-on">
+            <p>A growth rate is not a story. The same 7 per cent means one thing coming out of a contraction and something else entirely at the end of a long expansion.</p>
+          </div>
+          <div class="stage-step">
+            <p>2008 is the cleanest test of that. India kept growing through the global financial crisis, at 3.1 per cent, and the number that mattered was not the level but what it was measured against.</p>
+          </div>
+          <div class="stage-step">
+            <p>2020 took the series negative for the first time in four decades, to &minus;5.8 per cent. The 9.7 per cent that followed in 2021 is arithmetic on a collapsed base, not an acceleration.</p>
+          </div>
+          <div class="stage-step">
+            <p>Which is why no market is read on its own here. Set against China, the United States and the euro area, the same line reads differently &mdash; and against the emerging markets competing for the same capital, differently again. That comparison is where every engagement starts.</p>
+          </div>
+        </div>
+
+        <ul class="phases">
+          <li class="phase" data-from="2014" data-to="2016"><span class="phase-name">Expansion</span><span class="phase-when">2014 to 2016</span></li>
+          <li class="phase" data-from="2016" data-to="2016"><span class="phase-name">Peak</span><span class="phase-when">2016, 8.3%</span></li>
+          <li class="phase" data-from="2017" data-to="2019"><span class="phase-name">Slowdown</span><span class="phase-when">2017 to 2019</span></li>
+          <li class="phase" data-from="2020" data-to="2020"><span class="phase-name">Trough</span><span class="phase-when">2020, &minus;5.8%</span></li>
+          <li class="phase" data-from="2021" data-to="2025"><span class="phase-name">Recovery</span><span class="phase-when">2021 to 2025</span></li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ============ INDIA DESK — the deepest market ============ -->
+    <section class="section field-dark" id="india-desk">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">India Desk</h2>
+          <p class="mono-label">Our deepest specialist coverage &middot; monthly retainer</p>
+        </div>
+
+        <div class="desk-grid">
+          <div class="desk-body">
+            <p class="desk-claim a-rise">You may not need to build an India desk. You may simply need <em>access to one</em>.</p>
+            <p class="a-rise" style="margin-top: var(--s3)">India is the market Kakde Research covers most deeply and most continuously. The India Desk is a bespoke monthly research retainer for organisations with meaningful India exposure and no dedicated India team: asset managers, family offices, boutique investment firms, private-capital groups, and the emerging-markets and global allocation teams for whom India is one line among many.</p>
+            <p class="a-rise">What happened in India is already in the wires. The desk answers the question behind it: why it matters, and whether it makes India more or less attractive than the emerging markets competing for the same capital.</p>
+            <div class="desk-actions a-rise">
+              <a class="btn btn-primary" href="contact/">Discuss an India Desk retainer</a>
+              <a class="text-link" href="india-desk/">Inside the India Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+
+          <ol class="desk-mods a-rise">
+            <li class="desk-mod">
+              <span class="svc-num">01</span>
+              <h3>Monthly research note</h3>
+              <p>A bespoke paper each month on an India question you nominate &mdash; or an India-against-EM question the desk flags.</p>
+            </li>
+            <li class="desk-mod">
+              <span class="svc-num">02</span>
+              <h3>Rapid written Q&amp;A</h3>
+              <p>Short-turnaround analytical answers between the notes, in writing, within 48 hours.</p>
+            </li>
+            <li class="desk-mod">
+              <span class="svc-num">03</span>
+              <h3>Monthly research discussion</h3>
+              <p>A structured call around the note, the EM comparison and whatever the month raised.</p>
+            </li>
+            <li class="desk-mod">
+              <span class="svc-num">04</span>
+              <h3>Comparative EM monitoring</h3>
+              <p>India&rsquo;s position tracked against the peers that matter for your allocation, not a fixed basket.</p>
+            </li>
+            <li class="desk-mod">
+              <span class="svc-num">05</span>
+              <h3>Maintained data</h3>
+              <p>The series behind the work, kept current as the sources revise and release.</p>
+            </li>
+            <li class="desk-mod">
+              <span class="svc-num">06</span>
+              <h3>Priority research capacity</h3>
+              <p>An open desk: no re-scoping from zero every time an India question appears.</p>
+            </li>
+            <li class="desk-mod">
+              <span class="svc-num">07</span>
+              <h3>Deep-dive research</h3>
+              <p>The larger questions graduate into dedicated papers where the retainer warrants it.</p>
+            </li>
+          </ol>
+        </div>
+
+        <p class="a-rise" style="margin-top: var(--s4); font-size: var(--t-small); color: var(--on-dark-muted); max-width: 68ch;">No off-the-shelf subscription tiers. Each India Desk engagement is a bespoke monthly retainer, designed in writing around the organisation&rsquo;s actual India and emerging-markets research requirements.</p>
+      </div>
+    </section>
+
+    <!-- ============ EMERGING MARKETS STRATEGY ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Emerging markets strategy</h2>
+          <p class="mono-label">Which market deserves the marginal dollar?</p>
+        </div>
+        <p class="section-intro a-rise" style="margin-bottom: var(--s5)">No emerging market exists in a portfolio vacuum. Comparative work across the economies competing for the same allocation &mdash; measured on the mechanisms that turn growth into currency-adjusted shareholder return, not on the country narrative.</p>
+
+        <ol class="svc-rows">
+          <li class="svc-row a-rise">
+            <span class="svc-num">01</span>
+            <h3>Country allocation</h3>
+            <p>Which market deserves the marginal dollar, and on what evidence. Relative growth, valuation, currency and investability, read as one decision rather than seven country notes.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">02</span>
+            <h3>Cross-market valuation</h3>
+            <p>Price against earnings, ROE, currency and growth &mdash; which premiums the fundamentals actually support, and which are a story the market has agreed to keep telling.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">03</span>
+            <h3>Capital flows &amp; FX</h3>
+            <p>Foreign and domestic capital, the dollar cycle, rates and currencies &mdash; who is setting the price at the margin, and what a turn in the dollar changes across the set.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">04</span>
+            <h3>Trade &amp; manufacturing</h3>
+            <p>China+1, supply chains and export share &mdash; and the harder question of who captures the value: the host economy, the multinational, or the local shareholder.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">05</span>
+            <h3>Market structure &amp; investability</h3>
+            <p>Free float, ownership, governance, index construction and foreign access &mdash; the gap between the economy and the slice of it a foreigner is allowed to own.</p>
+          </li>
+        </ol>
+
+        <div class="a-rise" style="margin-top: var(--s5)">
+          <p class="mono-label" style="margin-bottom: var(--s3)">Example research questions</p>
+          <ul class="dash-list" style="max-width: 74ch;">
+            <li>India or Indonesia for domestic-demand exposure &mdash; and how much of each actually reaches a foreign shareholder?</li>
+            <li>India, Vietnam or Mexico for the China+1 electronics build-out?</li>
+            <li>What does a weaker dollar change across emerging-market currencies and valuations?</li>
+            <li>Which EM converts nominal GDP growth into USD shareholder earnings most effectively?</li>
+          </ul>
+          <p style="margin-top: var(--s4)"><a class="text-link" href="emerging-markets/">How we cover emerging markets <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FLAGSHIP RESEARCH ============ -->
+    <section class="section field-dn">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Flagship research</h2>
+          <p class="mono-label">India is the subject &middot; emerging markets are the opportunity set &middot; 28 pages</p>
+        </div>
+
+        <div class="intro-grid">
+          <div class="a-rise">
+            <p class="mono-label" style="margin-bottom: var(--s2)">The paper</p>
+            <p style="font-size: var(--t-small); color: var(--muted); max-width: 26ch; line-height: 1.6;">Read online, or request the full paper by email. The methodology and sources are stated in the document, and India is measured against the developed- and emerging-market alternatives throughout.</p>
+          </div>
+          <div class="intro-body">
+            <h3 class="statement-lg a-rise" style="max-width: 20ch;"><a href="research/the-india-you-cant-buy/" style="color: inherit; text-decoration: none;">The India You Can&rsquo;t Buy</a></h3>
+            <p class="a-rise" style="margin-top: var(--s2)">Why the index a foreign allocator can own is not the economy they think they are buying: foreign room, ownership limits, and the gap between MSCI India and India &mdash; the same investability question that decides where an emerging-market dollar can actually go.</p>
+            <ul class="dash-list a-rise" style="margin-top: var(--s3);">
+              <li>A foreign tracker owns the float foreigners are allowed to hold, not the economy.</li>
+              <li>Ownership limits, free-float adjustment and promoter holdings mean index weight understates economic weight in the most domestically-owned sectors.</li>
+              <li>The gap is structural, not a discount that closes on its own.</li>
+              <li>The paper closes on what would change the view, stated as observable indicators.</li>
+            </ul>
+            <div class="a-rise" style="display: flex; align-items: center; flex-wrap: wrap; gap: var(--s3) var(--s4); margin-top: var(--s4);">
+              <a class="btn btn-primary" href="research/the-india-you-cant-buy/">Read the paper</a>
+              <a class="text-link" href="mailto:inquiries@kakderesearch.com?subject=Paper%20request%3A%20The%20India%20You%20Can%27t%20Buy">Request the full paper <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE COMPARATIVE DATA DESK ============
+         The dashboard proper. Two reading modes over the same sourced
+         observations: the global anchors, and the EM peer set. Everything
+         drawn here comes from macro-em.js; the ranking table below reads the
+         latest fresh observation per country and shades by rank. -->
+    <section class="section field-dark" id="data-desk">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">The comparative data desk</h2>
+          <p class="mono-label">India &middot; global anchors &middot; EM peers</p>
+        </div>
+        <p class="section-intro a-rise">Maintained, not simulated. The desk shows the latest reported observation for each series and is refreshed as the sources release. Every figure carries its series ID, its observation years and its retrieval date &mdash; macro data is annual, and pretending otherwise would be decoration.</p>
+
+        <div class="dash a-rise" data-dash style="margin-top: var(--s5)">
+          <div class="dash-tabs" role="tablist" aria-label="Comparison set">
+            <button class="dash-tab" role="tab" data-mode="global" aria-selected="true">Global anchors</button>
+            <button class="dash-tab" role="tab" data-mode="em" aria-selected="false">India vs EM peers</button>
+          </div>
+
+          <div class="dash-controls">
+            <div class="dash-chiprow" data-dash-countries></div>
+            <div class="dash-chiprow" data-dash-indicators></div>
+          </div>
+
+          <div class="dash-layout">
+            <figure class="figure dash-fig">
+              <div class="figure-head">
+                <p class="figure-title" data-dash-title>Real GDP growth</p>
+                <p class="figure-unit" data-dash-unit>annual %</p>
+              </div>
+              <ul class="figure-legend" data-dash-legend></ul>
+              <div class="figure-frame" data-dash-frame></div>
+              <p class="figure-source" data-dash-source></p>
+              <p class="figure-source" data-dash-note></p>
+            </figure>
+
+            <aside class="dash-side">
+              <p class="mono-label">Latest observations</p>
+              <ul class="dash-reads" data-dash-reads aria-live="polite"></ul>
+              <div class="dash-cta">
+                <p>Need this watched for your portfolio, with the interpretation attached?</p>
+                <p><a class="text-link" href="india-desk/">The India Desk monitors it monthly <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </aside>
+          </div>
+
+          <div data-dash-rank></div>
+
+          <p class="figure-source" style="margin-top: var(--s3)">Source: World Bank Open Data, retrieved 13 August 2026. Reported annual observations only; no estimates, no interpolation. A country whose latest report is too old to compare shows n/a rather than a stale rank. Full series list, units and methodology on the <a href="data/" style="color: inherit">data desk</a>.</p>
+        </div>
+
+        <p class="a-rise" style="margin-top: var(--s4)"><a class="text-link" href="data/">Explore the full data desk <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============ RESEARCH AND ADVISORY ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Research and advisory</h2>
+          <p class="mono-label">The published work, and the work commissioned</p>
+        </div>
+
+        <div class="pillars">
+          <div class="pillar a-rise">
+            <p class="pillar-kicker">The intellectual product</p>
+            <h3><a href="research/" style="color: inherit; text-decoration: none;">Research</a></h3>
+            <p class="pillar-claim">You bring the question. We identify the markets, evidence and comparison set required to answer it.</p>
+            <p>Published papers, briefings and data notes on emerging economies &mdash; deepest on India &mdash; with the methodology stated openly enough to be challenged, and every market set against the right comparators for the question.</p>
+            <ul>
+              <li>India macro: growth, inflation, policy, the fiscal stance</li>
+              <li>Cross-market valuation, capital flows and currencies</li>
+              <li>Investability: the economy versus the market you can own</li>
+              <li>India in EM: where India wins, and where it loses</li>
+            </ul>
+            <a class="text-link" href="research/">The research archive <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </div>
+
+          <div class="pillar a-rise">
+            <p class="pillar-kicker">Research, applied</p>
+            <h3><a href="advisory/" style="color: inherit; text-decoration: none;">Advisory</a></h3>
+            <p class="pillar-claim">You bring the decision. We research what it actually rests on.</p>
+            <p>Client-specific research across India and emerging markets, built around one defined decision and the comparison set required to answer it &mdash; scoped in writing, delivered by a fixed date, with the data appendix your side can rebuild.</p>
+            <ul>
+              <li>Research sprints on a single defined question</li>
+              <li>Country allocation studies for CIOs and committees</li>
+              <li>Market access &amp; structure: what you can actually own</li>
+              <li>China+1 comparisons and strategic market studies</li>
+            </ul>
+            <a class="text-link" href="advisory/">How advisory works <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============
+         Real artefacts only. Client engagements are confidential and are not
+         restaged here as case studies. -->
+    <section class="section field-dn">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Selected work</h2>
+          <p class="mono-label">What leaves the desk</p>
+        </div>
+
+        <ol class="work-rows">
+          <li class="work-row a-rise">
+            <p class="work-client">Published research</p>
+            <h3 class="work-q"><a href="research/the-india-you-cant-buy/">The India You Can&rsquo;t Buy</a></h3>
+            <p class="work-desc">The flagship paper: what a foreign allocator can actually own in India, measured through foreign room, free float and ownership limits &mdash; and what that does to the exposure they think they hold.</p>
+            <p class="work-tags"><span>Markets</span><span>28 pages</span></p>
+          </li>
+          <li class="work-row a-rise">
+            <p class="work-client">Maintained data</p>
+            <h3 class="work-q"><a href="data/">India against seven economies, kept current</a></h3>
+            <p class="work-desc">The comparative data desk: sourced World Bank series across growth, prices, credit, external accounts and market structure for India and its EM peers, refreshed as the sources release, with every omission documented.</p>
+            <p class="work-tags"><span>Data desk</span><span>8 economies</span></p>
+          </li>
+          <li class="work-row a-rise">
+            <p class="work-client">Papers on request</p>
+            <h3 class="work-q"><a href="research/">Policy, banking, currency, governance</a></h3>
+            <p class="work-desc">Four further papers &mdash; on RBI credibility and transmission, banking-system resilience, the managed rupee, and promoter-controlled ownership &mdash; can be requested by email while their online editions are prepared.</p>
+            <p class="work-tags"><span>Research</span><span>By email</span></p>
+          </li>
+        </ol>
+
+        <p class="a-rise" style="margin-top: var(--s4); font-size: var(--t-small); color: var(--muted); max-width: 68ch;">Client engagements are confidential and are not restaged as marketing. Where a comparable question has been answered before, an anonymised summary &mdash; the question, the approach, the deliverable &mdash; is shared during scoping, with the client&rsquo;s permission.</p>
+      </div>
+    </section>
+
+    <!-- ============ WHO WE WORK WITH ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Who we work with</h2>
+          <p class="mono-label">In rough order of fit</p>
+        </div>
+
+        <ol class="svc-rows">
+          <li class="svc-row a-rise">
+            <span class="svc-num">01</span>
+            <h3>Global &amp; emerging-market asset managers</h3>
+            <p>EM and global funds holding India, or another emerging market, as a conviction &mdash; or an underweight they need to defend, on evidence rather than house view.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">02</span>
+            <h3>Family offices</h3>
+            <p>Sophisticated capital with meaningful emerging-market questions and no reason to staff a desk for a market they hold in size once.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">03</span>
+            <h3>CIO &amp; multi-asset teams</h3>
+            <p>Allocation teams weighing one emerging market against the set competing for the same capital, including EM ex-China strategies.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">04</span>
+            <h3>Hedge funds</h3>
+            <p>Macro and equity desks that need a specific mechanism worked through &mdash; a currency regime, an ownership limit, a policy transmission &mdash; not a country brochure.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">05</span>
+            <h3>Private equity &amp; private capital</h3>
+            <p>Research before commitment: market structure, sector evidence, and what the growth assumption in the model actually rests on.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">06</span>
+            <h3>Investment committees</h3>
+            <p>Written analysis built to be forwarded and defended &mdash; the comparison, the assumptions and the falsifier, stated plainly enough to be attacked.</p>
+          </li>
+          <li class="svc-row a-rise">
+            <span class="svc-num">07</span>
+            <h3>Corporates &amp; strategy teams</h3>
+            <p>Market entry, expansion and China+1 questions, compared honestly across India, Vietnam, Mexico, Indonesia and the other candidates.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ METHOD, ON THE DARK GROUND ============ -->
+    <section class="section field-dark">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">How the research is done</h2>
+          <p class="mono-label">The same six stages, every engagement</p>
+        </div>
+
+        <ol class="method">
+          <li class="method-step a-rise">
+            <span class="method-num">01</span>
+            <div>
+              <h3>Define the question</h3>
+              <p>Most enquiries arrive as a topic, and a topic cannot be answered. The scoping call turns it into something specific enough to be wrong about. If that cannot be done, the engagement does not start.</p>
+            </div>
+          </li>
+          <li class="method-step a-rise">
+            <span class="method-num">02</span>
+            <div>
+              <h3>Choose the comparison set</h3>
+              <p>The markets competing for the same capital are named before any analysis begins. A manufacturing question runs against Vietnam and Mexico; a domestic-demand question against Indonesia and Brazil. Choosing this set correctly is the first analytical act.</p>
+            </div>
+          </li>
+          <li class="method-step a-rise">
+            <span class="method-num">03</span>
+            <div>
+              <h3>Establish the evidence</h3>
+              <p>Official data, primary sources, policy documents and filings, pulled and cleaned in-house. Where a series has been revised or interrupted, that is recorded rather than smoothed over. Those breaks are usually where the interesting answers sit.</p>
+            </div>
+          </li>
+          <li class="method-step a-rise">
+            <span class="method-num">04</span>
+            <div>
+              <h3>Challenge the consensus</h3>
+              <p>The prevailing view is written down explicitly, along with what it rests on. Often that is a single dataset, a definitional choice, or a comparison nobody has revisited in years.</p>
+            </div>
+          </li>
+          <li class="method-step a-rise">
+            <span class="method-num">05</span>
+            <div>
+              <h3>Test the conclusion</h3>
+              <p>The finding is attacked before it is delivered. What alternative explanations produce the same result? Anything that only holds under one reading of the data is labelled as such.</p>
+            </div>
+          </li>
+          <li class="method-step a-rise">
+            <span class="method-num">06</span>
+            <div>
+              <h3>Make it decision-relevant</h3>
+              <p>The report closes on what you should now understand differently, and the conditions that would change the view. A conclusion you cannot defend when challenged has not finished being researched.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="method-note a-rise">
+          <h3>The comparison set is <em>chosen</em>, not inherited.</h3>
+          <div>
+            <p>A good analysis does not reach for China and the United States by reflex. A manufacturing question runs against Vietnam, Mexico, Indonesia and China. A domestic-demand question runs against Indonesia and Brazil. A market-access question runs against the whole classified EM set. The question determines the peer group &mdash; and the first task of any engagement is getting that choice right.</p>
+            <p>Where an important conclusion is published, so is the condition that would change it. <a class="text-link" href="methodology/">The full methodology <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE RESEARCHER ============ -->
+    <section class="section">
+      <div class="container who-grid">
+        <div class="who-byline a-rise">
+          <p class="mono-label">The researcher</p>
+          <p class="byline-name">Pranav Prakash Kakde</p>
+          <p class="byline-role">Founder &amp; lead researcher<br>Based in India</p>
+        </div>
+
+        <div class="who-body">
+          <p class="statement-lg a-rise">A researcher, not a research department.</p>
+          <p class="a-rise">Before starting Kakde Research I worked in London, at a global investment bank and at a financial-data company, across macro and market data. I trained as a computer engineer before taking an MSc in Finance, and I still build the data pipelines behind every piece of work myself.</p>
+          <p class="a-rise">The practice exists because of a gap I kept seeing from the other side. The emerging-market questions asked in London &mdash; and the India questions most of all &mdash; were rarely answered well from London: the coverage was either promotional, written to sell the market, or generic, written by someone reading the same secondary sources as the client. What was missing was a local reading with the discipline of an institutional desk.</p>
+          <p class="a-rise">Every engagement is scoped, researched and delivered by the analyst you speak to. There is no account-manager handoff and no junior team separated from your original question, which places a limit on how much work the practice takes at once &mdash; and the limit is deliberate.</p>
+          <p class="signature a-rise">If I don&rsquo;t think your question can be answered properly, I will tell you on the scoping call, before you have spent anything.</p>
+          <p class="a-rise" style="margin-top: var(--s4)"><a class="text-link" href="about/founder/">About the researcher <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LATEST THINKING ============ -->
+    <section class="section field-dn">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">Latest thinking</h2>
+          <p class="mono-label">Three registers of writing</p>
+        </div>
+
+        <ul class="principles a-rise">
+          <li class="principle">
+            <h3>Research</h3>
+            <p>Deep work. Longer structured papers with a stated methodology and the data shown, written to hold up in front of a committee.</p>
+          </li>
+          <li class="principle">
+            <h3>Briefings</h3>
+            <p>Time-sensitive analysis: what a data release, policy statement or market move actually changes.</p>
+          </li>
+          <li class="principle">
+            <h3>Data notes</h3>
+            <p>One chart. One finding. One implication.</p>
+          </li>
+        </ul>
+
+        <ol class="idx" style="margin-top: var(--s4)">
+          <li class="idx-row a-rise">
+            <span class="idx-num">08.26</span>
+            <h3 class="idx-title"><a href="insights/#note-2026-08">The number that isn&rsquo;t in the index factsheet</a></h3>
+            <p class="idx-desc">Foreign room: how much of a company a foreign investor may own, how much of that allowance is already used &mdash; and why the factsheet never says.</p>
+            <p class="idx-meta"><span>Data note</span></p>
+            <span class="idx-arrow" aria-hidden="true">&rarr;</span>
+          </li>
+          <li class="idx-row a-rise">
+            <span class="idx-num">07.26</span>
+            <h3 class="idx-title"><a href="insights/#note-2026-07">What a 6.5 percent decade actually prices in</a></h3>
+            <p class="idx-desc">A growth premium can be fully priced, partly owned, or simply not investable. Given growth like this, what do you actually get to buy?</p>
+            <p class="idx-meta"><span>Briefing</span></p>
+            <span class="idx-arrow" aria-hidden="true">&rarr;</span>
+          </li>
+          <li class="idx-row a-rise">
+            <span class="idx-num">06.26</span>
+            <h3 class="idx-title"><a href="insights/#note-2026-06">How to read an RBI statement</a></h3>
+            <p class="idx-desc">Stance, vote, liquidity, transmission, assumptions &mdash; in that order. A policy rate that is not transmitting is commentary, not policy.</p>
+            <p class="idx-meta"><span>Briefing</span></p>
+            <span class="idx-arrow" aria-hidden="true">&rarr;</span>
+          </li>
+        </ol>
+
+        <div class="a-rise" style="display: flex; flex-wrap: wrap; gap: var(--s2) var(--s3); margin-top: var(--s4); align-items: center;">
+          <a class="flag-chip" href="research/what-the-coverage-misses/">What the Coverage Misses</a>
+          <a class="flag-chip" href="research/india-in-em/">India in EM</a>
+          <span style="font-size: var(--t-small); color: var(--muted);">&mdash; the two recurring franchises, under Research.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ON WHAT TERMS ============ -->
+    <section class="section-tight">
+      <div class="container">
+        <h2 class="section-title a-rise" style="margin-bottom: var(--s4)">On what terms</h2>
+        <ul class="terms-grid">
+          <li class="term a-rise">
+            <span class="term-num">01</span>
+            <h3>Fixed scope</h3>
+            <p>The question, the sources and the deliverable are agreed in writing before any work begins. A brief that grows is a new engagement, quoted separately.</p>
+          </li>
+          <li class="term a-rise">
+            <span class="term-num">02</span>
+            <h3>Fixed fee</h3>
+            <p>Quoted per engagement against that scope. No hourly billing and no overage, so the fee does not move because the answer took longer to reach.</p>
+          </li>
+          <li class="term a-rise">
+            <span class="term-num">03</span>
+            <h3>Fixed date</h3>
+            <p>A delivery date set at the outset, chosen so the work lands before the meeting it is meant to inform rather than after it.</p>
+          </li>
+          <li class="term a-rise">
+            <span class="term-num">04</span>
+            <h3>The retainer</h3>
+            <p>The India Desk runs as a bespoke monthly retainer, scoped in writing like everything else. Continuous capacity, not a subscription product.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING ============ -->
+    <section class="closing">
+      <div class="container">
+        <blockquote class="a-rise">Where India ranks badly, I say so first.</blockquote>
+        <p class="attrib a-rise">That is what makes the favourable findings worth anything &mdash; and it holds across the set. Sometimes Vietnam wins the manufacturing comparison; sometimes Brazil is cheaper for the same growth. The methodology is stated plainly enough to be challenged, so a reader who disagrees with a conclusion can see exactly which number, or which assumption, to attack.</p>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta-band">
+      <div class="container">
+        <div class="cta-inner a-rise">
+          <div>
+            <h2>Have a market question worth investigating?</h2>
+            <p>Describe what you are trying to understand, the markets it touches, and the decision it relates to. You will get a reply within two working days.</p>
+          </div>
+          <a class="btn btn-primary" href="contact/">Discuss a research mandate</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark" href="./">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="20 20 68 58" width="26" height="22" role="presentation" focusable="false">
+              <rect x="20" y="54" width="10" height="22" fill="currentColor"/>
+              <rect x="34" y="40" width="10" height="36" fill="currentColor"/>
+              <rect x="48" y="20" width="10" height="56" fill="currentColor"/>
+              <rect x="56" y="43" width="36" height="10" fill="currentColor" transform="rotate(-42 56 48)"/>
+              <rect x="56" y="43" width="38" height="10" fill="currentColor" transform="rotate(42 56 48)"/>
+            </svg>
+          </span>
+          <span class="wordmark-text">Kakde Research</span>
+        </a>
+        <p class="footer-line">Independent emerging markets research &amp; advisory,</p>
+        <p class="footer-line">with deep India expertise</p>
+        <p class="footer-line">Based in India &middot; working globally</p>
+        <p class="footer-line"><a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a></p>
+      </div>
+      <nav class="footer-col" aria-label="Coverage">
+        <p class="footer-head">Coverage</p>
+        <a href="emerging-markets/">Emerging Markets</a>
+        <a href="india-desk/">India Desk</a>
+        <a href="data/">The data desk</a>
+      </nav>
+      <nav class="footer-col" aria-label="Research">
+        <p class="footer-head">Research</p>
+        <a href="research/">All research</a>
+        <a href="research/the-india-you-cant-buy/">The India You Can&rsquo;t Buy</a>
+        <a href="research/india-in-em/">India in EM</a>
+        <a href="insights/">Insights</a>
+      </nav>
+      <nav class="footer-col" aria-label="Firm">
+        <p class="footer-head">Firm</p>
+        <a href="advisory/">Advisory</a>
+        <a href="about/">The practice</a>
+        <a href="about/founder/">The researcher</a>
+        <a href="methodology/">Methodology</a>
+        <a href="contact/">Contact</a>
+      </nav>
+      <nav class="footer-col" aria-label="Legal">
+        <p class="footer-head">Legal</p>
+        <a href="legal/disclaimer/">Disclaimer</a>
+        <a href="legal/terms/">Terms</a>
+        <a href="legal/privacy/">Privacy</a>
+        <a href="legal/sources/">Sources &amp; data</a>
+        <a href="legal/corrections/">Corrections</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>Kakde Research provides emerging-markets research and advisory for professional and institutional readers. Nothing on this site constitutes investment advice or a recommendation to buy or sell any security.</p>
+      <p>&copy; 2026 Kakde Research</p>
+    </div>
+  </footer>
+
+</body>
+</html>

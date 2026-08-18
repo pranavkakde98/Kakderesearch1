@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Three faces, three jobs. Self-hosted, latin subset, same origin — no
+   request leaves the machine on page load.
+
+   Source Serif 4   editorial voice. Statements, headlines, paper titles.
+                    Chosen over Playfair Display, which is a fashion didone:
+                    handsome at 90px, but it has become the default "premium"
+                    web serif and now reads as generated rather than chosen.
+                    Source Serif was drawn for reading, holds its colour at
+                    text sizes, and looks like a publication.
+   Inter            interface. Navigation, body copy, buttons, forms.
+                    400 and 500 only — nothing on this site is set bolder,
+                    so the 600 file was dropped.
+   JetBrains Mono   the technical register. Dates, page counts, themes,
+                    section indices — the metadata of a research publication.
+                    It appears only where something is being recorded.
+
+   Source Serif and JetBrains Mono are variable, so one file covers each
+   weight range. Five files, 200 KB, against nine files and 338 KB before.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/SourceSerif4.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/SourceSerif4-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../assets/fonts/JetBrainsMono.woff2') format('woff2');
+}
