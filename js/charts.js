@@ -430,11 +430,15 @@
     if (!motion) { print(target); return; }
     print(0);
     var state = { v: 0 };
-    window.ScrollTrigger.create({
-      trigger: node,
-      start: 'top 88%',
-      once: true,
-      onEnter: function () {
+
+    /* Fire the count-up immediately on page load. The strip figures are now
+       part of the initial hero viewport, so waiting for a scroll event
+       would feel broken. A small stagger per cell keeps it feeling choreographed
+       rather than mechanical. */
+    var delay = parseFloat(node.getAttribute('data-delay') || '0');
+    if (isNaN(delay) || delay < 0) delay = 0;
+    setTimeout(function () {
+      if (g.to) {
         g.to(state, {
           v: target,
           duration: 1.4,
@@ -442,7 +446,7 @@
           onUpdate: function () { print(state.v); }
         });
       }
-    });
+    }, 800 + delay * 1000);
   });
 
   /* ---------- article bar charts ---------- */

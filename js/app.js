@@ -359,6 +359,7 @@
       tl.to(heroEl.querySelector('.hero-actions'), { opacity: 1, y: 0, duration: 0.7 }, 0.62);
       tl.to(heroEl.querySelectorAll('.hero-fig .a-hero-el'), { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.55);
       tl.to(heroEl.querySelectorAll('.strip .a-hero-el'), { opacity: 1, y: 0, duration: 0.7, stagger: 0.07 }, 0.9);
+      tl.to(heroEl.querySelector('.hero-countries'), { opacity: 1, y: 0, duration: 0.7 }, 1.05);
     };
     /* Split after the webfonts have settled, so lines break where they
        will stay. The race keeps a slow font from holding the page. */

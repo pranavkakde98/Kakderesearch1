@@ -556,7 +556,8 @@ body.has-dark-hero { padding-top: 0; }
      plate fails to load. */
   background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-abyss) 100%);
   color: var(--on-dark);
-  padding-top: calc(var(--header-h) + clamp(40px, 7vh, 88px));
+  padding-top: calc(var(--header-h) + clamp(32px, 5.5vh, 64px));
+  padding-bottom: 0;
   overflow: hidden;
   /* Small type sits over a photograph here rather than a flat field, so
      the muted step is lifted. At 0.55 the dateline and the chart's axis
@@ -606,17 +607,17 @@ body.has-dark-hero { padding-top: 0; }
 
 .hero-row {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: var(--s5) var(--s6);
-  align-items: end;
-  margin-top: clamp(36px, 5vh, 64px);
+  grid-template-columns: minmax(0, 4.7fr) minmax(0, 7.3fr);
+  gap: var(--s4) var(--s5);
+  align-items: start;
+  margin-top: clamp(28px, 4vh, 48px);
 }
 
 .hero-dateline {
   display: flex;
   flex-wrap: wrap;
   gap: 8px var(--s3);
-  margin-bottom: clamp(28px, 4vh, 48px);
+  margin-bottom: clamp(20px, 3vh, 36px);
   font-family: var(--mono);
   font-size: var(--t-meta);
   letter-spacing: 0.14em;
@@ -691,22 +692,10 @@ body.has-dark-hero { padding-top: 0; }
   color: var(--on-dark-muted);
 }
 
-/* The hero chart draws with cream ink on the dark desk. */
-.hero-chart .series-line { stroke: var(--on-dark); stroke-width: 2; }
-.hero-chart .series-area { fill: var(--on-dark); }
-.hero-chart .axis-label { fill: var(--on-dark-muted); }
-.hero-chart .gridline { stroke: var(--rule-dk); }
-.hero-chart .zeroline { stroke: var(--rule-dk-mid); }
-.hero-chart .annot-note { fill: var(--on-dark-mid); }
-.hero-chart .annot-val { fill: var(--on-dark); }
-.hero-chart .annot-rule { stroke: var(--rule-dk-mid); }
-.hero-chart .annot-dot { fill: var(--accent-bright); }
-
-/* ---------- The snapshot strip: real readouts, honestly dated ---------- */
-
+/* Snapshot strip below the hero chart */
 .strip {
   border-top: 1px solid var(--rule-dk);
-  margin-top: clamp(48px, 7vh, 84px);
+  margin-top: clamp(24px, 3.5vh, 48px);
 }
 .strip-grid {
   display: grid;
@@ -718,6 +707,204 @@ body.has-dark-hero { padding-top: 0; }
 }
 .strip-cell + .strip-cell { padding-left: var(--s3); }
 .strip-cell:last-child { border-right: 0; padding-right: 0; }
+.strip-label {
+  font-family: var(--mono);
+  font-size: var(--t-meta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+}
+.strip-value {
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.6vw, 40px);
+  line-height: 1;
+  color: var(--on-dark);
+  font-variant-numeric: tabular-nums;
+}
+.strip-value .unit { font-size: 0.55em; color: var(--on-dark-mid); }
+.strip-note {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: var(--on-dark-muted);
+}
+.strip-spark { height: 26px; margin-top: 12px; }
+.strip-spark svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.strip-spark .spark-line { stroke: var(--on-dark-mid); stroke-width: 1.4; fill: none; }
+.strip-spark .spark-end { fill: var(--on-dark-mid); }
+.strip-cell.is-subject .strip-spark .spark-line { stroke: var(--accent-bright); }
+.strip-cell.is-subject .strip-spark .spark-end { fill: var(--accent-bright); }
+.strip-market {
+  display: block;
+  font-family: var(--serif);
+  font-size: 15.5px;
+  color: var(--on-dark);
+  margin-bottom: 4px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.strip-cell.is-subject .strip-market { color: var(--accent-bright); }
+
+@media (max-width: 760px) {
+  .strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .strip-cell { border-right: 0; border-bottom: 1px solid var(--rule-dk); padding-left: 0; }
+  .strip-cell + .strip-cell { padding-left: 0; }
+  .strip-cell:nth-child(odd) { border-right: 1px solid var(--rule-dk); padding-right: var(--s3); }
+  .strip-cell:nth-child(even) { padding-left: var(--s3); }
+  .strip-cell:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (max-width: 720px) {
+  .strip { margin-top: 40px; }
+  .strip-value { font-size: 26px; }
+  .strip-market { font-size: 14.5px; }
+  .strip-label { font-size: 10.5px; }
+  .strip-note { font-size: 10px; }
+}
+@media (max-width: 380px) {
+  .strip-grid { grid-template-columns: 1fr; }
+  .strip-cell, .strip-cell:nth-child(odd) { border-right: 0; padding-right: 0; }
+  .strip-cell:nth-child(even) { padding-left: 0; }
+  .strip-cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule-dk); }
+  .strip-cell:last-child { border-bottom: 0; }
+}
+
+/* The hero chart draws with cream ink on the dark desk. */
+.hero-chart .series-line { stroke: var(--on-dark); stroke-width: 2; }
+.hero-chart .series-area { fill: var(--on-dark); }
+.hero-chart .axis-label { fill: var(--on-dark-muted); }
+.hero-chart .gridline { stroke: var(--rule-dk); }
+.hero-chart .zeroline { stroke: var(--rule-dk-mid); }
+.hero-chart .annot-note { fill: var(--on-dark-mid); }
+.hero-chart .annot-val { fill: var(--on-dark); }
+.hero-chart .annot-rule { stroke: var(--rule-dk-mid); }
+.hero-chart .annot-dot { fill: var(--accent-bright); }
+
+/* ---------- The snapshot strip: real readouts, honestly dated ----------
+
+   Default strip: full-width below the hero. The inline variant sits
+   inside the hero figure so the chart and the four readouts share one
+   visual container, both landing above the fold on a 16:9 viewport. */
+
+.strip {
+  border-top: 1px solid var(--rule-dk);
+  margin-top: clamp(24px, 3.5vh, 48px);
+}
+.strip.is-inline {
+  margin-top: var(--s4);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--rule-dk-mid);
+}
+.strip.is-full {
+  margin-top: 0;
+  padding-top: 0;
+  background: var(--ink);
+  border-top: 1px solid var(--rule-dk);
+  border-bottom: 1px solid var(--rule-dk);
+}
+.strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.strip.is-inline .strip-grid { column-gap: var(--s2); }
+.strip-cell {
+  padding: clamp(16px, 1.8vw, 22px) var(--s2) clamp(18px, 2vw, 26px) 0;
+  border-right: 1px solid var(--rule-dk);
+}
+.strip.is-inline .strip-cell { padding-top: var(--s2); padding-bottom: var(--s2); }
+.strip-cell + .strip-cell { padding-left: var(--s2); }
+.strip-cell:last-child { border-right: 0; padding-right: 0; }
+.strip.is-inline .strip-value { font-size: clamp(20px, 1.8vw, 28px); }
+.strip.is-inline .strip-spark { height: 22px; margin-top: 8px; }
+.strip.is-inline .strip-note { font-size: 9.5px; margin-top: 6px; }
+.strip.is-inline .strip-foot {
+  padding-top: 10px;
+  margin-top: var(--s2);
+  font-size: 9.5px;
+}
+.strip.is-full .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.strip.is-full .strip-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+.strip.is-full .strip-cell {
+  padding: clamp(24px, 3vw, 40px) clamp(16px, 3vw, 48px) clamp(22px, 2.5vw, 36px);
+  border-right: 1px solid var(--rule-dk);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.strip.is-full .strip-cell:last-child {
+  border-right: 0;
+}
+.strip.is-full .strip-market {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.strip.is-full .strip-label {
+  display: none;
+}
+.strip.is-full .strip-value {
+  font-size: clamp(28px, 2.4vw, 36px);
+  font-weight: 700;
+  color: var(--on-dark);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.strip.is-full .strip-value .unit {
+  font-size: 0.5em;
+  color: var(--on-dark-mid);
+  margin-left: 2px;
+  font-weight: 500;
+}
+.strip.is-full .strip-spark {
+  height: 32px;
+  margin-top: 12px;
+}
+.strip.is-full .strip-spark .spark-line {
+  stroke: var(--on-dark-mid);
+  stroke-width: 1.6;
+}
+.strip.is-full .strip-spark .spark-end {
+  fill: var(--on-dark-mid);
+}
+.strip.is-full .strip-cell.is-subject .strip-market {
+  color: var(--accent-bright);
+}
+.strip.is-full .strip-cell.is-subject .strip-value {
+  color: var(--accent-bright);
+}
+.strip.is-full .strip-cell.is-subject .strip-spark .spark-line {
+  stroke: var(--accent-bright);
+}
+.strip.is-full .strip-cell.is-subject .strip-spark .spark-end {
+  fill: var(--accent-bright);
+}
+.strip.is-full .strip-note {
+  font-size: 9px;
+  margin-top: 10px;
+  color: var(--on-dark-muted);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+.strip.is-full .strip-foot {
+  padding: 12px 0 20px;
+  margin-top: 0;
+  border-top: 1px solid var(--rule-dk);
+  font-size: 8.5px;
+  color: var(--on-dark-muted);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
 .strip-label {
   font-family: var(--mono);
   font-size: var(--t-meta);

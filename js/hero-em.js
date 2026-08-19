@@ -130,7 +130,7 @@
 
     var allVals = [];
     series.forEach(function (s) { s.pts.forEach(function (p) { if (p.year <= lastYear) allVals.push(p.value); }); });
-    var lo = 100 - 20;   /* a little air under the base line */
+    var lo = 100;   /* baseline is the floor: no space below 100, so the bottom reads horizontal */
     var hi = Math.max.apply(null, allVals);
     var step = hi > 600 ? 100 : hi > 300 ? 50 : 25;
     hi = Math.ceil(hi / step) * step;
