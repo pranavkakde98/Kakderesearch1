@@ -1,0 +1,32 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/advisory", "destination": "/consulting/", "permanent": true },
+    { "source": "/advisory/:path*", "destination": "/consulting/", "permanent": true },
+    { "source": "/services", "destination": "/consulting/", "permanent": true },
+    { "source": "/services/:path*", "destination": "/consulting/", "permanent": true },
+    { "source": "/research/the-india-you-cant-buy", "destination": "/research/can-global-investors-capture-indias-economic-rise/", "permanent": true },
+    { "source": "/research/the-india-you-cant-buy/:path*", "destination": "/research/can-global-investors-capture-indias-economic-rise/", "permanent": true },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "kakderesearch.com" }],
+      "destination": "https://www.kakderesearch.com/:path*",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()" }
+      ]
+    }
+  ]
+}

@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Kakde Research</title>
-  <meta name="description" content="Discuss a research mandate: an India Desk retainer, a country-allocation study or a bespoke emerging-markets question. A reply within two working days.">
+  <meta name="description" content="Discuss a project: an Emerging Markets Desk or India Desk retainer, published or commissioned research, or a fixed-scope consulting study. A reply within two working days.">
   <link rel="canonical" href="https://www.kakderesearch.com/contact/">
 
   <meta property="og:title" content="Contact | Kakde Research">
-  <meta property="og:description" content="Discuss a research mandate across India and emerging markets. A reply within two working days.">
+  <meta property="og:description" content="Discuss a project across India and emerging markets. A reply within two working days.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kakderesearch.com/contact/">
   <meta property="og:site_name" content="Kakde Research">
@@ -23,20 +23,7 @@
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../css/main.css">
 
-  <script>
-    (function () {
-      var d = document.documentElement;
-      d.className += ' js';
-      try {
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          d.className += ' anim';
-          window.setTimeout(function () {
-            if (!window.__kr_ready) d.className = d.className.replace(' anim', '');
-          }, 2500);
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <script src="/js/boot.js"></script>
 
   <script defer src="../js/vendor/lenis.min.js"></script>
   <script defer src="../js/vendor/gsap.min.js"></script>
@@ -99,7 +86,7 @@
         <nav class="crumbs" aria-label="Breadcrumb">
           <a href="../">Kakde Research</a> <span aria-hidden="true">/</span> <span aria-current="page">Contact</span>
         </nav>
-        <h1>Discuss a mandate</h1>
+        <h1>Discuss a Project</h1>
         <p class="page-lede">Have a market question worth investigating? Describe what you are trying to understand, the markets it touches and what decision it relates to.</p>
       </div>
     </section>
@@ -118,77 +105,60 @@
           </ol>
         </div>
 
-        <form class="contact-form a-rise" id="contactForm" aria-label="Project enquiry">
-          <div class="visually-hidden" aria-hidden="true"><label for="cf-website">Website</label><input id="cf-website" name="_hp" tabindex="-1" autocomplete="off"></div>
+        <form class="contact-form a-rise" id="contactForm" aria-label="Project enquiry" novalidate>
+          <div class="visually-hidden" aria-hidden="true"><label for="cf-website">Website</label><input id="cf-website" name="website" tabindex="-1" autocomplete="off"></div>
           <div class="field-row">
             <div class="field">
               <label for="cf-name">Name</label>
               <input id="cf-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="cf-org">Organisation</label>
-              <input id="cf-org" name="organisation" type="text" autocomplete="organization" required>
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="cf-position">Position</label>
-              <input id="cf-position" name="position" type="text" autocomplete="organization-title" required>
-            </div>
-            <div class="field">
-              <label for="cf-email">Email</label>
+              <label for="cf-email">Work email</label>
               <input id="cf-email" name="email" type="email" autocomplete="email" required>
             </div>
           </div>
 
           <div class="field-row">
             <div class="field">
-              <label for="cf-country">Country</label>
-              <input id="cf-country" name="country" type="text" autocomplete="country-name" required>
+              <label for="cf-org">Organisation</label>
+              <input id="cf-org" name="organisation" type="text" autocomplete="organization" required>
             </div>
             <div class="field">
-              <label for="cf-type">Engagement type</label>
-              <select id="cf-type" name="project_type" required>
+              <label for="cf-service">Service</label>
+              <select id="cf-service" name="service" required>
                 <option value="">Select one</option>
-                <option>India Desk retainer</option>
-                <option>Emerging markets / country allocation</option>
-                <option>Advisory (bespoke research)</option>
+                <option>Emerging Markets Desk</option>
+                <option>India Desk</option>
                 <option>Research</option>
-                <option>Other</option>
+                <option>Consulting</option>
               </select>
             </div>
           </div>
 
           <div class="field">
-            <label for="cf-markets">Relevant markets / geographies <span class="optional">optional</span></label>
-            <input id="cf-markets" name="markets" type="text" placeholder="e.g. India, Indonesia, Vietnam">
-          </div>
-
-          <div class="field">
-            <label for="cf-question">What are you trying to understand or decide? Name the markets it touches.</label>
+            <label for="cf-question">Research question or project need</label>
             <textarea id="cf-question" name="question" rows="5" required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="cf-timeline">Timeframe</label>
-            <input id="cf-timeline" name="timeframe" type="text" placeholder="e.g. before our March IC" required>
           </div>
 
           <div class="field-row">
             <div class="field">
-              <label for="cf-budget">Budget range <span class="optional">optional</span></label>
-              <input id="cf-budget" name="budget" type="text">
+              <label for="cf-timeframe">Timeframe</label>
+              <input id="cf-timeframe" name="timeframe" type="text" placeholder="e.g. before our March IC" required>
             </div>
             <div class="field">
-              <label for="cf-source">How did you hear about Kakde Research? <span class="optional">optional</span></label>
-              <input id="cf-source" name="source" type="text">
+              <label for="cf-role">Role <span class="optional">optional</span></label>
+              <input id="cf-role" name="role" type="text" autocomplete="organization-title">
             </div>
           </div>
 
+          <div class="field">
+            <label for="cf-country">Country <span class="optional">optional</span></label>
+            <input id="cf-country" name="country" type="text" autocomplete="country-name">
+          </div>
+
           <button class="btn btn-primary" type="submit">Send the enquiry</button>
-          <p class="form-confirm" hidden>Received. You will hear back within two working days.</p>
-          <p style="margin-top: var(--s3); font-size: var(--t-small); line-height: 1.6; color: var(--muted); max-width: 56ch;">Enquiries are handled as described in the <a href="../legal/privacy/" style="color: inherit">privacy policy</a>: no lists, no sharing, deleted within twelve months if we do not work together.</p>
+          <p class="form-confirm" role="status" aria-live="polite" hidden></p>
+          <p style="margin-top: var(--s3); font-size: var(--t-small); line-height: 1.6; color: var(--muted); max-width: 56ch;">Enquiries are handled as described in the <a href="../legal/privacy/" style="color: inherit">privacy policy</a>. Your details are used only to answer your enquiry.</p>
         </form>
       </div>
     </section>

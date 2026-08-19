@@ -469,30 +469,11 @@
   confirmOnSubmit('contactForm', '/api/contact');
   confirmOnSubmit('listForm', '/api/newsletter');
 
-  /* ---------- Privacy-safe page and CTA analytics ---------- */
-
-  function sessionId() {
-    try {
-      var key = 'kr_session_id';
-      var value = window.sessionStorage.getItem(key);
-      if (!value) { value = Math.random().toString(36).slice(2) + Date.now().toString(36); window.sessionStorage.setItem(key, value); }
-      return value;
-    } catch (_) { return ''; }
-  }
-  function track(eventName, details) {
-    var payload = Object.assign({ event_name: eventName, page_path: window.location.pathname, referrer: document.referrer || '', session_id: sessionId() }, details || {});
-    try {
-      var data = JSON.stringify(payload);
-      if (navigator.sendBeacon) { navigator.sendBeacon('/api/events', new Blob([data], { type: 'application/json' })); }
-      else { fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: data, keepalive: true }); }
-    } catch (_) { /* Analytics must never interrupt the site. */ }
-  }
-  track('page_view');
-  doc.addEventListener('click', function (event) {
-    var target = event.target.closest && event.target.closest('a.btn, button');
-    if (!target) return;
-    track('button_click', { href: target.href || '', label: (target.textContent || '').trim().slice(0, 200), metadata: { element_id: target.id || '' } });
-  });
+  /* Analytics note: the earlier bespoke /api/events beacon (session id +
+     per-click tracking) was removed for a privacy-light footprint. The site
+     collects only what a visitor submits through a form. If analytics are
+     reintroduced, add the disclosure and consent the target jurisdictions
+     require, and never place personal data in the payload. */
 
   /* ---------- Keep layout measurements honest ---------- */
 

@@ -24,20 +24,7 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/main.css">
 
-  <script>
-    (function () {
-      var d = document.documentElement;
-      d.className += ' js';
-      try {
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          d.className += ' anim';
-          window.setTimeout(function () {
-            if (!window.__kr_ready) d.className = d.className.replace(' anim', '');
-          }, 2500);
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <script src="/js/boot.js"></script>
 
   <script defer src="js/vendor/lenis.min.js"></script>
   <script defer src="js/vendor/gsap.min.js"></script>

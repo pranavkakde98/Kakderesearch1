@@ -1,4 +1,5 @@
-# Staging / preview deployment of Kakde Research V9 — not for indexing.
-# Production remains https://www.kakderesearch.com
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.kakderesearch.com/sitemap.xml
