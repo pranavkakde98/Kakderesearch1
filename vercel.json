@@ -9,6 +9,17 @@
     { "source": "/services/:path*", "destination": "/consulting/", "permanent": true },
     { "source": "/research/the-india-you-cant-buy", "destination": "/research/can-global-investors-capture-indias-economic-rise/", "permanent": true },
     { "source": "/research/the-india-you-cant-buy/:path*", "destination": "/research/can-global-investors-capture-indias-economic-rise/", "permanent": true },
+    { "source": "/research/credibility-and-transmission", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/credibility-and-transmission/:path*", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/the-balance-sheet-decade", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/the-balance-sheet-decade/:path*", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/the-rupee-managed", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/the-rupee-managed/:path*", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/promoter-nation", "destination": "/research/#selected", "permanent": true },
+    { "source": "/research/promoter-nation/:path*", "destination": "/research/#selected", "permanent": true },
+    { "source": "/emerging-markets-desk", "destination": "/emerging-markets/", "permanent": true },
+    { "source": "/emerging-markets-desk/:path*", "destination": "/emerging-markets/", "permanent": true },
+    { "source": "/api/research-request", "destination": "/api/request-report", "permanent": true },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "kakderesearch.com" }],
@@ -27,6 +38,21 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()" }
       ]
+    },
+    {
+      "source": "/assets/fonts/(.*)",
+      "headers": [ { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" } ]
+    },
+    {
+      "source": "/assets/img/(.*)",
+      "headers": [ { "key": "Cache-Control", "value": "public, max-age=2592000" } ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [ { "key": "Cache-Control", "value": "no-store" } ]
     }
-  ]
+  ],
+  "functions": {
+    "api/request-report.js": { "maxDuration": 30 }
+  }
 }

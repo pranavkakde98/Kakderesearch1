@@ -12,11 +12,13 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kakderesearch.com/research/india-in-em/">
   <meta property="og:site_name" content="Kakde Research">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://www.kakderesearch.com/assets/img/mumbai-skyline-1200.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%2314294B'/%3E%3Cg fill='%23F4F0E6'%3E%3Crect x='20' y='54' width='10' height='22'/%3E%3Crect x='34' y='40' width='10' height='36'/%3E%3Crect x='48' y='20' width='10' height='56'/%3E%3Crect x='56' y='43' width='36' height='10' transform='rotate(-42 56 48)'/%3E%3Crect x='56' y='43' width='38' height='10' transform='rotate(42 56 48)'/%3E%3C/g%3E%3C/svg%3E">
 
   <link rel="preload" href="../../assets/fonts/SourceSerif4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/SourceSerif4-Italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../assets/fonts/Inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../assets/fonts/Inter-500.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../assets/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin>
@@ -28,6 +30,7 @@
   <script defer src="../../js/vendor/lenis.min.js"></script>
   <script defer src="../../js/vendor/gsap.min.js"></script>
   <script defer src="../../js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../js/vendor/SplitText.min.js"></script>
   <script defer src="../../assets/data/macro-em.js"></script>
   <script defer src="../../js/app.js"></script>
   <script defer src="../../js/dash.js"></script>
@@ -70,6 +73,8 @@
         <a class="nav-link" href="../../consulting/">Consulting</a>
         <a class="nav-link" href="../../about/">About</a>
         <a class="nav-link" href="../../contact/">Contact</a>
+        <a class="btn btn-primary nav-cta" href="../../contact/">Discuss a Project</a>
+        <p class="nav-foot">Emerging-markets research &amp; consulting<br>Deep India expertise<br><a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a></p>
       </nav>
 
       <div class="header-right">
@@ -92,6 +97,7 @@
         <p style="margin-bottom: var(--s3)"><span class="flag-chip">Research franchise</span></p>
         <h1>India in EM.</h1>
         <p class="page-lede">Global capital rarely asks whether India is attractive. It asks whether India is more attractive than the other markets competing for the same capital. This franchise takes that question literally.</p>
+        <p style="margin-top: var(--s3); max-width: 62ch;">One of the firm&rsquo;s two standing research franchises. The firm&rsquo;s wider comparative work across emerging markets lives on the <a href="../../emerging-markets/">Emerging Markets Desk</a>.</p>
       </div>
     </section>
 
@@ -167,14 +173,14 @@
       </div>
     </section>
 
-    <!-- ============ QUESTIONS UNDER INVESTIGATION ============ -->
+    <!-- ============ THE STANDING QUESTIONS ============ -->
     <section class="section">
       <div class="container">
         <div class="section-head a-rise">
-          <h2 class="section-title">Questions under investigation</h2>
-          <p class="mono-label">Open questions, not findings</p>
+          <h2 class="section-title">The franchise&rsquo;s standing questions</h2>
+          <p class="mono-label">Open questions, not settled findings</p>
         </div>
-        <p class="section-intro a-rise" style="margin-bottom: var(--s4)">What follows is a research agenda, not a set of conclusions: none of these papers has been published, and none of their answers is settled. The papers in this franchise each take one allocation-grade question. In preparation, in no committed order:</p>
+        <p class="section-intro a-rise" style="margin-bottom: var(--s4)">The franchise keeps six questions standing. Each is an allocation-grade comparison, and none of the answers is treated as settled. The general case is argued in the published flagship study; four related studies are available on request from the <a href="../">Research library</a>; and every piece of work in the franchise returns to one of these:</p>
 
         <ul class="question-list a-rise">
           <li><p>Why India instead of Indonesia &mdash; the domestic-demand trade?</p></li>
@@ -186,7 +192,7 @@
         </ul>
 
         <p class="statement-lg a-rise" style="margin-top: var(--s5)">Where a paper&rsquo;s honest answer is &ldquo;not India&rdquo;, that is the paper.</p>
-        <p class="a-rise" style="margin-top: var(--s4); max-width: 62ch;">New papers are announced here, in <a href="../">the research archive</a> and in <a href="../../insights/">the monthly note</a>. No dates are promised &mdash; a promised date has a way of writing the conclusion.</p>
+        <p class="a-rise" style="margin-top: var(--s4); max-width: 62ch;">The flagship, <a href="../can-global-investors-capture-indias-economic-rise/">Can Global Investors Actually Capture India&rsquo;s Economic Rise?</a>, is published and downloads directly. The four related studies &mdash; Credibility and Transmission, The Balance-Sheet Decade, The Rupee, Managed and Promoter Nation &mdash; are sent on request from <a href="../">the Research library</a>. Shorter, dated notes sit in <a href="../../insights/">Insights</a>.</p>
       </div>
     </section>
 
@@ -233,27 +239,29 @@
           </span>
           <span class="wordmark-text">Kakde Research</span>
         </a>
-        <p class="footer-line">Independent emerging-markets research &amp; consulting</p>
-        <p class="footer-line">Emerging Markets Desk &middot; India Desk</p>
-        <p class="footer-line">Based in India &middot; working globally</p>
+        <p class="footer-line">Emerging-markets research and consulting</p>
+        <p class="footer-line">Deep India expertise</p>
+        <p class="footer-line">Based in India &middot; Working globally</p>
         <p class="footer-line"><a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a></p>
       </div>
-      <nav class="footer-col" aria-label="Desks">
-        <p class="footer-head">Desks</p>
+      <nav class="footer-col" aria-label="Services">
+        <p class="footer-head">Services</p>
         <a href="../../emerging-markets/">Emerging Markets Desk</a>
         <a href="../../india-desk/">India Desk</a>
+        <a href="../../research/">Research</a>
+        <a href="../../consulting/">Consulting</a>
       </nav>
       <nav class="footer-col" aria-label="Research">
         <p class="footer-head">Research</p>
         <a href="../../research/">Selected research</a>
-        <a href="../../research/can-global-investors-capture-indias-economic-rise/">Flagship report</a>
-        <a href="../../data/">Comparative data desk</a>
+        <a href="../../research/can-global-investors-capture-indias-economic-rise/">Flagship</a>
         <a href="../../insights/">Insights</a>
+        <a href="../../data/">Data</a>
       </nav>
       <nav class="footer-col" aria-label="Firm">
         <p class="footer-head">Firm</p>
-        <a href="../../consulting/">Consulting</a>
         <a href="../../about/">About</a>
+        <a href="../../about/founder/">Founder</a>
         <a href="../../methodology/">Methodology</a>
         <a href="../../contact/">Contact</a>
       </nav>
@@ -262,11 +270,11 @@
         <a href="../../legal/disclaimer/">Disclaimer</a>
         <a href="../../legal/terms/">Terms</a>
         <a href="../../legal/privacy/">Privacy</a>
-        <a href="../../legal/sources/">Sources &amp; data</a>
+        <a href="../../legal/sources/">Sources</a>
         <a href="../../legal/corrections/">Corrections</a>
       </nav>
     </div>
-<div class="container footer-bottom">
+    <div class="container footer-bottom">
       <p>Kakde Research provides emerging-markets research and consulting for professional and institutional readers. Nothing on this site constitutes investment advice or a recommendation to buy or sell any security.</p>
       <p>&copy; 2026 Kakde Research</p>
     </div>

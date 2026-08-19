@@ -77,8 +77,14 @@
     var peerKeys = (stage.getAttribute('data-peers') || '').split(',').filter(Boolean);
     var isHero = stage.hasAttribute('data-hero');
 
-    var W = 1000, H = isHero ? 430 : 500;
-    var PAD = { t: 26, r: 62, b: 34, l: 6 };
+    /* A phone-width frame gets a viewBox its own size so the labels stay
+       legible; the CSS aspect (4:3 under 720px) is matched so the SVG fills
+       the frame without letterboxing. Desktop keeps the 1000-unit canvas. */
+    var fw = Math.round(frame.getBoundingClientRect().width);
+    var narrow = fw > 0 && fw < 700;
+    var W = narrow ? Math.max(300, fw) : 1000;
+    var H = narrow ? Math.round(W * 0.75) : (isHero ? 430 : 500);
+    var PAD = narrow ? { t: 22, r: 50, b: 30, l: 4 } : { t: 26, r: 62, b: 34, l: 6 };
 
     var years = pts.map(function (p) { return p.year; });
     var allVals = pts.map(function (p) { return p.value; });
@@ -114,10 +120,10 @@
     }
 
     /* year ticks: first, last, decades */
-    var tickEvery = (x1 - x0) > 40 ? 10 : 5;
+    var tickEvery = ((x1 - x0) > 40 || narrow) ? 10 : 5;
     years.forEach(function (y) {
       if (y !== x0 && y !== x1 && y % tickEvery !== 0) return;
-      if (y !== x0 && y !== x1 && (Math.abs(y - x0) < 3 || Math.abs(y - x1) < 3)) return;
+      if (y !== x0 && y !== x1 && (Math.abs(y - x0) < (narrow ? 4 : 3) || Math.abs(y - x1) < (narrow ? 4 : 3))) return;
       var t = el('text', { x: X(y), y: H - PAD.b + 20, class: 'axis-label', 'text-anchor': 'middle' });
       t.textContent = String(y);
       svg.appendChild(t);
@@ -190,7 +196,9 @@
       }));
       gEl.appendChild(el('circle', { cx: X(pt.year), cy: Y(pt.value), class: 'annot-dot' }));
       var ty = up ? Y(pt.value) - 54 : Y(pt.value) + 60;
-      var anchor = X(pt.year) > W * 0.72 ? 'end' : 'start';
+      /* On a phone-width canvas a note anchored to the right of its point
+         runs off the frame, so the flip happens earlier. */
+      var anchor = X(pt.year) > W * (narrow ? 0.52 : 0.72) ? 'end' : 'start';
       var t1 = el('text', { x: X(pt.year) + (anchor === 'end' ? -8 : 8), y: ty, class: 'annot-val', 'text-anchor': anchor });
       t1.textContent = fmt(mode, pt.value);
       var t2 = el('text', { x: X(pt.year) + (anchor === 'end' ? -8 : 8), y: ty + 16, class: 'annot-note', 'text-anchor': anchor });

@@ -173,8 +173,14 @@
 
   function drawLine(frame, ind, seriesList, animate) {
     frame.innerHTML = '';
-    var W = 1000, H = 480;
-    var PAD = { t: 24, r: 66, b: 34, l: 6 };
+    /* On a phone the frame is a 4:3 box a few hundred pixels wide; drawing
+       into a 1000-unit viewBox there would shrink every label to ~3px. So the
+       viewBox takes the frame's own size and type stays at its CSS size. */
+    var fw = Math.round(frame.getBoundingClientRect().width);
+    var narrow = fw > 0 && fw < 700;
+    var W = narrow ? Math.max(300, fw) : 1000;
+    var H = narrow ? Math.round(W * 0.75) : 480;
+    var PAD = narrow ? { t: 20, r: 54, b: 30, l: 4 } : { t: 24, r: 66, b: 34, l: 6 };
 
     var allVals = [], x0 = Infinity, x1 = -Infinity;
     seriesList.forEach(function (s) {
@@ -209,9 +215,10 @@
       lab.textContent = axisFmt(ind, yv);
       svg.appendChild(lab);
     }
+    var tickEvery = narrow ? 10 : 5;
     for (var ty = x0; ty <= x1; ty++) {
-      if (ty !== x0 && ty !== x1 && ty % 5 !== 0) continue;
-      if (ty !== x0 && ty !== x1 && (Math.abs(ty - x0) < 2 || Math.abs(ty - x1) < 2)) continue;
+      if (ty !== x0 && ty !== x1 && ty % tickEvery !== 0) continue;
+      if (ty !== x0 && ty !== x1 && (Math.abs(ty - x0) < (narrow ? 4 : 2) || Math.abs(ty - x1) < (narrow ? 4 : 2))) continue;
       var t = el('text', { x: X(ty), y: H - PAD.b + 20, class: 'axis-label', 'text-anchor': 'middle' });
       t.textContent = String(ty);
       svg.appendChild(t);
@@ -322,8 +329,11 @@
     var noteEl = host.querySelector('[data-dash-note]');
     if (!frame) return;
 
+    /* The markup names the opening mode by marking one tab selected; a page
+       about the EM desk opens on the peer set, the data desk on the anchors. */
+    var initialTab = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
     var state = {
-      mode: 'global',
+      mode: (initialTab && initialTab.getAttribute('data-mode')) || 'global',
       indicator: 'gdp_growth',
       peers: ['IDN', 'VNM', 'BRA'],  /* selection order = tone order */
       animate: false                 /* first paint is static; the draw is

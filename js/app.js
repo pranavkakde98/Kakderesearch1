@@ -186,6 +186,19 @@
 
   if (toggle && nav) {
     var navLinks = Array.prototype.slice.call(nav.children);
+    var FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    /* The overlay behaves as a modal dialog while it is open: the page
+       behind it is inert (so neither Tab nor a screen reader can wander
+       into it), focus moves to the first link, Tab cycles between the
+       toggle and the last link, and Escape hands focus back to the toggle. */
+    function setInert(on) {
+      Array.prototype.forEach.call(doc.body.children, function (node) {
+        if (node === header || node.tagName === 'SCRIPT') return;
+        if (on) { node.setAttribute('inert', ''); node.setAttribute('aria-hidden', 'true'); }
+        else { node.removeAttribute('inert'); node.removeAttribute('aria-hidden'); }
+      });
+    }
 
     /* body.nav-open locks the page behind the overlay. Lenis has to be
        told, or it keeps integrating wheel deltas against a page that
@@ -196,6 +209,11 @@
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       if (lenis) { if (open) lenis.stop(); else lenis.start(); }
+      setInert(open);
+      if (open) {
+        var first = nav.querySelector(FOCUSABLE);
+        window.setTimeout(function () { if (first && nav.classList.contains('is-open')) first.focus(); }, motion ? 120 : 20);
+      }
     }
 
     toggle.addEventListener('click', function () {
@@ -207,16 +225,34 @@
           { y: 0, autoAlpha: 1, duration: 0.55, ease: 'power3.out', stagger: 0.055, delay: 0.08,
             clearProps: 'visibility,' + CLEAR });
       }
+      if (!open) toggle.focus();
     });
     nav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') setNav(false);
+      if (e.target.closest && e.target.closest('a')) setNav(false);
     });
     doc.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      if (!nav.classList.contains('is-open')) return;
+      if (e.key === 'Escape') {
         setNav(false);
         toggle.focus();
+        return;
+      }
+      if (e.key === 'Tab') {
+        var nodes = [toggle].concat(Array.prototype.filter.call(nav.querySelectorAll(FOCUSABLE), function (n) {
+          return n.offsetParent !== null;
+        }));
+        if (nodes.length < 2) return;
+        var first = nodes[0], last = nodes[nodes.length - 1];
+        var active = doc.activeElement;
+        if (e.shiftKey && (active === first || nodes.indexOf(active) === -1)) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
       }
     });
+    /* If the viewport grows past the drawer breakpoint while it is open,
+       release the page rather than leaving it locked under a desktop nav. */
+    var wide = window.matchMedia('(min-width: 901px)');
+    var onWide = function (mq) { if (mq.matches && nav.classList.contains('is-open')) setNav(false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide); else if (wide.addListener) wide.addListener(onWide);
   }
 
   /* ---------- Reveals ----------

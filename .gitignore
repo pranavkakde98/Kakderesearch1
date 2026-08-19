@@ -1,6 +1,9 @@
-.claude/
-.vercel/
-node_modules/
 .env
-.env.local
+.env.*
+!.env.example
+.vercel/
+.claude/
+node_modules/
+*.log
 .DS_Store
+Thumbs.db
