@@ -2632,3 +2632,48 @@ html.lenis, html.lenis body { height: auto; }
   .stage-step { min-height: 0; margin-bottom: var(--s4); }
   .stage-step p, .phase, .annot { opacity: 1 !important; }
 }
+
+/* ---------- Data table (comparative exhibits rebuilt as semantic HTML) ---------- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-small);
+  line-height: 1.5;
+  min-width: 640px;
+}
+.data-table caption { text-align: left; }
+.data-table thead th {
+  text-align: left;
+  vertical-align: bottom;
+  font-family: var(--sans);
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0 var(--s3) 10px 0;
+  border-bottom: 2px solid var(--rule-strong);
+}
+.data-table .th-sub {
+  display: block;
+  font-family: var(--mono);
+  font-size: var(--t-meta);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.data-table tbody th[scope="row"] {
+  text-align: left;
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.data-table tbody th, .data-table td {
+  padding: 12px var(--s3) 12px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  color: var(--body-c);
+}
+.data-table td:nth-child(2), .data-table td:nth-child(3) { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.data-table td:last-child { white-space: normal; min-width: 22ch; }
+.field-dark .data-table thead th, .field-dn .data-table thead th { color: var(--ink); }
