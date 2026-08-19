@@ -26,10 +26,14 @@ const {
 } = require('./_lib/http');
 const db = require('./_lib/db');
 const storage = require('./_lib/storage');
+const sheets = require('./_lib/sheets');
 const { getReport } = require('./_lib/reports');
 
 const BASE = (process.env.APP_BASE_URL || 'https://www.kakderesearch.com').replace(/\/$/, '');
-const RECORDED_MESSAGE = 'The report could not be sent automatically just now. Your request has been recorded and it will be sent to your email directly.';
+
+const NOT_PUBLISHED_MESSAGE = 'This report is nearing completion. Your request has been recorded and the finished study will be sent to your email as soon as it is published.';
+const NOT_CONFIGURED_MESSAGE = 'Your request has been recorded. The report will be sent to your email once it is available.';
+const SEND_FAILED_MESSAGE = 'Your request has been recorded. The research team will send the report to your email directly.';
 
 function fmtDate(d) {
   try { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }); }
@@ -146,13 +150,17 @@ module.exports = async function handler(req, res) {
     }
 
     const mail = mailConfig();
-    if (!mail.configured) throw new HttpError(503, 'Email delivery is not configured yet.');
+    if (!mail.configured) {
+      await logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
+      throw new HttpError(503, 'Email delivery is not configured yet.');
+    }
 
-    /* The document is not in storage yet: record, notify, and say so. */
+    /* The document is not yet published: record, notify, and say so. */
     if (!link) {
-      await notifyInside({ report, to, name, org, outcome: 'NOT DELIVERED — document not found in storage', recordId, context }).catch(() => {});
-      if (recordId) db.update('report_requests', `id=eq.${recordId}`, { status: 'undeliverable', delivery: 'none' }).catch(() => {});
-      return ok(res, { ok: true, delivered: false, message: RECORDED_MESSAGE });
+      await notifyInside({ report, to, name, org, outcome: 'NOT PUBLISHED — report nearing completion', recordId, context }).catch(() => {});
+      if (recordId) db.update('report_requests', `id=eq.${recordId}`, { status: 'awaiting_publication', delivery: 'none' }).catch(() => {});
+      await logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
+      return ok(res, { ok: true, delivered: false, message: NOT_PUBLISHED_MESSAGE });
     }
 
     const attached = !!attachments;
@@ -170,10 +178,11 @@ module.exports = async function handler(req, res) {
       });
     } catch (e) {
       if (recordId) db.update('report_requests', `id=eq.${recordId}`, { status: 'failed', delivery }).catch(() => {});
+      await logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
       await notifyInside({ report, to, name, org, outcome: 'SEND FAILED — please send manually', recordId, context }).catch(() => {});
       /* A recorded request the practice will fulfil by hand is not a
          success the visitor should be told to look for in their inbox. */
-      return ok(res, { ok: true, delivered: false, message: RECORDED_MESSAGE });
+      return ok(res, { ok: true, delivered: false, message: SEND_FAILED_MESSAGE });
     }
 
     markSeen(dupKey, 10 * 60 * 1000);

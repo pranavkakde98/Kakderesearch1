@@ -157,8 +157,8 @@
         /* The server distinguishes "sent" from "recorded, will follow by
            email" — the dialog says exactly which. */
         if (data.delivered === false) {
-          if (doneTitle) doneTitle.textContent = 'Request received.';
-          if (doneBody) doneBody.textContent = data.message || 'The report could not be sent automatically. Your request has been recorded and it will be sent to your email directly.';
+          if (doneTitle) doneTitle.textContent = 'Request noted.';
+          if (doneBody) doneBody.textContent = data.message || 'This report is nearing completion. We will send it to your email once it is published. Thank you for your interest.';
         } else {
           if (doneTitle) doneTitle.textContent = 'Check your inbox. The report has been sent.';
           if (doneBody && data.message) doneBody.textContent = data.message;
