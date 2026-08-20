@@ -159,7 +159,7 @@ module.exports = async function handler(req, res) {
     if (!link) {
       await notifyInside({ report, to, name, org, outcome: 'NOT PUBLISHED — report nearing completion', recordId, context }).catch(() => {});
       if (recordId) db.update('report_requests', `id=eq.${recordId}`, { status: 'awaiting_publication', delivery: 'none' }).catch(() => {});
-      await logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
+      await sheets.logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
       return ok(res, { ok: true, delivered: false, message: NOT_PUBLISHED_MESSAGE });
     }
 
@@ -178,7 +178,7 @@ module.exports = async function handler(req, res) {
       });
     } catch (e) {
       if (recordId) db.update('report_requests', `id=eq.${recordId}`, { status: 'failed', delivery }).catch(() => {});
-      await logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
+      await sheets.logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
       await notifyInside({ report, to, name, org, outcome: 'SEND FAILED — please send manually', recordId, context }).catch(() => {});
       /* A recorded request the practice will fulfil by hand is not a
          success the visitor should be told to look for in their inbox. */
