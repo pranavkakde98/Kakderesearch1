@@ -137,7 +137,7 @@ async function sendEmail({ to, subject, html, text: plain, replyTo, attachments,
 }
 
 function inboxAddress() {
-  return process.env.INQUIRY_TO_EMAIL || process.env.ADMIN_NOTIFICATION_EMAIL || '';
+  return process.env.INQUIRY_TO_EMAIL || process.env.ADMIN_NOTIFICATION_EMAIL || 'inquiries@kakderesearch.com';
 }
 
 function send(res, status, payload) {
