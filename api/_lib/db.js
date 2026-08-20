@@ -44,7 +44,7 @@ async function select(table, query) {
   return r.data;
 }
 
-/* Exact row count for a filter, read from Content-Range: "0-0/N" or "*/N". */
+/* Exact row count for a filter, read from the Content-Range header. */
 async function count(table, query) {
   const r = await request(`${table}?select=id&${query}`, { method: 'GET', headers: { Prefer: 'count=exact', Range: '0-0' } });
   const range = r.headers.get('content-range') || '';
