@@ -73,26 +73,27 @@ function visitorText({ name, report, link, expiresAt, attached }) {
 
 module.exports = async function handler(req, res) {
   let recordId = null;
+  var ip = '', to = '', name = '', org = '', reportId = '', context = { page_path: '', referrer: '', user_agent: '' }, report = null;
   try {
     method(req, 'POST');
     requireJson(req);
     const data = await readBody(req);
     if (data.website || data._hp) throw new HttpError(400, 'Unable to process this submission.');
 
-    const ip = clientIp(req);
+    ip = clientIp(req);
     rateLimit(`req:${ip}`, 6, 15 * 60 * 1000);
 
-    const to = email(data.email);
-    const name = text(data.name, 160);
-    const org = text(data.organisation, 200);
-    const reportId = text(data.reportId, 80);
-    const context = {
+    to = email(data.email);
+    name = text(data.name, 160);
+    org = text(data.organisation, 200);
+    reportId = text(data.reportId, 80);
+    context = {
       page_path: text(data.page_path, 300),
       referrer: text(data.referrer, 500),
       user_agent: text(req.headers['user-agent'], 300)
     };
 
-    const report = getReport(reportId);
+    report = getReport(reportId);
     if (!report) throw new HttpError(404, 'That report is not available for request.');
 
     /* Idempotency: the same address asking for the same report inside ten
@@ -151,7 +152,7 @@ module.exports = async function handler(req, res) {
 
     const mail = mailConfig();
     if (!mail.configured) {
-      await logRequest({ name, email: to, organisation: org, reportId, reportTitle: report.title, page: context.page_path, referrer: context.referrer }).catch(() => {});
+      await notifyInside({ report, to, name, org, outcome: 'FAILED — email not configured', recordId, context }).catch(() => {});
       throw new HttpError(503, 'Email delivery is not configured yet.');
     }
 
@@ -197,6 +198,18 @@ module.exports = async function handler(req, res) {
     const when = expiresAt ? ` The link is valid until ${fmtDate(expiresAt)}.` : '';
     return ok(res, { ok: true, delivered: true, message: `Sent to ${to}.${when} If it does not arrive within a few minutes, check your spam folder or email inquiries@kakderesearch.com.` });
   } catch (error) {
+    /* Last-resort safety net: log + notify the practice for any unhandled
+       error (missing env vars, Supabase outage, etc.) so nothing is silent. */
+    console.error('Report request handler error', error && error.message, error && error.status);
+    notifyInside({
+      report: { title: (report && report.title) || 'Unknown', id: reportId || 'unknown' },
+      to: to || 'not provided',
+      name: name || '',
+      org: org || '',
+      outcome: 'ERROR — ' + (error && error.message || 'unknown failure'),
+      recordId,
+      context: context || { page_path: '', referrer: '' }
+    }).catch(() => {});
     return fail(res, error);
   }
 };
