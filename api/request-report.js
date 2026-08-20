@@ -81,7 +81,7 @@ module.exports = async function handler(req, res) {
     if (data.website || data._hp) throw new HttpError(400, 'Unable to process this submission.');
 
     ip = clientIp(req);
-    rateLimit(`req:${ip}`, 6, 15 * 60 * 1000);
+    rateLimit(`req:${ip}`, 100, 10 * 60 * 1000);
 
     to = email(data.email);
     name = text(data.name, 160);
@@ -102,19 +102,18 @@ module.exports = async function handler(req, res) {
     const dupKey = `req:${to}:${reportId}`;
     if (isSeen(dupKey)) return ok(res, { ok: true, delivered: true, message: 'That report is already on its way to your inbox.' });
 
-    /* Durable limits where the database is available: per address per day,
-       per IP per quarter-hour. These survive cold starts; the in-memory
-       limiter above does not. */
+    /* Durable limits where the database is available: 100 per address and
+       100 per IP per ten-minute window. These survive cold starts; the
+       in-memory limiter above does not. */
     if (db.configured()) {
       try {
-        const since15 = new Date(Date.now() - 15 * 60 * 1000).toISOString();
-        const since24 = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+        const since10 = new Date(Date.now() - 10 * 60 * 1000).toISOString();
         const [byIp, byEmail, recentSame] = await Promise.all([
           db.count('report_requests', `ip_hash=eq.${hashIp(ip)}&created_at=gte.${since15}`),
           db.count('report_requests', `email=eq.${encodeURIComponent(to)}&created_at=gte.${since24}`),
           db.count('report_requests', `email=eq.${encodeURIComponent(to)}&report_id=eq.${encodeURIComponent(reportId)}&status=eq.sent&created_at=gte.${new Date(Date.now() - 10 * 60 * 1000).toISOString()}`)
         ]);
-        if (byIp >= 8 || byEmail >= 6) throw new HttpError(429, 'Too many requests. Please try again later.');
+        if (byIp >= 100 || byEmail >= 100) throw new HttpError(429, 'Too many requests. Please try again later.');
         if (recentSame >= 1) return ok(res, { ok: true, delivered: true, message: 'That report is already on its way to your inbox.' });
       } catch (e) {
         if (e instanceof HttpError && e.status === 429) throw e;
@@ -193,7 +192,7 @@ module.exports = async function handler(req, res) {
         link_expires_at: expiresAt ? expiresAt.toISOString() : null
       }).catch(() => {});
     }
-    notifyInside({ report, to, name, org, outcome: attached ? 'Sent (attachment)' : 'Sent (link)', recordId, context }).catch(() => {});
+    await notifyInside({ report, to, name, org, outcome: attached ? 'Sent (attachment)' : 'Sent (link)', recordId, context }).catch(() => {});
 
     const when = expiresAt ? ` The link is valid until ${fmtDate(expiresAt)}.` : '';
     return ok(res, { ok: true, delivered: true, message: `Sent to ${to}.${when} If it does not arrive within a few minutes, check your spam folder or email inquiries@kakderesearch.com.` });
@@ -201,7 +200,7 @@ module.exports = async function handler(req, res) {
     /* Last-resort safety net: log + notify the practice for any unhandled
        error (missing env vars, Supabase outage, etc.) so nothing is silent. */
     console.error('Report request handler error', error && error.message, error && error.status);
-    notifyInside({
+    await notifyInside({
       report: { title: (report && report.title) || 'Unknown', id: reportId || 'unknown' },
       to: to || 'not provided',
       name: name || '',
