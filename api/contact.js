@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
     const data = await readBody(req);
     if (data.website || data._hp) throw new HttpError(400, 'Unable to process this submission.');
 
-    rateLimit(`contact:${clientIp(req)}`, 5, 15 * 60 * 1000);
+    rateLimit(`contact:${clientIp(req)}`, 60, 60 * 1000);
 
     const contact = {
       name: text(data.name, 160),
