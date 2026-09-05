@@ -16,7 +16,7 @@ const SERVICES = [
   /* Labels from the previous contact form, still accepted so nothing in flight breaks. */
   'Research', 'Consulting', 'Other / not sure'
 ];
-const CONFIRM = 'Received. You will hear back within two working days.';
+const CONFIRM = 'Received. We will get back to you as soon as possible.';
 
 /* Production's persistence path: the Supabase edge function that writes the
    contact and the enquiry. Best-effort — a storage failure never blocks the
