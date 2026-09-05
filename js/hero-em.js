@@ -35,6 +35,10 @@
   var isos = (host.getAttribute('data-series') || 'IND,CHN,VNM,IDN,MEX').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
   var subject = host.getAttribute('data-subject') || 'IND';
   var base = parseInt(host.getAttribute('data-base') || '2000', 10);
+  /* V13: data-measure names a level series in the dataset (for example
+     gdp_pc_usd) to plot as it is; the default is the chained real-GDP index. */
+  var measure = host.getAttribute('data-measure') || 'index';
+  var level = measure !== 'index' && EM.series[measure] ? measure : null;
   var frame = host.querySelector('.hero-chart');
   if (!frame) return;
 
@@ -48,6 +52,19 @@
   /* ---------- the index: 100 at the base year, chained forward ---------- */
 
   function indexSeries(iso) {
+    if (level) {
+      var lv = EM.series[level][iso];
+      if (!lv) return null;
+      var ys = Object.keys(lv).map(Number).sort(function (a, b) { return a - b; });
+      if (ys.indexOf(base) === -1) return null;
+      var out = [];
+      for (var yy = base; yy <= ys[ys.length - 1]; yy++) {
+        var vv = lv[String(yy)];
+        if (vv === undefined || vv === null) break;
+        out.push({ year: yy, value: vv });
+      }
+      return out.length > 1 ? out : null;
+    }
     var growth = EM.series.gdp_growth[iso];
     if (!growth) return null;
     var years = Object.keys(growth).map(Number).sort(function (a, b) { return a - b; });
@@ -82,7 +99,8 @@
   /* An accessible name that states what the figure shows and where the lines end. */
   function describe() {
     var ends = series.slice().sort(function (a, b) { return b.pts[b.pts.length - 1].value - a.pts[a.pts.length - 1].value; })
-      .map(function (s) { return s.label + ' ' + (s.pts[s.pts.length - 1].value / 100).toFixed(1) + ' times'; }).join(', ');
+      .map(function (s) { return s.label + ' ' + (level ? Math.round(s.pts[s.pts.length - 1].value).toLocaleString('en-GB') + ' dollars' : (s.pts[s.pts.length - 1].value / 100).toFixed(1) + ' times'); }).join(', ');
+    if (level) return 'Line chart of GDP per head in current US dollars for ' + series.length + ' emerging markets, ' + base + ' to ' + lastYear + '. By ' + lastYear + ': ' + ends + '.';
     return 'Line chart of real GDP indexed to ' + base + ' equals 100 for ' + series.length + ' emerging markets, ' + base + ' to ' + lastYear + '. By ' + lastYear + ': ' + ends + '.';
   }
 
@@ -102,7 +120,7 @@
     return w;
   }
 
-  function fmtMul(v) { return (v / 100).toFixed(1) + '×'; }
+  function fmtMul(v) { return level ? '$' + (v / 1000).toFixed(1) + 'k' : (v / 100).toFixed(1) + '×'; }
 
   function build() {
     var width = Math.max(280, Math.round(frame.getBoundingClientRect().width));
@@ -130,25 +148,27 @@
 
     var allVals = [];
     series.forEach(function (s) { s.pts.forEach(function (p) { if (p.year <= lastYear) allVals.push(p.value); }); });
-    var lo = 100;   /* baseline is the floor: no space below 100, so the bottom reads horizontal */
+    var lo = level ? 0 : 100;   /* baseline is the floor: no space below it, so the bottom reads horizontal */
     var hi = Math.max.apply(null, allVals);
-    var step = hi > 600 ? 100 : hi > 300 ? 50 : 25;
+    var step = level ? (hi > 12000 ? 5000 : hi > 6000 ? 2000 : 1000) : (hi > 600 ? 100 : hi > 300 ? 50 : 25);
     hi = Math.ceil(hi / step) * step;
 
     function X(y) { return PAD.l + (y - x0) / (x1 - x0) * (W - PAD.l - PAD.r); }
     function Y(v) { return PAD.t + (hi - v) / (hi - lo) * (H - PAD.t - PAD.b); }
 
     /* gridlines and left axis: index values */
-    for (var gv = 100; gv <= hi; gv += step) {
-      var isBase = gv === 100;
+    for (var gv = lo; gv <= hi; gv += step) {
+      var isBase = gv === lo;
       svg.appendChild(el('line', { x1: PAD.l, x2: W - PAD.r, y1: Y(gv), y2: Y(gv), class: isBase ? 'em-baseline' : 'gridline' }));
       var lab = el('text', { x: PAD.l - 8, y: Y(gv) + 3.5, class: 'axis-label', 'text-anchor': 'end' });
-      lab.textContent = String(gv);
+      lab.textContent = level ? (gv ? '$' + (gv / 1000) + 'k' : '0') : String(gv);
       svg.appendChild(lab);
     }
     /* year ticks: base, last, and every fifth year between */
     yearsAll.forEach(function (y) {
-      if (y !== x0 && y !== x1 && (y % 5 !== 0 || x1 - y < 3)) return;
+      /* On a very narrow phone only the ends and the midpoint are labelled. */
+      if (narrow && width < 380) { if (y !== x0 && y !== x1 && y !== x0 + Math.round((x1 - x0) / 2)) return; }
+      else if (y !== x0 && y !== x1 && (y % 5 !== 0 || x1 - y < 3)) return;
       var t = el('text', { x: X(y), y: H - PAD.b + 19, class: 'axis-label', 'text-anchor': y === x0 ? 'start' : y === x1 ? 'end' : 'middle' });
       t.textContent = String(y);
       svg.appendChild(t);
@@ -211,7 +231,7 @@
 
     /* the reading note: base line named once, bottom-left */
     var note = el('text', { x: PAD.l + 6, y: Y(100) - 7, class: 'em-note' });
-    note.textContent = base + ' = 100';
+    note.textContent = level ? '' : base + ' = 100';
     svg.appendChild(note);
 
     /* draw state */
@@ -293,19 +313,29 @@
 
   build();
 
-  /* ---------- draw on load, in step with the hero timeline ---------- */
+  /* ---------- draw on load, in step with the hero timeline ----------
+     V13: the exhibit may also sit below the fold, in the specialist
+     section. Outside the hero it draws once, when it arrives in view,
+     rather than unseen on load. Reduced motion renders it finished. */
   if (!motion) {
     built.render(1);
   } else {
     built.render(0);
     var state = { t: 0 };
-    g.to(state, {
-      t: 1,
-      duration: 2.6,
-      ease: 'power2.inOut',
-      delay: parseFloat(host.getAttribute('data-delay') || '0.9'),
-      onUpdate: function () { if (built) built.render(state.t); }
-    });
+    var draw = function () {
+      g.to(state, {
+        t: 1,
+        duration: 2.6,
+        ease: 'power2.inOut',
+        delay: parseFloat(host.getAttribute('data-delay') || '0.9'),
+        onUpdate: function () { if (built) built.render(state.t); }
+      });
+    };
+    if (!host.closest('.hero-dark') && window.ScrollTrigger) {
+      window.ScrollTrigger.create({ trigger: host, start: 'top 82%', once: true, onEnter: draw });
+    } else {
+      draw();
+    }
   }
 
   /* ---------- rebuild on a real width change ---------- */

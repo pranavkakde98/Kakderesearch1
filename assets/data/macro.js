@@ -1,5 +1,5 @@
 window.MACRO = {
-    "_source":  "World Bank Open Data (api.worldbank.org), retrieved 2026-08-12. Public, no key required.",
+    "_source":  "World Bank Open Data (api.worldbank.org), retrieved 2026-09-05. Public, no key required.",
     "_note":  "Annual observations. All figures are actual reported values, not illustrative.",
     "_policy":  {
                     "repo_rate":  5.25,

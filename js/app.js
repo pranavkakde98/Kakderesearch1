@@ -355,11 +355,16 @@
       }
       if (!usedSplit && h1) tl.to(h1, { opacity: 1, y: 0, duration: 0.9 }, 0.12);
 
-      tl.to(heroEl.querySelector('.hero-sub'), { opacity: 1, y: 0, duration: 0.7 }, 0.5);
-      tl.to(heroEl.querySelector('.hero-actions'), { opacity: 1, y: 0, duration: 0.7 }, 0.62);
-      tl.to(heroEl.querySelectorAll('.hero-fig .a-hero-el'), { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.55);
-      tl.to(heroEl.querySelectorAll('.strip .a-hero-el'), { opacity: 1, y: 0, duration: 0.7, stagger: 0.07 }, 0.9);
-      tl.to(heroEl.querySelector('.hero-countries'), { opacity: 1, y: 0, duration: 0.7 }, 1.05);
+      /* Only the elements this hero actually carries are scheduled: V13's
+         hero has no strip, and a missing target would otherwise log a
+         GSAP warning on every load. */
+      var one = function (sel, vars, at) { var n = heroEl.querySelector(sel); if (n) tl.to(n, vars, at); };
+      var all = function (sel, vars, at) { var ns = heroEl.querySelectorAll(sel); if (ns.length) tl.to(ns, vars, at); };
+      one('.hero-sub', { opacity: 1, y: 0, duration: 0.7 }, 0.5);
+      one('.hero-actions', { opacity: 1, y: 0, duration: 0.7 }, 0.62);
+      all('.hero-fig .a-hero-el', { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.55);
+      all('.strip .a-hero-el', { opacity: 1, y: 0, duration: 0.7, stagger: 0.07 }, 0.9);
+      one('.hero-countries', { opacity: 1, y: 0, duration: 0.7 }, 1.05);
     };
     /* Split after the webfonts have settled, so lines break where they
        will stay. The race keeps a slow font from holding the page. */

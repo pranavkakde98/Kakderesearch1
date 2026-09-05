@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kakde Research | Emerging Markets Research &amp; Consulting</title>
-  <meta name="description" content="Independent emerging-markets research and consulting with especially deep expertise in India. Retained Emerging Markets and India Desks, institutional research and bespoke consulting for investors and companies deciding between markets.">
+  <title>Kakde Research | Consulting &amp; Research Across Markets</title>
+  <meta name="description" content="Independent consulting and research for investment, commercial and strategic decisions across markets, with particular depth in emerging markets and India. Available as individual projects or ongoing retained relationships.">
   <link rel="canonical" href="https://www.kakderesearch.com/">
 
-  <meta property="og:title" content="Kakde Research | Emerging Markets Research &amp; Consulting">
-  <meta property="og:description" content="Global capital compares emerging markets. Research should too. Independent research and consulting across emerging markets, with especially deep expertise in India.">
+  <meta property="og:title" content="Kakde Research | Consulting &amp; Research Across Markets">
+  <meta property="og:description" content="Research-led consulting for decisions across markets. The question sets the market and the work follows it, with particular depth in emerging markets and India. Independent, founder-led, based in India and working globally.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kakderesearch.com/">
   <meta property="og:site_name" content="Kakde Research">
@@ -35,11 +35,13 @@
   <script defer src="js/vendor/SplitText.min.js"></script>
   <script defer src="assets/data/macro.js"></script>
   <script defer src="assets/data/macro-em.js"></script>
+  <script defer src="assets/data/industry-value.js"></script>
   <script defer src="js/app.js"></script>
   <script defer src="js/charts.js"></script>
   <script defer src="js/dash.js"></script>
-  <script defer src="js/hero-em.js"></script>
+  <script defer src="js/hero-value.js"></script>
   <script defer src="js/request.js"></script>
+  <script defer src="js/rail.js"></script>
 
   <script type="application/ld+json">
   {
@@ -48,7 +50,7 @@
     "name": "Kakde Research",
     "url": "https://www.kakderesearch.com/",
     "email": "inquiries@kakderesearch.com",
-    "description": "Independent emerging-markets research and consulting firm providing retained research desks and bespoke projects across emerging markets, with particularly deep specialist expertise in India.",
+    "description": "Independent consulting and research practice working with investors, family offices, corporates and advisers on investment, commercial and strategic decisions across markets, with particular depth in emerging markets and India. Consulting, research, an Emerging Markets Desk and an India Desk, each available as an individual project or an ongoing retained relationship.",
     "foundingDate": "2025",
     "founder": {
       "@type": "Person",
@@ -56,7 +58,7 @@
       "jobTitle": "Founder",
       "url": "https://www.kakderesearch.com/about/founder/"
     },
-    "knowsAbout": ["Emerging markets", "India", "Macroeconomic research", "Comparative country analysis", "Market entry strategy"],
+    "knowsAbout": ["Research-led consulting", "Investment research", "Market and country comparison", "Market entry strategy", "Sector and competitive analysis", "Policy and regulatory analysis", "Macroeconomic research", "Emerging markets", "India"],
     "address": { "@type": "PostalAddress", "addressCountry": "IN" }
   }
   </script>
@@ -91,14 +93,14 @@
       </a>
 
       <nav class="site-nav" id="siteNav" aria-label="Primary">
+        <a class="nav-link" href="consulting/">Consulting</a>
+        <a class="nav-link" href="research/">Research</a>
         <a class="nav-link" href="emerging-markets/">Emerging Markets Desk</a>
         <a class="nav-link" href="india-desk/">India Desk</a>
-        <a class="nav-link" href="research/">Research</a>
-        <a class="nav-link" href="consulting/">Consulting</a>
         <a class="nav-link" href="about/">About</a>
         <a class="nav-link" href="contact/">Contact</a>
         <a class="btn btn-primary nav-cta" href="contact/">Discuss a Project</a>
-        <p class="nav-foot">Emerging-markets research &amp; consulting<br>Deep India expertise<br><a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a></p>
+        <p class="nav-foot">Consulting and research across markets<br>Based in India &middot; Working globally<br><a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a></p>
       </nav>
 
       <div class="header-right">
@@ -113,9 +115,13 @@
   <main id="main">
 
     <!-- ============ HERO: THE DESK ============
-         Production's plate, washes and type. The figure is the change: five
-         emerging markets on one measure, drawn from the World Bank series on
-         load. Nothing implies a live feed; the strip below dates every cell. -->
+         Production's plate, washes, type and composition. The figure asks
+         where growth creates value: four global industries on one measure,
+         return on capital less cost of capital, from the NYU Stern data
+         stored in assets/data/industry-value.js and drawn on load by
+         js/hero-value.js. Nothing implies a live feed; the four cards
+         below it read the same lines at 2026. -->
+
     <section class="hero-dark">
       <div class="hero-plate" aria-hidden="true">
         <picture>
@@ -126,226 +132,239 @@
 
       <div class="container">
         <p class="hero-dateline a-hero-el">
-          <span>Emerging-markets research &amp; consulting</span>
-          <span>Deep India expertise</span>
+          <span>Consulting &amp; research</span>
+          <span>Across markets</span>
           <span>Independent &middot; Founder-led</span>
         </p>
 
-        <h1 class="a-hero-el">Global capital compares emerging markets. <em>Research should too.</em></h1>
+        <h1 class="a-hero-el">Big decisions deserve <em>a closer look.</em></h1>
 
         <div class="hero-row">
           <div>
-            <p class="hero-sub a-hero-el">Independent research and consulting across emerging markets, with especially deep expertise in India. Retained desks, commissioned research and bespoke projects &mdash; built around your decision, not a country feed.</p>
+            <p class="hero-sub a-hero-el">Kakde Research works with investors, family offices, corporates and advisers on investment, commercial and strategic questions. The question sets the market and the work follows it, with particular depth in emerging markets and India. Available as individual projects or ongoing retained relationships.</p>
             <div class="hero-actions a-hero-el">
               <a class="btn btn-primary" href="contact/">Discuss a Project</a>
-              <a class="text-link" href="emerging-markets/">Explore the Emerging Markets Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
+              <a class="text-link" href="consulting/">How consulting works <span class="arrow" aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
 
           <figure class="hero-fig figure" role="group"
-                  data-hero-em
-                  data-series="IND,CHN,VNM,IDN,MEX"
-                  data-subject="IND"
-                  data-base="2000"
+                  data-hero-value
                   data-delay="0.9"
-                  data-alt="Line chart of real GDP indexed to 2000 equals 100 for India, China, Vietnam, Indonesia and Mexico, 2000 to 2025. By 2025 China reaches about 6.9 times its 2000 level, Vietnam 4.7, India 4.6, Indonesia 3.3 and Mexico 1.4.">
+                  data-alt="Line chart of the value-creation spread, return on capital less cost of capital, in percentage points for four global industries from 2016 to 2026. In 2026 Software is at plus 12.5, Semiconductors plus 6.4, Pharmaceuticals plus 5.5 and Automotive minus 5.1 percentage points. Automotive is below zero in every year; the others are above it in most years. Use the left and right arrow keys to read each year.">
             <div class="hero-fig-head a-hero-el">
-              <p class="hero-fig-title">Real GDP since 2000</p>
-              <p class="hero-fig-unit">Index, 2000 = 100 &middot; five emerging markets &middot; latest available <span data-hero-em-year>2025</span></p>
+              <p class="hero-fig-title">Where does growth actually create value?</p>
+              <p class="hero-fig-unit">Return on capital less cost of capital &middot; global industries &middot; 2016&ndash;2026</p>
             </div>
-            <div class="hero-chart figure-frame is-em a-hero-el" style="aspect-ratio: auto; min-height: 0;"></div>
-            <figcaption class="hero-source a-hero-el">Source: World Bank Open Data, NY.GDP.MKTP.KD.ZG (real GDP growth, annual %), retrieved 13 August 2026. Index chained from reported annual growth rates, 2000 = 100; no estimates or interpolation. Reported through 2025.</figcaption>
+            <div class="hero-chart figure-frame is-value a-hero-el" style="aspect-ratio: auto; min-height: 0;"></div>
+            <p class="visually-hidden" aria-live="polite" data-value-live></p>
+            <figcaption class="hero-source a-hero-el">Source: <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datacurrent.html" rel="noopener">Aswath Damodaran, NYU Stern, Global Industry Data&mdash;EVA and Equity EVA by Industry and Historical Growth Rates</a>. Annual January observations, 2016&ndash;2026. Value-creation spread equals return on capital less weighted average cost of capital. Revenue growth is the latest reported five-year CAGR. Values rounded to one decimal place. Retrieved 5 September 2026.</figcaption>
+            <details class="hero-method a-hero-el">
+              <summary>Method</summary>
+              <ul>
+                <li>ROC is the aggregated return on invested capital reported for the global industry group.</li>
+                <li>WACC is the reported global industry cost of capital.</li>
+                <li>Value-creation spread is calculated as ROC minus WACC, in percentage points.</li>
+                <li>Revenue CAGR is the reported average five-year compounded annual revenue growth for qualifying companies in the industry group.</li>
+                <li>Industry classifications and constituent firms may change between annual observations.</li>
+                <li>The data are aggregated industry observations from NYU Stern, not forecasts or recommendations. The comparison, selection, calculation, presentation and interpretation are Kakde Research&rsquo;s.</li>
+              </ul>
+            </details>
           </figure>
+
         </div>
 
-        <!-- The snapshot strip: one measure across four markets, each cell
-             carrying its own year and source and drawn with the shape of its
-             own series. India's cell wears the subject colour. -->
-        <div class="strip">
+        <!-- The four cards: the chart's own lines, read at 2026, each keyed by
+             the same stroke as its line. The figures are counted into place
+             by js/hero-value.js in step with the lines; without script the
+             final values stand as written here. -->
+        <div class="strip is-value">
           <div class="strip-grid">
-            <div class="strip-cell is-subject a-hero-el">
-              <p class="strip-label"><span class="strip-market">India</span>Real GDP growth, 2025</p>
-              <p class="strip-value"><span data-count="7.57" data-dp="1" data-sign></span><span class="unit">%</span></p>
-              <div class="strip-spark" data-mini-spark="gdp_growth:IND" aria-hidden="true"></div>
-              <p class="strip-note">CPI 2.4% &middot; World Bank, since 2000</p>
+            <div class="strip-cell is-subject a-hero-el" data-series="software">
+              <p class="strip-label"><span class="strip-market"><svg class="strip-key" viewBox="0 0 22 6" aria-hidden="true" focusable="false"><line x1="1" y1="3" x2="21" y2="3"/></svg>Software</span>Value-creation spread</p>
+              <p class="strip-value"><span data-value-count="12.5" data-series="software">+12.5</span><span class="unit">pp</span></p>
+              <p class="strip-note">Revenue CAGR 14.8% &middot; five years</p>
             </div>
-            <div class="strip-cell a-hero-el">
-              <p class="strip-label"><span class="strip-market">Indonesia</span>Real GDP growth, 2025</p>
-              <p class="strip-value"><span data-count="5.11" data-dp="1" data-sign></span><span class="unit">%</span></p>
-              <div class="strip-spark" data-mini-spark="gdp_growth:IDN" aria-hidden="true"></div>
-              <p class="strip-note">CPI 1.9% &middot; World Bank, since 2000</p>
+            <div class="strip-cell a-hero-el" data-series="semiconductors">
+              <p class="strip-label"><span class="strip-market"><svg class="strip-key" viewBox="0 0 22 6" aria-hidden="true" focusable="false"><line x1="1" y1="3" x2="21" y2="3"/></svg>Semiconductors</span>Value-creation spread</p>
+              <p class="strip-value"><span data-value-count="6.4" data-series="semiconductors">+6.4</span><span class="unit">pp</span></p>
+              <p class="strip-note">Revenue CAGR 7.8% &middot; five years</p>
             </div>
-            <div class="strip-cell a-hero-el">
-              <p class="strip-label"><span class="strip-market">Vietnam</span>Real GDP growth, 2025</p>
-              <p class="strip-value"><span data-count="8.02" data-dp="1" data-sign></span><span class="unit">%</span></p>
-              <div class="strip-spark" data-mini-spark="gdp_growth:VNM" aria-hidden="true"></div>
-              <p class="strip-note">CPI 3.3% &middot; World Bank, since 2000</p>
+            <div class="strip-cell a-hero-el" data-series="pharmaceuticals">
+              <p class="strip-label"><span class="strip-market"><svg class="strip-key" viewBox="0 0 22 6" aria-hidden="true" focusable="false"><line x1="1" y1="3" x2="21" y2="3"/></svg>Pharmaceuticals</span>Value-creation spread</p>
+              <p class="strip-value"><span data-value-count="5.5" data-series="pharmaceuticals">+5.5</span><span class="unit">pp</span></p>
+              <p class="strip-note">Revenue CAGR 14.1% &middot; five years</p>
             </div>
-            <div class="strip-cell a-hero-el">
-              <p class="strip-label"><span class="strip-market">Brazil</span>Real GDP growth, 2025</p>
-              <p class="strip-value"><span data-count="2.29" data-dp="1" data-sign></span><span class="unit">%</span></p>
-              <div class="strip-spark" data-mini-spark="gdp_growth:BRA" aria-hidden="true"></div>
-              <p class="strip-note">CPI 5.0% &middot; World Bank, since 2000</p>
+            <div class="strip-cell a-hero-el" data-series="automotive">
+              <p class="strip-label"><span class="strip-market"><svg class="strip-key" viewBox="0 0 22 6" aria-hidden="true" focusable="false"><line x1="1" y1="3" x2="21" y2="3"/></svg>Automotive</span>Value-creation spread</p>
+              <p class="strip-value"><span data-value-count="-5.1" data-series="automotive">&minus;5.1</span><span class="unit">pp</span></p>
+              <p class="strip-note">Revenue CAGR 14.2% &middot; five years</p>
             </div>
           </div>
+          <p class="strip-foot a-hero-el"><em class="strip-lead">Similar growth. Very different value creation.</em> Software, pharmaceuticals and automotive grew revenue at close to 14% a year over five years; their latest value-creation spreads run from +12.5pp to &minus;5.1pp. Growth is an input. Value creation is the outcome.</p>
         </div>
+
       </div>
     </section>
 
     <!-- ============ 01 · WHAT WE DO ============ -->
-    <section class="section">
+    <section class="section" id="what-we-do">
       <div class="container">
         <div class="section-head a-rise">
           <h2 class="section-title">What we do</h2>
-          <p class="mono-label">Two retained desks &middot; research &middot; consulting</p>
+          <p class="mono-label">Consulting &middot; Research &middot; Emerging Markets Desk &middot; India Desk</p>
         </div>
+        <p class="section-intro a-rise" style="margin-bottom: var(--s4)">All four services are available through individual projects and ongoing retained relationships. Consulting and research describe the work; the two desks describe where it goes deepest. Scope and cadence are agreed for each engagement, and the question decides whether it sits inside an existing relationship or needs a separately agreed assignment.</p>
 
         <ul class="paths">
           <li class="path a-rise">
-            <p class="path-kicker"><span>01</span><span class="path-mode">Retained desk</span></p>
+            <p class="path-kicker"><span>01</span><span class="path-mode">Project or retainer</span></p>
+            <h3><a href="consulting/">Consulting</a></h3>
+            <p>Research applied to a live decision: which market or opportunity, whether to enter or expand, whether an investment case holds, what a policy turn does to the plan.</p>
+            <a class="text-link" href="consulting/">How consulting works <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li class="path a-rise">
+            <p class="path-kicker"><span>02</span><span class="path-mode">Project or retainer</span></p>
+            <h3><a href="research/">Research</a></h3>
+            <p>A question investigated to institutional standard, as a defined assignment or ongoing research support, and a library of published and private work to read or request.</p>
+            <a class="text-link" href="research/">Research <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li class="path a-rise">
+            <p class="path-kicker"><span>03</span><span class="path-mode">Project or retainer</span></p>
             <h3><a href="emerging-markets/">Emerging Markets Desk</a></h3>
-            <p>Your external comparative research capability across the emerging markets that matter to your organisation.</p>
+            <p>Comparative research across the emerging markets a question names, for a specific EM assignment or a retained specialist relationship.</p>
             <a class="text-link" href="emerging-markets/">The Emerging Markets Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
           </li>
           <li class="path a-rise">
-            <p class="path-kicker"><span>02</span><span class="path-mode">Retained desk</span></p>
+            <p class="path-kicker"><span>04</span><span class="path-mode">Project or retainer</span></p>
             <h3><a href="india-desk/">India Desk</a></h3>
-            <p>Continuous specialist research for organisations with meaningful India exposure &mdash; the firm&rsquo;s deepest market.</p>
+            <p>The firm&rsquo;s deepest single-market capability, read from India, for a specific India assignment or a retained specialist relationship.</p>
             <a class="text-link" href="india-desk/">The India Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
-          </li>
-          <li class="path a-rise">
-            <p class="path-kicker"><span>03</span><span class="path-mode">Published &amp; commissioned</span></p>
-            <h3><a href="research/">Research</a></h3>
-            <p>Institutional-quality independent and commissioned research, with the methodology shown and every source dated.</p>
-            <a class="text-link" href="research/">Selected research <span class="arrow" aria-hidden="true">&rarr;</span></a>
-          </li>
-          <li class="path a-rise">
-            <p class="path-kicker"><span>04</span><span class="path-mode">Bespoke projects</span></p>
-            <h3><a href="consulting/">Consulting</a></h3>
-            <p>Research-led strategic work on emerging-market investment, expansion, supply-chain and policy decisions.</p>
-            <a class="text-link" href="consulting/">How consulting works <span class="arrow" aria-hidden="true">&rarr;</span></a>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ 02 · EMERGING MARKETS DESK ============ -->
-    <section class="section field-dark" id="emerging-markets-desk">
+    <!-- ============ 02 · ONE TEAM, EVERY MARKET ============
+         The twenty leading financial centres (the founder's list of
+         6 September 2026) and where the work is done from. The map is Natural Earth land (public domain)
+         in an equirectangular projection; pins are placed by longitude
+         and latitude in the same projection. Decorative: the cities are
+         listed in the text beside it. -->
+    <section class="section" id="across-markets">
       <div class="container">
         <div class="section-head a-rise">
-          <h2 class="section-title">Emerging Markets Desk</h2>
-          <p class="mono-label">01 &middot; Retained desk &middot; Comparative research</p>
+          <h2 class="section-title">Where the work is</h2>
+          <p class="mono-label">Founded 2025 &middot; Based in India &middot; Working globally</p>
         </div>
-
-        <div class="desk-grid">
-          <div class="desk-body">
-            <p class="desk-claim a-rise">You may not need an internal emerging-markets research team. You may need <em>access to one</em>.</p>
-            <p class="a-rise" style="margin-top: var(--s3)">Most organisations with exposure across several emerging markets cannot justify an economist, a strategist and a data analyst for each. The questions still arrive &mdash; before the committee, after the shock, when a market moves and someone has to say what it means for the others.</p>
-            <p class="a-rise">The Emerging Markets Desk is that capability, retained: continuous comparative research across the markets relevant to you, built around your questions rather than a generic country feed, delivered in whatever form the decision needs.</p>
-            <div class="desk-actions a-rise">
-              <a class="btn btn-primary" href="emerging-markets/">Explore the Emerging Markets Desk</a>
-              <a class="text-link" href="contact/">Discuss an Emerging Markets Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <div class="map-grid">
+          <figure class="map a-rise">
+            <div class="map-frame" aria-hidden="true">
+              <img src="assets/img/world-land.svg" alt="" width="1000" height="394" loading="lazy" decoding="async">
+              <span class="map-pin" style="left:29.443%;top:30.484%" title="New York"></span>
+              <span class="map-pin" style="left:49.965%;top:22.882%" title="London"></span>
+              <span class="map-pin" style="left:81.714%;top:43.437%" title="Hong Kong"></span>
+              <span class="map-pin" style="left:78.839%;top:58.203%" title="Singapore"></span>
+              <span class="map-pin" style="left:15.995%;top:32.553%" title="San Francisco"></span>
+              <span class="map-pin" style="left:83.743%;top:37.162%" title="Shanghai"></span>
+              <span class="map-pin" style="left:65.353%;top:41.405%" title="Dubai"></span>
+              <span class="map-pin" style="left:85.272%;top:32.700%" title="Seoul"></span>
+              <span class="map-pin" style="left:81.683%;top:43.280%" title="Shenzhen"></span>
+              <span class="map-pin" style="left:88.792%;top:34.031%" title="Tokyo"></span>
+              <span class="map-pin" style="left:52.373%;top:25.791%" title="Zurich"></span>
+              <span class="map-pin" style="left:17.155%;top:35.175%" title="Los Angeles"></span>
+              <span class="map-pin" style="left:30.261%;top:29.324%" title="Boston"></span>
+              <span class="map-pin" style="left:25.658%;top:29.663%" title="Chicago"></span>
+              <span class="map-pin" style="left:52.412%;top:23.866%" title="Frankfurt"></span>
+              <span class="map-pin" style="left:51.703%;top:24.217%" title="Luxembourg"></span>
+              <span class="map-pin" style="left:28.601%;top:31.756%" title="Washington, D.C."></span>
+              <span class="map-pin" style="left:51.706%;top:26.617%" title="Geneva"></span>
+              <span class="map-pin" style="left:50.653%;top:24.749%" title="Paris"></span>
+              <span class="map-pin" style="left:51.362%;top:22.276%" title="Amsterdam"></span>
+              <span class="map-pin is-base" style="left:70.244%;top:45.721%" title="Mumbai, India"></span>
             </div>
+            <figcaption class="map-caption"><span class="map-key"><i class="map-pin"></i>Leading financial centres</span><span class="map-key"><i class="map-pin is-base"></i>Where the work is done from</span></figcaption>
+          </figure>
+          <div class="map-body">
+            <p class="statement-lg a-rise">One team, <em>every market</em>.</p>
+            <p class="a-rise">Kakde Research works from India for clients across the world&rsquo;s leading financial centres, in North America, Europe, the Gulf and East and South-East Asia. There is no twenty-year archive here and no network of offices, and we do not pretend otherwise. There is a founder and a team of six analysts who work every question together, in whichever market it lands: young enough to have no legacy to defend, exacting enough to hold every figure to the same standard, and quick enough to be looking at your question the morning it arrives.</p>
+            <ul class="who-facts a-rise">
+              <li><b>Where</b><span>The twenty leading financial centres: New York, London, Hong Kong, Singapore, San Francisco, Shanghai, Dubai, Seoul, Shenzhen, Tokyo, Zurich, Los Angeles, Boston, Chicago, Frankfurt, Luxembourg, Washington, D.C., Geneva, Paris and Amsterdam.</span></li>
+              <li><b>Clients</b><span>Family offices, hedge funds, private investment offices, private capital and global equity funds.</span></li>
+              <li><b>What we provide</b><span>Consulting, research, the Emerging Markets Desk and the India Desk, each as a project or an ongoing relationship.</span></li>
+              <li><b>How</b><span>Original sources, an explicit comparison set, judgement labelled as judgement, and direct access to the people doing the work.</span></li>
+            </ul>
           </div>
-
-          <ol class="desk-mods a-rise">
-            <li class="desk-mod">
-              <span class="svc-num">01</span>
-              <h3>Recurring comparative notes</h3>
-              <p>Cross-market research on the questions your universe raises, on a cadence agreed with you.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">02</span>
-              <h3>Country and sector dashboards</h3>
-              <p>Maintained scorecards across the agreed markets, every figure sourced and dated.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">03</span>
-              <h3>Event-driven briefs</h3>
-              <p>When rates, the dollar, oil, an election or a policy turn changes a decision across the set.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">04</span>
-              <h3>Rapid research response</h3>
-              <p>Short-turnaround analysis for questions that cannot wait for the regular cycle &mdash; memo, data note, deck or call.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">05</span>
-              <h3>Research calls and committee briefings</h3>
-              <p>Live discussion with the analyst who did the work; presentations to investment or strategy committees.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">06</span>
-              <h3>Deep-dive research</h3>
-              <p>The larger questions graduate into dedicated studies, scoped inside the retainer&rsquo;s context.</p>
-            </li>
-          </ol>
         </div>
       </div>
     </section>
 
-    <!-- ============ 03 · INDIA DESK ============ -->
-    <section class="section field-dn on-paper" id="india-desk">
+    <!-- ============ 03 · CLIENT PERSPECTIVES ============
+         Eight client perspectives in the founder's approved wording (his
+         selection of 6 September 2026: 2A, 3B, 4B, 5A, 7B, 8B, 10A, then 1B
+         last). Desktop: a moving rail (js/rail.js) that eases to a stop on
+         hover or Pause. Phones, tablets and reduced motion: a swipeable
+         one-card carousel with previous/next buttons and a counter; nothing
+         moves on its own. The same eight sit below as a static list. -->
+    <section class="section field-dn" id="client-perspectives" aria-labelledby="revTitle">
       <div class="container">
         <div class="section-head a-rise">
-          <h2 class="section-title">India Desk</h2>
-          <p class="mono-label">02 &middot; Retained desk &middot; Specialist depth</p>
+          <h2 class="section-title" id="revTitle">Client perspectives</h2>
+          <p class="mono-label">Selected client feedback</p>
         </div>
+        <div class="rail-head a-rise">
+          <p class="rev-note" style="margin-bottom: 0">Selected client feedback. Organisations are anonymised; roles and locations are shown.</p>
+          <button class="rail-toggle" id="railToggle" type="button" aria-pressed="false" aria-controls="railViewport" hidden>
+            <span class="rail-toggle-icon" aria-hidden="true"></span><span class="rail-toggle-text">Pause</span>
+          </button>
+        </div>
+      </div>
 
-        <div class="desk-grid is-mirror">
-          <div class="desk-body">
-            <p class="desk-claim a-rise">Most India research is written <em>a long way from India</em>.</p>
-            <p class="a-rise" style="margin-top: var(--s3)">The India Desk is the firm&rsquo;s deepest continuous capability: macro, the RBI, fiscal policy, banking and credit, capital flows, corporate earnings, ownership, valuation and market structure &mdash; read from India, with the discipline of an institutional desk, and set against the emerging markets competing for the same capital.</p>
-            <p class="a-rise">A bespoke monthly retainer for organisations with meaningful India exposure and no dedicated India research team.</p>
-            <div class="desk-actions a-rise">
-              <a class="btn btn-primary" href="india-desk/">Explore the India Desk</a>
-              <a class="text-link" href="contact/">Discuss an India Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
-            </div>
+      <div class="rail a-rise" id="revRail">
+        <div class="rail-viewport" id="railViewport" aria-hidden="true">
+          <div class="rail-track" id="railTrack">
+            <article class="rail-card"><p class="rail-num">01<span>/08</span></p><p class="rail-q">Pranav will disagree with you. I actually like that. We gave him a brief where he thought we were asking the wrong question, and he said so. We changed the scope. He was right. For me, that is part of the value of the relationship. I would rather have someone challenge the investment case than produce a polished defence of what we already wanted to believe.</p><p class="rail-cite"><b>Portfolio Manager</b>Long/Short Fund &middot; New York</p></article>
+            <article class="rail-card"><p class="rail-num">02<span>/08</span></p><p class="rail-q">What I appreciate about the relationship is how little administration sits around an ordinary question. We can send it across and find out what is needed. Sometimes there is a straightforward answer; sometimes Pranav explains the work required to get to one. That process fits into our existing workflow. The retainer feels practical in day-to-day use.</p><p class="rail-cite"><b>Chief Investment Officer</b>Private Investment Office &middot; Geneva</p></article>
+            <article class="rail-card"><p class="rail-num">03<span>/08</span></p><p class="rail-q">We have relationships with larger research firms, and we use those too. With Kakde, I can send a specific question in the morning and usually have someone looking at it promptly. That is useful in its own right. There are occasions when what I need is a focused answer, and the ability to get the question in front of someone quickly matters more than receiving another long report.</p><p class="rail-cite"><b>Portfolio Manager</b>Hedge Fund &middot; London</p></article>
+            <article class="rail-card"><p class="rail-num">04<span>/08</span></p><p class="rail-q">Our assignments with Pranav have covered Europe and the US. There is considerable breadth in the team, and I would describe Kakde in those terms. The range of work we have given them goes across markets. For me, that is an important part of understanding the firm and the research and consulting capability it offers.</p><p class="rail-cite"><b>Investment Director</b>Family Office &middot; Zurich</p></article>
+            <article class="rail-card"><p class="rail-num">05<span>/08</span></p><p class="rail-q">For us, the useful question is how one market compares with the alternatives available to us. An attractive India story still needs to be considered alongside Indonesia, Mexico, Vietnam or Brazil. Kakde keeps that comparison in the discussion. It reflects the way we have to think as capital allocators, and it is the part of their emerging-markets work that I value.</p><p class="rail-cite"><b>Emerging Markets Portfolio Manager</b>Singapore</p></article>
+            <article class="rail-card"><p class="rail-num">06<span>/08</span></p><p class="rail-q">We didn&rsquo;t make that project easy for them. There was a tight deadline to begin with, a change of scope partway through, and then another question from a partner near the end. They handled it without making a production of it. The final work didn&rsquo;t feel as though it had been assembled overnight. That is the part I remember.</p><p class="rail-cite"><b>Managing Director</b>Private Capital Firm &middot; Los Angeles</p></article>
+            <article class="rail-card"><p class="rail-num">07<span>/08</span></p><p class="rail-q">Our relationship with Kakde covers research, commercial questions and market work. They have also handled urgent requests ahead of internal meetings. What keeps us using them is the combination of speed and access. You know who is working on your question, and you can actually speak to that person. For us, that is a very practical part of the retained relationship.</p><p class="rail-cite"><b>Chief Investment Officer</b>Global Family Office &middot; Zurich</p></article>
+            <article class="rail-card"><p class="rail-num">08<span>/08</span></p><p class="rail-q">The team has handled European commercial diligence and work involving a US company for us. Those were quite different assignments, and I was pleased with both. Their range comes through in the work itself. Different questions and different data, handled well across markets. That is how I would describe our experience with Kakde, and what I think is worth drawing attention to.</p><p class="rail-cite"><b>Investment Partner</b>Family Office &middot; Dubai</p></article>
           </div>
-
-          <ol class="desk-mods a-rise">
-            <li class="desk-mod">
-              <span class="svc-num">01</span>
-              <h3>Monthly research note</h3>
-              <p>A bespoke paper each month on an India question you nominate, or one the desk flags.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">02</span>
-              <h3>Rapid research response</h3>
-              <p>Short-turnaround analysis between the notes: a memo, a data note, a briefing deck or a call.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">03</span>
-              <h3>Monthly research discussion</h3>
-              <p>A structured call around the note, the EM comparison and whatever the month raised.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">04</span>
-              <h3>Comparative EM monitoring</h3>
-              <p>India&rsquo;s position tracked against the peers that matter for your allocation.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">05</span>
-              <h3>Maintained data</h3>
-              <p>The series behind the work, kept current as the sources revise and release.</p>
-            </li>
-            <li class="desk-mod">
-              <span class="svc-num">06</span>
-              <h3>Deep-dive research</h3>
-              <p>The larger questions graduate into dedicated papers where the retainer warrants it.</p>
-            </li>
-          </ol>
         </div>
+      </div>
+
+      <div class="container">
+        <div class="rail-nav" id="railNav" hidden>
+          <button class="rail-arrow" type="button" data-rail-prev aria-label="Previous perspective"><span aria-hidden="true">&larr;</span></button>
+          <p class="rail-count" aria-live="polite"><span data-rail-index>1</span> / <span data-rail-total>8</span></p>
+          <button class="rail-arrow" type="button" data-rail-next aria-label="Next perspective"><span aria-hidden="true">&rarr;</span></button>
+        </div>
+        <details class="rev-more a-rise" id="all-client-perspectives">
+          <summary><span class="rev-toggle-icon" aria-hidden="true"></span><span>Read all eight as a list</span></summary>
+          <ul class="rev-grid">
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>Pranav will disagree with you. I actually like that. We gave him a brief where he thought we were asking the wrong question, and he said so. We changed the scope. He was right. For me, that is part of the value of the relationship. I would rather have someone challenge the investment case than produce a polished defence of what we already wanted to believe.</p></blockquote><figcaption class="rev-cite"><b>Portfolio Manager</b>Long/Short Fund &middot; New York</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>What I appreciate about the relationship is how little administration sits around an ordinary question. We can send it across and find out what is needed. Sometimes there is a straightforward answer; sometimes Pranav explains the work required to get to one. That process fits into our existing workflow. The retainer feels practical in day-to-day use.</p></blockquote><figcaption class="rev-cite"><b>Chief Investment Officer</b>Private Investment Office &middot; Geneva</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>We have relationships with larger research firms, and we use those too. With Kakde, I can send a specific question in the morning and usually have someone looking at it promptly. That is useful in its own right. There are occasions when what I need is a focused answer, and the ability to get the question in front of someone quickly matters more than receiving another long report.</p></blockquote><figcaption class="rev-cite"><b>Portfolio Manager</b>Hedge Fund &middot; London</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>Our assignments with Pranav have covered Europe and the US. There is considerable breadth in the team, and I would describe Kakde in those terms. The range of work we have given them goes across markets. For me, that is an important part of understanding the firm and the research and consulting capability it offers.</p></blockquote><figcaption class="rev-cite"><b>Investment Director</b>Family Office &middot; Zurich</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>For us, the useful question is how one market compares with the alternatives available to us. An attractive India story still needs to be considered alongside Indonesia, Mexico, Vietnam or Brazil. Kakde keeps that comparison in the discussion. It reflects the way we have to think as capital allocators, and it is the part of their emerging-markets work that I value.</p></blockquote><figcaption class="rev-cite"><b>Emerging Markets Portfolio Manager</b>Singapore</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>We didn&rsquo;t make that project easy for them. There was a tight deadline to begin with, a change of scope partway through, and then another question from a partner near the end. They handled it without making a production of it. The final work didn&rsquo;t feel as though it had been assembled overnight. That is the part I remember.</p></blockquote><figcaption class="rev-cite"><b>Managing Director</b>Private Capital Firm &middot; Los Angeles</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>Our relationship with Kakde covers research, commercial questions and market work. They have also handled urgent requests ahead of internal meetings. What keeps us using them is the combination of speed and access. You know who is working on your question, and you can actually speak to that person. For us, that is a very practical part of the retained relationship.</p></blockquote><figcaption class="rev-cite"><b>Chief Investment Officer</b>Global Family Office &middot; Zurich</figcaption></figure></li>
+            <li class="rev-item"><figure><blockquote class="rev-q"><p>The team has handled European commercial diligence and work involving a US company for us. Those were quite different assignments, and I was pleased with both. Their range comes through in the work itself. Different questions and different data, handled well across markets. That is how I would describe our experience with Kakde, and what I think is worth drawing attention to.</p></blockquote><figcaption class="rev-cite"><b>Investment Partner</b>Family Office &middot; Dubai</figcaption></figure></li>
+          </ul>
+        </details>
       </div>
     </section>
 
-    <!-- ============ 04 · FLAGSHIP RESEARCH ============ -->
-    <section class="section">
+    <!-- ============ 03 · FLAGSHIP AND LIBRARY ============ -->
+    <section class="section" id="research-evidence">
       <div class="container">
         <div class="section-head a-rise">
-          <h2 class="section-title">Flagship research</h2>
-          <p class="mono-label">Published &middot; August 2026 &middot; Direct download</p>
+          <h2 class="section-title">Research as evidence</h2>
+          <p class="mono-label">Seven published &middot; Six sent on request</p>
         </div>
+        <p class="section-intro a-rise" style="margin-bottom: var(--s5)">The published and private research shows how the work is done: how a question is framed, how the evidence is assembled and qualified, and how far a conclusion is allowed to go. The work to date goes deepest in India and the emerging markets it competes with; a research assignment follows wherever the client&rsquo;s question leads.</p>
 
         <div class="pub-grid">
           <a class="pub-cover a-rise" href="research/can-global-investors-capture-indias-economic-rise/" aria-label="Open the flagship study: Can Global Investors Actually Capture India’s Economic Rise?">
@@ -357,102 +376,145 @@
           </a>
 
           <div class="pub-body">
+            <p class="mono-label a-rise" style="margin-bottom: var(--s2)">Flagship study &middot; Published August 2026 &middot; Direct download</p>
             <h3 class="statement-lg a-rise"><a href="research/can-global-investors-capture-indias-economic-rise/" style="color: inherit; text-decoration: none;">Can Global Investors Actually Capture India&rsquo;s Economic Rise?</a></h3>
             <p class="a-rise" style="margin-top: var(--s3); max-width: 62ch;">A dollar invested in India captures part of India&rsquo;s rise &mdash; materially less than GDP growth implies. Return depends on corporate earnings, valuation, dilution, investability and currency translation. India is structurally attractive but valuation-sensitive, and it has to be sized against the markets competing for the same capital. An India-centred question, answered inside a genuine comparative emerging-markets framework.</p>
             <p class="pub-meta a-rise"><span>Published <b>August 2026</b></span><span>Data cut-off 31 July 2026</span><span>118 pages &middot; 22 exhibits</span><span>Ten-market scorecard</span></p>
-            <div class="pub-themes a-rise"><span>India</span><span>Emerging markets</span><span>Capital flows</span><span>Valuation</span><span>Investability</span><span>Currency</span></div>
             <div class="pub-actions a-rise">
-              <a class="btn btn-primary" href="research/can-global-investors-capture-indias-economic-rise/">Read the flagship</a>
+              <a class="btn btn-primary" href="research/can-global-investors-capture-indias-economic-rise/">Read the study</a>
               <a class="text-link" href="assets/papers/can-global-investors-capture-indias-economic-rise.pdf" data-report="flagship">Download the PDF <span aria-hidden="true">(2.1&nbsp;MB)</span> <span class="arrow" aria-hidden="true">&rarr;</span></a>
             </div>
             <p class="pub-note a-rise">Report findings carry a 31 July 2026 data cut-off. Nothing in the study is live data.</p>
           </div>
         </div>
+
+        <div class="section-head a-rise" style="margin-top: var(--s6)">
+          <h2 class="section-title" style="font-size: var(--t-h3)">Where the questions concentrate</h2>
+          <p class="mono-label">Six themes &middot; The past decade</p>
+        </div>
+        <p class="section-intro a-rise" style="margin-bottom: var(--s3); max-width: 62ch;">Six of the many ways a question arrives. Each is a standing line of consulting and research work, scoped to the decision in front of you; none is a fixed product, and yours may be none of these. Bring it anyway.</p>
+        <ul class="lib a-rise" style="margin-top: 0">
+          <li>
+            <p class="lib-title">Higher for longer: what the cost of capital does to valuations, leverage and allocation</p>
+            <p class="lib-meta">Global &middot; Rates and capital</p>
+            <a class="text-link" href="contact/">Discuss this question <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li>
+            <p class="lib-title">Tariffs, trade policy and the re-pricing of supply chains</p>
+            <p class="lib-meta">Global &middot; Trade and location</p>
+            <a class="text-link" href="contact/">Discuss this question <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li>
+            <p class="lib-title">AI capital expenditure and the concentration of equity returns</p>
+            <p class="lib-meta">Global &middot; Markets and sectors</p>
+            <a class="text-link" href="contact/">Discuss this question <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li>
+            <p class="lib-title">Private markets and private credit: return outside listed equity</p>
+            <p class="lib-meta">Global &middot; Private capital</p>
+            <a class="text-link" href="contact/">Discuss this question <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li>
+            <p class="lib-title">EM ex-China: where the allocation goes when China is carved out</p>
+            <p class="lib-meta">Emerging markets &middot; Allocation</p>
+            <a class="text-link" href="contact/">Discuss this question <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li>
+            <p class="lib-title">India&rsquo;s investability: ownership limits, free float and what a foreign investor actually captures</p>
+            <p class="lib-meta">India &middot; Investability</p>
+            <a class="text-link" href="contact/">Discuss this question <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </li>
+        </ul>
+        <p class="lib-note a-rise">The research library, with six further published studies and the completed India studies, is on the Research page. <a class="text-link" href="research/#selected">The research library <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
       </div>
     </section>
 
-    <!-- ============ 05 · SELECTED RESEARCH ============ -->
-    <section class="section field-dark">
+    <!-- ============ 04 · SPECIALIST DEPTH: EMERGING MARKETS AND INDIA ============ -->
+    <section class="section field-dark depth" id="specialist-depth">
       <div class="container">
         <div class="section-head a-rise">
-          <h2 class="section-title">Selected research</h2>
-          <p class="mono-label">Completed studies &middot; Available on request</p>
+          <h2 class="section-title">Specialist depth: emerging markets and India</h2>
+          <p class="mono-label">Two desks &middot; Assignment or retained</p>
         </div>
-        <p class="section-intro a-rise" style="margin-bottom: var(--s4)">Four further studies exist and are distributed directly. Request one and it is sent to your work email.</p>
 
-        <ol class="idx">
-          <li class="idx-row is-request a-rise">
-            <span class="idx-num">01</span>
-            <h3 class="idx-title"><span class="idx-flag is-request">Available on request</span>Credibility and Transmission</h3>
-            <p class="idx-desc">RBI policy credibility and transmission, scored against major central banks &mdash; and what a policy rate that is not transmitting means for the rates and currency view.</p>
-            <p class="idx-meta"><span>Policy</span><span>India &middot; comparators</span></p>
-            <div class="idx-actions"><button class="btn btn-outline" type="button" data-request-report="credibility-transmission" data-report-title="Credibility and Transmission" data-report-meta="Policy · India against major central banks">Request report</button></div>
-          </li>
-          <li class="idx-row is-request a-rise">
-            <span class="idx-num">02</span>
-            <h3 class="idx-title"><span class="idx-flag is-request">Available on request</span>The Balance-Sheet Decade</h3>
-            <p class="idx-desc">Banking-system resilience: India against comparator systems after a decade of clean-up &mdash; credit depth, asset quality and where the next stress would surface.</p>
-            <p class="idx-meta"><span>Banking</span><span>India &middot; comparators</span></p>
-            <div class="idx-actions"><button class="btn btn-outline" type="button" data-request-report="balance-sheet-decade" data-report-title="The Balance-Sheet Decade" data-report-meta="Banking · India against comparator systems">Request report</button></div>
-          </li>
-          <li class="idx-row is-request a-rise">
-            <span class="idx-num">03</span>
-            <h3 class="idx-title"><span class="idx-flag is-request">Available on request</span>The Rupee, Managed</h3>
-            <p class="idx-desc">The rupee against comparator currencies: intervention, real effective rates and reserve adequacy &mdash; and what the management regime does to a foreign investor&rsquo;s return.</p>
-            <p class="idx-meta"><span>Currency</span><span>India &middot; EM peers</span></p>
-            <div class="idx-actions"><button class="btn btn-outline" type="button" data-request-report="rupee-managed" data-report-title="The Rupee, Managed" data-report-meta="Currency · India against EM peers">Request report</button></div>
-          </li>
-          <li class="idx-row is-request a-rise">
-            <span class="idx-num">04</span>
-            <h3 class="idx-title"><span class="idx-flag is-request">Available on request</span>Promoter Nation</h3>
-            <p class="idx-desc">Corporate structure and governance: promoter holdings, pledged shares and related-party norms &mdash; and what a foreign shareholder actually owns.</p>
-            <p class="idx-meta"><span>Governance</span><span>India</span></p>
-            <div class="idx-actions"><button class="btn btn-outline" type="button" data-request-report="promoter-nation" data-report-title="Promoter Nation" data-report-meta="Governance · India">Request report</button></div>
-          </li>
-        </ol>
-
-        <p class="a-rise" style="margin-top: var(--s4)"><a class="text-link" href="research/">The research library <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
-      </div>
-    </section>
-
-    <!-- ============ 06 · WHY KAKDE RESEARCH ============ -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head a-rise">
-          <h2 class="section-title">Why Kakde Research</h2>
-          <p class="mono-label">Six commitments</p>
+        <div class="depth-grid">
+          <div class="desk-body">
+            <p class="desk-claim a-rise">India is where the work goes deepest, <em>not where it stops</em>.</p>
+          </div>
+          <div>
+            <p class="a-rise">Two specialist desks sit inside the practice. The Emerging Markets Desk reads the emerging markets a question names against one another and against the developed-market anchors an allocator already holds; the peer group follows the question rather than a fixed list. The India Desk is the firm&rsquo;s deepest single-market capability, read from India with the discipline of an institutional desk.</p>
+            <p class="a-rise">Both are available for a specific assignment or as a retained specialist relationship, and both run on the same comparative dataset and the same method as the wider consulting and research work.</p>
+            <div class="desk-actions a-rise">
+              <a class="btn btn-primary" href="emerging-markets/">Explore the Emerging Markets Desk</a>
+              <a class="text-link" href="india-desk/">Explore the India Desk <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
         </div>
-        <ul class="principles">
-          <li class="principle a-rise">
-            <h3>A comparative lens</h3>
-            <p>Every market conclusion is tested against the alternatives competing for the same allocation or the same plant. The peer set is chosen for the question, not inherited from a benchmark.</p>
+
+        <ul class="depth-links">
+          <li class="a-rise">
+            <span class="mono-label">Specialist desk</span>
+            <h3><a href="emerging-markets/">Emerging Markets Desk</a></h3>
+            <p>Comparative research across the emerging markets that matter to your organisation.</p>
           </li>
-          <li class="principle a-rise">
-            <h3>Deeper India capability</h3>
-            <p>Emerging markets are the opportunity set. India is our deepest specialist market: read from India, continuously, to institutional standard.</p>
+          <li class="a-rise">
+            <span class="mono-label">Specialist desk</span>
+            <h3><a href="india-desk/">India Desk</a></h3>
+            <p>The firm&rsquo;s deepest continuous capability: India, read from India.</p>
           </li>
-          <li class="principle a-rise">
-            <h3>Original research</h3>
-            <p>Official data, filings and primary sources pulled and cleaned in-house. Where a series is revised or interrupted, that is recorded, not smoothed over.</p>
+          <li class="a-rise">
+            <span class="mono-label">Standing research</span>
+            <h3><a href="research/india-in-em/">India in EM</a></h3>
+            <p>Where India stands inside the investable emerging-markets set, and when it does not.</p>
           </li>
-          <li class="principle a-rise">
-            <h3>Direct analyst access</h3>
-            <p>The researcher you speak to is the researcher who does the work. No account manager, no junior team separated from your question.</p>
-          </li>
-          <li class="principle a-rise">
-            <h3>Transparent method</h3>
-            <p>Sources dated, judgement labelled as judgement, and the conditions that would change a conclusion stated alongside it.</p>
-          </li>
-          <li class="principle a-rise">
-            <h3>Independence</h3>
-            <p>Research and consulting and nothing else: no brokerage, no execution, no product distribution. Nothing earns more when a conclusion goes one way.</p>
+          <li class="a-rise">
+            <span class="mono-label">Maintained data</span>
+            <h3><a href="data/">The comparative data desk</a></h3>
+            <p>Eight economies on one frame; every series sourced, dated and documented.</p>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ 07 · THE FOUNDER ============ -->
-    <section class="section field-dn">
+    <!-- ============ 05 · HOW THE WORK IS DONE ============ -->
+    <section class="section" id="method">
+      <div class="container">
+        <div class="section-head a-rise">
+          <h2 class="section-title">How the work is done</h2>
+          <p class="mono-label">Six commitments &middot; every engagement</p>
+        </div>
+        <ul class="principles">
+          <li class="principle a-rise">
+            <h3>Original research</h3>
+            <p>Official data, filings and primary sources, pulled and cleaned in-house. Where a series is revised or interrupted, that is recorded rather than smoothed over.</p>
+          </li>
+          <li class="principle a-rise">
+            <h3>An explicit comparison set</h3>
+            <p>Every conclusion is tested against the alternatives the decision actually runs between. The peer set is chosen for the question and written into the scope, whether it spans emerging markets, developed anchors or both.</p>
+          </li>
+          <li class="principle a-rise">
+            <h3>Sources and dates</h3>
+            <p>Every figure carries its source and its date, and the data appendix is written so that your own team can rebuild it.</p>
+          </li>
+          <li class="principle a-rise">
+            <h3>Judgement labelled as judgement</h3>
+            <p>Where the evidence runs out and interpretation begins, the report says so, and states the conditions that would change the view.</p>
+          </li>
+          <li class="principle a-rise">
+            <h3>Direct access</h3>
+            <p>You speak to the people doing the work. The founder scopes every engagement, reviews it and stays on the relationship; the analysts are reachable rather than hidden behind an account layer.</p>
+          </li>
+          <li class="principle a-rise">
+            <h3>Independence</h3>
+            <p>Consulting and research fees are the only revenue: no brokerage, no execution, no products, no asset-management incentive. A conclusion is allowed to be inconvenient.</p>
+          </li>
+        </ul>
+        <p class="a-rise" style="margin-top: var(--s4)"><a class="text-link" href="methodology/">The methodology, in six stages <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============ 06 · THE FOUNDER-LED TEAM ============ -->
+    <section class="section field-dn" id="team">
       <div class="container who-grid">
         <div class="who-byline a-rise">
           <p class="mono-label">The founder</p>
@@ -460,10 +522,10 @@
           <p class="byline-role">Founder &amp; lead researcher<br>Based in India &middot; working globally</p>
         </div>
         <div class="who-body">
-          <p class="statement-lg a-rise">A researcher, not a research department.</p>
-          <p class="a-rise">Before starting Kakde Research I worked in London, at a global investment bank and at a financial-data company, across macro and market data. I trained as a computer engineer before an MSc in Finance, and I still build the data pipelines behind every piece of work myself.</p>
-          <p class="a-rise">The practice exists because the emerging-market questions asked in London were rarely answered well from London &mdash; least of all the India ones. Every engagement is scoped, researched and delivered by the analyst you speak to, which caps how much the practice takes on at once. The limit is deliberate.</p>
-          <p class="a-rise" style="margin-top: var(--s3)"><a class="text-link" href="about/founder/">About the founder <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+          <p class="statement-lg a-rise">Founder-led. You speak to the people doing the work.</p>
+          <p class="a-rise">Before starting Kakde Research I worked in London, at a global investment bank and at a financial-data company, across macro and market data. I trained as a computer engineer before an MSc in Finance, and the data pipelines behind the work are still built in-house rather than lifted from a vendor summary.</p>
+          <p class="a-rise">The practice exists because important investment and strategic decisions are so often made from generic research, inherited assumptions or evidence assembled a long way from the decision itself. The founder scopes every engagement, directs and reviews the work and stays on the relationship; a team of six analysts assembles, checks and maintains the evidence. Founder review on every deliverable caps how much runs at once, and the limit is deliberate.</p>
+          <p class="a-rise" style="margin-top: var(--s3)"><a class="text-link" href="about/">About the practice <span class="arrow" aria-hidden="true">&rarr;</span></a> &nbsp;&nbsp; <a class="text-link" href="about/founder/">The founder <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
         </div>
       </div>
     </section>
@@ -473,8 +535,8 @@
       <div class="container">
         <div class="cta-inner a-rise">
           <div>
-            <h2>Have a question worth researching?</h2>
-            <p>Bring us the question. We build the research around the decision &mdash; and tell you plainly, before you have spent anything, if it cannot be answered well.</p>
+            <h2>Bring us the decision, question or assumption you need tested.</h2>
+            <p>Describe it and the markets it touches. We will tell you plainly whether it can be answered well, what evidence it requires and whether it is a project or an ongoing relationship.</p>
           </div>
           <a class="btn btn-primary" href="contact/">Discuss a Project</a>
         </div>
@@ -499,22 +561,22 @@
           </span>
           <span class="wordmark-text">Kakde Research</span>
         </a>
-        <p class="footer-line">Emerging-markets research and consulting</p>
-        <p class="footer-line">Deep India expertise</p>
+        <p class="footer-line">Consulting and research across markets</p>
+        <p class="footer-line">Particularly deep in emerging markets and India</p>
         <p class="footer-line">Based in India &middot; Working globally</p>
         <p class="footer-line"><a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a></p>
       </div>
       <nav class="footer-col" aria-label="Services">
         <p class="footer-head">Services</p>
+        <a href="consulting/">Consulting</a>
+        <a href="research/">Research</a>
         <a href="emerging-markets/">Emerging Markets Desk</a>
         <a href="india-desk/">India Desk</a>
-        <a href="research/">Research</a>
-        <a href="consulting/">Consulting</a>
       </nav>
-      <nav class="footer-col" aria-label="Research">
-        <p class="footer-head">Research</p>
-        <a href="research/">Selected research</a>
-        <a href="research/can-global-investors-capture-indias-economic-rise/">Flagship</a>
+      <nav class="footer-col" aria-label="Research library">
+        <p class="footer-head">Research library</p>
+        <a href="research/#selected">Selected research</a>
+        <a href="research/can-global-investors-capture-indias-economic-rise/">Flagship study</a>
         <a href="insights/">Insights</a>
         <a href="data/">Data</a>
       </nav>
@@ -535,13 +597,13 @@
       </nav>
     </div>
     <div class="container footer-bottom">
-      <p>Kakde Research provides emerging-markets research and consulting for professional and institutional readers. Nothing on this site constitutes investment advice or a recommendation to buy or sell any security.</p>
+      <p>Kakde Research provides independent consulting and research for professional and institutional readers. Nothing on this site constitutes investment advice or a recommendation to buy or sell any security.</p>
       <p>&copy; 2026 Kakde Research</p>
     </div>
   </footer>
 
   <!-- ============ REQUEST-A-REPORT DIALOG ============
-       One dialog for every "Request report" button on the page. Opened,
+       One dialog for every "Request the report" button on the page. Opened,
        trapped, announced and closed by js/request.js; delivered by
        /api/request-report, which resolves the report ID server-side. -->
   <div class="req-modal" id="reqModal" role="dialog" aria-modal="true" aria-labelledby="reqTitle" aria-describedby="reqReportName" hidden>

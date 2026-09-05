@@ -49,6 +49,53 @@ const REPORTS = {
     object: 'promoter-nation.pdf',
     filename: 'Kakde-Research-Promoter-Nation.pdf'
   }
+,
+  /* Six studies listed as published on the research page (September 2026).
+     Upload each PDF to the private bucket under the object name below; until
+     it is there, a request is recorded and the enquirer is told the study
+     will be sent as soon as it is published. */
+  'cost-of-capital': {
+    title: 'The Cost of Capital Has Changed. Has Your Hurdle Rate?',
+    meta: 'Rates · Global',
+    status: 'request',
+    object: 'the-cost-of-capital-has-changed.pdf',
+    filename: 'Kakde-Research-The-Cost-of-Capital-Has-Changed.pdf'
+  },
+  'tariff-arithmetic': {
+    title: 'Tariff Arithmetic',
+    meta: 'Trade · Global',
+    status: 'request',
+    object: 'tariff-arithmetic.pdf',
+    filename: 'Kakde-Research-Tariff-Arithmetic.pdf'
+  },
+  'concentration-problem': {
+    title: 'The Concentration Problem',
+    meta: 'Equity markets · Global',
+    status: 'request',
+    object: 'the-concentration-problem.pdf',
+    filename: 'Kakde-Research-The-Concentration-Problem.pdf'
+  },
+  'private-credit-decade': {
+    title: 'Private Credit’s Decade',
+    meta: 'Private markets · Global',
+    status: 'request',
+    object: 'private-credits-decade.pdf',
+    filename: 'Kakde-Research-Private-Credits-Decade.pdf'
+  },
+  'public-debt-after-pandemic': {
+    title: 'Public Debt After the Pandemic',
+    meta: 'Sovereign · Global',
+    status: 'request',
+    object: 'public-debt-after-the-pandemic.pdf',
+    filename: 'Kakde-Research-Public-Debt-After-the-Pandemic.pdf'
+  },
+  'em-ex-china': {
+    title: 'EM ex-China: The Allocation Nobody Designed',
+    meta: 'Allocation · Emerging markets',
+    status: 'request',
+    object: 'em-ex-china.pdf',
+    filename: 'Kakde-Research-EM-ex-China.pdf'
+  }
 };
 
 const ID_PATTERN = /^[a-z0-9-]{3,64}$/;

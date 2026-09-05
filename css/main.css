@@ -3874,3 +3874,755 @@ html, body { max-width: 100%; overflow-x: clip; }
    0.55 alpha measured under 4.5:1 on navy-deep. */
 .rank-table .cell-yr, .rank-table tbody th .row-unit, .dash-read .read-yr { color: var(--on-dark-mid); }
 /* cache-bust: 1787153769 */
+
+/* ==========================================================================
+   V13 — RESEARCH-LED CONSULTING, WORKING GLOBALLY
+   Additions only. Nothing above is removed: the comparative EM exhibit
+   keeps every rule it had and moves down the page into the specialist
+   section; the hero now carries a typeset scope sheet instead of a chart.
+   ========================================================================== */
+
+/* ---------- Navigation groups ----------
+   The trigger is a real link to the group's overview page. Hover opens the
+   menu on a pointer device (app.js), focus-within opens it for a keyboard,
+   and in the mobile overlay the group is simply printed in full. */
+.nav-drop { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.nav-drop .caret {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  opacity: 0.75;
+}
+.nav-item:focus-within .drop-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.drop-menu { min-width: 250px; }
+.drop-menu a[aria-current="page"] { color: var(--ink); background: var(--paper-dn); }
+.drop-head {
+  display: block;
+  padding: 4px 22px 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+@media (max-width: 900px) {
+  .nav-drop .caret { display: none; }
+  .drop-menu, .nav-item.is-open .drop-menu { display: block; }
+  .drop-head { display: none; }
+  .drop-menu a { font-size: 17px; padding: 7px 0; }
+  .drop-menu a[aria-current="page"] { background: none; color: var(--accent-bright); }
+  .nav-item { padding-bottom: 6px; }
+}
+
+/* ---------- Hero, V13 ----------
+   The plate, washes and type are production's. The right column is a
+   scope sheet, typeset like the written scope every engagement starts
+   from; the four-market strip has moved to the specialist section. */
+.hero-dark.is-v13 { padding-bottom: clamp(48px, 7vh, 96px); }
+.hero-dark.is-v13 h1 { font-size: clamp(38px, 5.3vw, 78px); max-width: 15ch; }
+.hero-dark.is-v13 .hero-row {
+  grid-template-columns: minmax(0, 5.4fr) minmax(0, 6.6fr);
+  gap: var(--s4) var(--s6);
+  margin-top: clamp(24px, 3.5vh, 44px);
+}
+.hero-dark.is-v13 .hero-sub { max-width: 46ch; }
+.hero-line {
+  margin-top: clamp(24px, 3.5vh, 40px);
+  font-family: var(--mono);
+  font-size: var(--t-meta);
+  letter-spacing: 0.12em;
+  line-height: 1.9;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+  max-width: 44ch;
+}
+.hero-line b { font-weight: 400; color: var(--on-dark); }
+
+.hero-sheet { border-top: 1px solid var(--rule-dk-strong); padding-top: var(--s2); }
+.hero-sheet-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  padding: 4px 0 var(--s2);
+  font-family: var(--mono);
+  font-size: var(--t-meta);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+}
+.hero-sheet-head span:last-child { color: var(--on-dark-muted); }
+.hero-sheet ol { list-style: none; }
+.hero-sheet li {
+  display: grid;
+  grid-template-columns: 30px 128px minmax(0, 1fr);
+  column-gap: var(--s2);
+  align-items: baseline;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule-dk);
+}
+.sh-num { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--on-dark-muted); }
+.sh-key { font-family: var(--serif); font-size: 17px; line-height: 1.3; color: var(--on-dark); }
+.sh-val { font-size: 13.5px; line-height: 1.55; color: var(--on-dark-mid); }
+.sh-val em { font-style: italic; color: var(--accent-bright); }
+.hero-sheet-foot {
+  padding-top: var(--s2);
+  border-top: 1px solid var(--rule-dk);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  line-height: 1.65;
+  color: var(--on-dark-muted);
+}
+.hero-sheet-foot b { font-weight: 400; color: var(--on-dark-mid); }
+@media (max-width: 1100px) {
+  .hero-dark.is-v13 .hero-row { grid-template-columns: 1fr; gap: var(--s5); }
+  .hero-sheet { max-width: 660px; }
+}
+@media (max-width: 720px) {
+  .hero-dark.is-v13 h1 { font-size: clamp(33px, 9vw, 44px); max-width: none; }
+  .hero-line { margin-top: 22px; }
+  .hero-sheet li { grid-template-columns: 26px minmax(0, 1fr); row-gap: 4px; }
+  .sh-val { grid-column: 2; }
+}
+
+/* ---------- Ways of working: an editorial service index ----------
+   Four rows, one per engagement form. Number, mode and title on the left;
+   the commercial facts on the right as a term sheet, so the four can be
+   compared line by line rather than read as four slogans. */
+.eng { list-style: none; border-top: 1px solid var(--rule-mid); }
+.eng-row {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 5fr) minmax(0, 6fr);
+  column-gap: var(--s5);
+  row-gap: var(--s3);
+  align-items: start;
+  padding-block: clamp(28px, 3.4vw, 46px);
+  border-bottom: 1px solid var(--rule);
+}
+.eng-num { font-family: var(--mono); font-size: var(--t-small); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 6px; }
+.eng-mode {
+  font-family: var(--mono);
+  font-size: var(--t-meta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.eng-row h3 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+  max-width: 16ch;
+}
+.eng-row h3 a { color: inherit; text-decoration: none; transition: color 0.2s var(--ease-out); }
+.eng-row h3 a:hover { color: var(--accent); }
+.eng-lede { margin-top: var(--s2); font-size: var(--t-body); line-height: 1.6; color: var(--body-c); max-width: 42ch; }
+.eng-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4); margin-top: var(--s3); }
+.eng-facts { margin: 0; border-top: 1px solid var(--rule-mid); }
+.eng-facts > div {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  column-gap: var(--s2);
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.eng-facts dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 3px;
+}
+.eng-facts dd { margin: 0; font-size: var(--t-small); line-height: 1.55; color: var(--body-c); }
+.eng-facts dd b { font-weight: 500; color: var(--ink); }
+@media (max-width: 1024px) {
+  .eng-row { grid-template-columns: 44px minmax(0, 1fr); }
+  .eng-facts { grid-column: 2; }
+}
+@media (max-width: 560px) {
+  .eng-row { grid-template-columns: 1fr; row-gap: var(--s2); }
+  .eng-num { display: none; }
+  .eng-facts { grid-column: 1; }
+  .eng-facts > div { grid-template-columns: 1fr; row-gap: 2px; }
+  .eng-actions .btn { width: 100%; }
+}
+
+/* ---------- Client perspectives ----------
+   Static. Three set side by side as a ledger; the rest under a native
+   disclosure, printed in full for anyone who opens it. No motion, no
+   ranking, no decorative quotation marks. */
+.rev-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--rule-mid);
+}
+.rev-item {
+  padding: var(--s4) var(--s4) var(--s4) 0;
+  margin-right: var(--s4);
+  border-right: 1px solid var(--rule);
+  min-width: 0;
+}
+.rev-item:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.rev-item figure { margin: 0; display: flex; flex-direction: column; height: 100%; }
+.rev-q { font-family: var(--serif); font-size: clamp(16.5px, 1.3vw, 19.5px); line-height: 1.52; color: var(--ink); flex: 1; }
+.rev-q p + p { margin-top: 0.8em; }
+.rev-cite {
+  margin-top: var(--s3);
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.rev-cite b { display: block; font-weight: 400; color: var(--ink); }
+.rev-note { font-size: var(--t-small); line-height: 1.6; color: var(--muted); max-width: 62ch; margin-bottom: var(--s4); }
+.rev-more { margin-top: var(--s2); border-top: 1px solid var(--rule-mid); }
+.rev-more summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s3) 0;
+  font-family: var(--sans);
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--ink);
+  min-height: 44px;
+}
+.rev-more summary::-webkit-details-marker { display: none; }
+.rev-more summary .rev-toggle-icon {
+  flex: none;
+  width: 9px; height: 9px;
+  margin-top: -3px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s var(--ease-out);
+}
+.rev-more[open] summary .rev-toggle-icon { transform: rotate(-135deg); margin-top: 3px; }
+.rev-more summary .rev-count { color: var(--muted); font-weight: 400; }
+.rev-more summary:hover { color: var(--accent); }
+.rev-more summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.rev-more .rev-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+.rev-more .rev-item { padding-block: var(--s3); border-bottom: 1px solid var(--rule); }
+.rev-more .rev-item:nth-child(2n) { border-right: 0; margin-right: 0; padding-right: 0; }
+.rev-more .rev-item:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+@media (max-width: 900px) {
+  .rev-grid, .rev-more .rev-grid { grid-template-columns: 1fr; }
+  .rev-item, .rev-more .rev-item { border-right: 0; margin-right: 0; padding-right: 0; padding-block: var(--s3); border-bottom: 1px solid var(--rule); }
+  .rev-grid > .rev-item:last-child { border-bottom: 0; }
+  .rev-q { font-size: 17px; }
+}
+
+/* ---------- Research as evidence: the compact library ---------- */
+.lib {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--s5);
+  margin-top: var(--s5);
+  border-top: 1px solid var(--rule-mid);
+}
+.lib li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--s3);
+  row-gap: 4px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lib-title { font-family: var(--serif); font-size: 18px; line-height: 1.3; color: var(--ink); }
+.lib-title a { color: inherit; text-decoration: none; }
+.lib-title a:hover { color: var(--accent); }
+.lib-meta { grid-column: 1; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.lib li > .btn, .lib li > .text-link { grid-column: 2; grid-row: 1 / span 2; }
+.lib li > .btn { padding: 10px 16px; font-size: 13.5px; }
+.lib-note { margin-top: var(--s3); font-size: var(--t-small); line-height: 1.6; color: var(--muted); max-width: 66ch; }
+@media (max-width: 860px) { .lib { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .lib li { grid-template-columns: 1fr; }
+  .lib li > .btn, .lib li > .text-link { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 6px; }
+}
+
+/* ---------- Specialist depth: emerging markets and India ----------
+   The comparative exhibit and the four-market strip, exactly as they were
+   drawn in the V10 hero, now sit here on the dark field with the desks and
+   the research that go with them. */
+.depth-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--s5) var(--s6);
+  align-items: start;
+}
+.depth-grid .desk-body > p { max-width: 52ch; }
+.depth .strip { margin-top: var(--s5); }
+.depth-links {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 var(--s4);
+  margin-top: var(--s5);
+  border-top: 1px solid var(--rule-dk-mid);
+}
+.depth-links li { padding: var(--s3) 0; border-bottom: 1px solid var(--rule-dk); min-width: 0; }
+.depth-links .mono-label { display: block; margin-bottom: 8px; }
+.depth-links h3 { font-family: var(--serif); font-size: clamp(18px, 1.5vw, 22px); font-weight: 400; line-height: 1.2; }
+.depth-links h3 a { color: var(--on-dark); text-decoration: none; transition: color 0.2s var(--ease-out); }
+.depth-links h3 a:hover { color: var(--accent-bright); }
+.depth-links p { margin-top: 6px; font-size: 13.5px; line-height: 1.55; color: var(--on-dark-muted); max-width: 30ch; }
+@media (max-width: 1024px) {
+  .depth-grid { grid-template-columns: 1fr; }
+  .depth-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) { .depth-links { grid-template-columns: 1fr; } .depth-links p { max-width: none; } }
+
+/* ---------- The founder-led team ---------- */
+.who-body .team-line { font-size: var(--t-small); line-height: 1.6; color: var(--muted); max-width: 60ch; }
+.who-facts { list-style: none; margin-top: var(--s3); border-top: 1px solid var(--rule-mid); max-width: 60ch; }
+.who-facts li { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: var(--s3); padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: var(--t-small); line-height: 1.55; color: var(--body-c); }
+.who-facts li b { font-weight: 500; color: var(--ink); }
+@media (max-width: 480px) { .who-facts li { grid-template-columns: 1fr; row-gap: 2px; } }
+
+/* ---------- Retained research page: the two desks as configurations ---------- */
+.cfg { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule-mid); }
+.cfg li { padding: var(--s4) var(--s5) var(--s4) 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+.cfg li:nth-child(2n) { border-right: 0; padding-right: 0; padding-left: var(--s5); }
+.cfg li:nth-last-child(-n+2) { border-bottom: 0; }
+.cfg .mono-label { display: block; margin-bottom: 12px; }
+.cfg h3 { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 30px); font-weight: 400; line-height: 1.1; letter-spacing: -0.012em; color: var(--ink); }
+.cfg h3 a { color: inherit; text-decoration: none; }
+.cfg h3 a:hover { color: var(--accent); }
+.cfg p { margin-top: var(--s2); font-size: var(--t-small); line-height: 1.6; color: var(--body-c); max-width: 46ch; }
+.cfg .text-link { margin-top: var(--s3); }
+@media (max-width: 760px) {
+  .cfg { grid-template-columns: 1fr; }
+  .cfg li, .cfg li:nth-child(2n) { border-right: 0; padding-inline: 0; border-bottom: 1px solid var(--rule); }
+  .cfg li:last-child { border-bottom: 0; }
+}
+
+/* ---------- Small guards ---------- */
+[id] { scroll-margin-top: calc(var(--header-h) + var(--s2)); }
+@media (prefers-reduced-motion: reduce) {
+  .rev-more summary .rev-toggle-icon { transition: none; }
+}
+
+/* ---------- Client perspectives: the moving rail ----------
+   One track, two identical halves, moved by a transform at a constant
+   speed (js/rail.js sets the duration from the measured width, so the
+   pace is the same on every screen). Each card carries its own trailing
+   margin, so one half is exactly half the track and the loop lands on an
+   identical pixel. It holds still on hover, on the control, off-screen
+   and under reduced motion, where it becomes a plain horizontal scroll. */
+.rail-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s3); margin-bottom: var(--s4); }
+.rail-toggle {
+  flex: none;
+  display: inline-flex; align-items: center; gap: 9px;
+  min-height: 40px; padding: 8px 14px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--ink);
+  background: none; border: 1px solid var(--rule-mid); cursor: pointer;
+  transition: border-color 0.15s var(--ease-out), background-color 0.15s var(--ease-out);
+}
+.rail-toggle:hover { border-color: var(--ink); background: var(--paper-up); }
+.rail-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.rail-toggle-icon { position: relative; width: 10px; height: 12px; }
+.rail-toggle-icon::before, .rail-toggle-icon::after { content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: currentColor; }
+.rail-toggle-icon::before { left: 0; } .rail-toggle-icon::after { right: 0; }
+.rail-toggle[aria-pressed="true"] .rail-toggle-icon::before { left: 1px; width: 0; height: 0; top: 0; bottom: auto; background: none; border-left: 9px solid currentColor; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.rail-toggle[aria-pressed="true"] .rail-toggle-icon::after { display: none; }
+
+.rail { position: relative; overflow: hidden; padding-block: 6px; }
+.rail-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 clamp(24px, 6vw, 96px), #000 calc(100% - clamp(24px, 6vw, 96px)), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 clamp(24px, 6vw, 96px), #000 calc(100% - clamp(24px, 6vw, 96px)), transparent 100%);
+}
+.rail-track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  padding-left: var(--gutter);
+  animation: rail-move var(--rail-dur, 120s) linear infinite;
+  will-change: transform;
+}
+.rail.is-still .rail-track, .rail:hover .rail-track { animation-play-state: paused; }
+@keyframes rail-move { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+
+.rail-card {
+  flex: 0 0 auto;
+  width: clamp(300px, 31vw, 440px);
+  margin-right: clamp(14px, 1.6vw, 24px);
+  display: flex; flex-direction: column;
+  padding: 26px 28px 22px;
+  background: var(--paper-up);
+  border: 1px solid var(--rule-mid);
+  box-shadow: 0 1px 0 rgba(20, 41, 75, 0.06);
+  transition: border-color 0.2s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.rail-card:hover { border-color: var(--rule-strong); transform: translateY(-2px); }
+.rail-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 14px; }
+.rail-num span { color: var(--muted); }
+.rail-q { flex: 1; font-family: var(--serif); font-size: clamp(16px, 1.15vw, 17.5px); line-height: 1.5; color: var(--ink); }
+.rail-cite {
+  margin-top: 18px; padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.7; color: var(--muted);
+}
+.rail-cite b { display: block; font-weight: 400; color: var(--ink); }
+#client-perspectives .rev-more { margin-top: var(--s4); }
+
+@media (max-width: 720px) {
+  .rail-head { flex-direction: column; align-items: flex-start; gap: var(--s2); }
+  .rail-card { width: min(84vw, 360px); padding: 22px 22px 18px; }
+  .rail-q { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rail-track { animation: none; padding-right: var(--gutter); }
+  .rail-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x proximity; padding-bottom: 6px; }
+  .rail-card { scroll-snap-align: start; }
+  .rail-card.is-dup { display: none; }
+  .rail-toggle { display: none; }
+}
+
+/* ---------- Rail: script-driven motion, deeper edge fade ----------
+   When rail.js is running it moves the track itself and eases the speed
+   in and out; the CSS animation is only the fallback for no-script. */
+.rail.is-js .rail-track { animation: none; padding-left: 0; } /* the script sets where the current card rests */
+.rail.is-js:hover .rail-track { animation: none; }
+.rail-viewport {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 clamp(40px, 9vw, 150px), #000 calc(100% - clamp(40px, 9vw, 150px)), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 clamp(40px, 9vw, 150px), #000 calc(100% - clamp(40px, 9vw, 150px)), transparent 100%);
+}
+.rail-card { transition: border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), transform 0.35s var(--ease-out); }
+.rail-card:hover { box-shadow: 0 10px 28px -18px rgba(20, 41, 75, 0.35); transform: translateY(-3px); }
+
+/* ---------- Consulting: the questions that arrive ----------
+   A dense, quiet grid: many question types, one line each. */
+.qs {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 var(--s5);
+  border-top: 1px solid var(--rule-mid);
+}
+.qs li { padding: 18px 0 20px; border-bottom: 1px solid var(--rule); min-width: 0; }
+.qs h3 { font-family: var(--serif); font-size: 18px; font-weight: 400; line-height: 1.25; color: var(--ink); }
+.qs p { margin-top: 6px; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.qs li.is-more h3 { font-style: italic; color: var(--accent); }
+@media (max-width: 1024px) { .qs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--s4); } }
+@media (max-width: 600px) { .qs { grid-template-columns: 1fr; } }
+
+/* ---------- Header between 901px and 1180px ----------
+   Six links plus the button no longer fit at the desktop sizes on a
+   narrow laptop or a landscape tablet; the links and the button are kept
+   on one line by tightening the type and the gaps rather than wrapping. */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .header-inner { gap: var(--s2); }
+  .site-nav { gap: clamp(11px, 1.5vw, 20px); }
+  .nav-link { font-size: 13.5px; letter-spacing: 0; white-space: nowrap; }
+  .header-cta { white-space: nowrap; padding: 10px 16px; font-size: 13.5px; }
+  .wordmark-text { font-size: 18px; }
+}
+@media (min-width: 901px) and (max-width: 1010px) {
+  .site-nav { gap: 10px; }
+  .nav-link { font-size: 12.5px; }
+  .header-cta { padding: 9px 13px; font-size: 12.5px; }
+  .wordmark { gap: 8px; }
+  .wordmark-text { font-size: 17px; }
+}
+
+/* ---------- QA pass, 6 September 2026 ----------
+   Small corrections from the visual review: the header button never wraps;
+   the desktop nav is explicitly static above the drawer breakpoint (so a
+   capture or a resize across 900px cannot leave the overlay styles behind);
+   the rail loses its edge fade when it is a plain scroll row; the fourth
+   service column no longer stretches its kicker; annotation labels give way
+   on small phone charts; the ranking-table caption wraps inside its scroll
+   container; the hero eyebrow separators trail their items instead of
+   leading the next one. */
+.header-cta { white-space: nowrap; flex-wrap: nowrap; }
+@media (min-width: 901px) {
+  .site-nav { position: static; inset: auto; background: none; padding: 0; opacity: 1; visibility: visible; pointer-events: auto; transition: none; overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rail-viewport { -webkit-mask-image: none; mask-image: none; }
+  .rail-track { padding-inline: var(--gutter); }
+}
+.rail:not(.is-js) .rail-viewport { -webkit-mask-image: none; mask-image: none; }
+.rail:not(.is-js) .rail-track { padding-inline: var(--gutter); }
+.path > p.path-kicker { flex: 0 0 auto; }
+.depth-grid p + p { margin-top: 1em; }
+.rank-table caption {
+  display: block;
+  position: sticky;
+  left: 0;
+  max-width: calc(100vw - 2 * var(--gutter));
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+@media (max-width: 600px) { .annot-note, .annot-val { display: none; } }
+.hero-dateline span { white-space: nowrap; }
+.hero-dateline span + span { padding-left: 0; }
+.hero-dateline span + span::before { content: none; }
+.hero-dateline span:not(:last-child) { position: relative; padding-right: var(--s3); }
+.hero-dateline span:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 50%;
+  width: 1px; height: 11px;
+  transform: translateY(-50%);
+  background: currentColor;
+  opacity: 0.45;
+}
+@media (max-width: 720px) { .hero-dateline span:not(:last-child) { padding-right: 14px; } }
+
+/* ---------- One team, every market: the map ----------
+   Natural Earth land in navy on the paper ground; emerald pins for the
+   clients quoted on the page, a cream pin for the base. Two columns on
+   desktop, map first on a phone. */
+.map-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--s5) var(--s6);
+  align-items: center;
+}
+.map { margin: 0; min-width: 0; }
+.map-frame { position: relative; }
+.map-frame img { display: block; width: 100%; height: auto; }
+.map-pin {
+  position: absolute;
+  width: 9px; height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.25px var(--accent);
+}
+.map-pin.is-base {
+  width: 12px; height: 12px;
+  margin: -6px 0 0 -6px;
+  background: var(--paper);
+  box-shadow: 0 0 0 2.5px var(--ink), 0 0 0 4.5px var(--paper);
+}
+.map-caption {
+  display: flex; flex-wrap: wrap; gap: 6px var(--s4);
+  margin-top: var(--s3);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.map-key { display: inline-flex; align-items: center; gap: 12px; }
+.map-key .map-pin { position: static; margin: 0; flex: none; display: inline-block; }
+.map-body .statement-lg { margin-bottom: 0.7em; }
+.map-body > p:not(.statement-lg) { max-width: 52ch; }
+.map-body .who-facts { max-width: 52ch; }
+@media (max-width: 1024px) {
+  .map-grid { grid-template-columns: 1fr; gap: var(--s4); }
+  .map-body > p:not(.statement-lg), .map-body .who-facts { max-width: 62ch; }
+}
+@media (max-width: 560px) {
+  .map-pin { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; box-shadow: 0 0 0 1.5px var(--paper), 0 0 0 2.5px var(--accent); }
+  .map-pin.is-base { width: 10px; height: 10px; margin: -5px 0 0 -5px; }
+}
+
+/* ---------- Client perspectives: the hallmark and the phone carousel ----------
+   Every card carries a large opening and closing quotation mark, set low
+   in the ground behind the text. On phones and tablets (and under reduced
+   motion) the rail becomes a one-card-per-view carousel that the reader
+   swipes or steps through with the buttons; nothing moves on its own. */
+.rail-card { position: relative; overflow: hidden; }
+.rail-card::before, .rail-card::after {
+  position: absolute;
+  font-family: var(--serif);
+  font-size: 96px;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.09;
+  pointer-events: none;
+}
+.rail-card::before { content: '\201C'; top: 8px; right: 20px; }
+.rail-card::after { content: '\201D'; right: 20px; bottom: -22px; }
+.rail-card > * { position: relative; }
+
+.rail.is-manual .rail-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -webkit-mask-image: none; mask-image: none;
+  padding-bottom: 2px;
+}
+.rail.is-manual .rail-viewport::-webkit-scrollbar { display: none; }
+.rail.is-manual .rail-track {
+  animation: none;
+  transform: none;
+  width: max-content;
+  padding-inline: var(--gutter);
+}
+.rail.is-manual .rail-card {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  width: calc(100vw - 2 * var(--gutter));
+  max-width: 480px;
+}
+.rail.is-manual .rail-card:last-child { margin-right: var(--gutter); }
+
+.rail-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-top: var(--s3);
+}
+.rail-nav[hidden], .rail-toggle[hidden] { display: none; }
+.rail-arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--rule-mid);
+  background: none;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 18px;
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease-out), background-color 0.15s var(--ease-out);
+}
+.rail-arrow:hover:not(:disabled) { border-color: var(--ink); background: var(--paper-up); }
+.rail-arrow:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.rail-arrow:disabled { opacity: 0.3; cursor: default; }
+.rail-count { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; color: var(--muted); min-width: 4ch; text-align: center; }
+@media (max-width: 720px) {
+  .rail-card::before, .rail-card::after { font-size: 84px; }
+}
+
+/* ---------- V13 hero: where growth creates value ----------
+   Four global industries, one measure (return on capital less cost of
+   capital, percentage points), drawn by js/hero-value.js. Tones from the
+   existing on-navy ladder; Software carries the emphasis. The strokes also
+   differ in weight and dash, and each line is named at its end. */
+:root {
+  --val-software: var(--accent-bright);   /* emerald, 6.9:1 on navy-deep */
+  --val-semis:    #F4F0E6;                /* cream */
+  --val-pharma:   #AEC3E4;                /* pale steel, 9.4:1 */
+  --val-auto:     #7C9DD3;                /* steel, 5.7:1: the line below zero */
+}
+.hero-chart.is-value { margin-top: var(--s2); min-height: 220px; }
+.hero-chart.is-value svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hero-chart.is-value svg:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 6px; }
+.hero-chart .val-line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.hero-chart .val-zero { stroke: var(--rule-dk-strong); stroke-width: 1; }
+.hero-chart .val-zero-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--on-dark-mid);
+}
+.hero-chart .val-unit { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; fill: var(--on-dark-muted); }
+.hero-chart .val-end { opacity: 0; transition: opacity 0.5s var(--ease-out); }
+.hero-chart .val-end.is-on { opacity: 1; }
+.hero-chart .val-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  fill: var(--on-dark-mid);
+}
+.hero-chart .val-end.is-emphasis .val-label { fill: var(--on-dark); }
+.hero-chart .val-label .val-num { font-family: var(--serif); font-size: 13.5px; letter-spacing: 0; fill: var(--on-dark); font-variant-numeric: tabular-nums; }
+.hero-chart .val-end.is-emphasis .val-num { fill: var(--accent-bright); }
+.hero-chart .val-end-rule { stroke: var(--rule-dk-mid); stroke-width: 1; }
+.hero-chart .val-pulse { fill: none; stroke-width: 1.5; opacity: 0; }
+.hero-chart .figure-tip .tip-measure { display: block; color: var(--muted); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; margin: 2px 0 4px; }
+.hero-chart .figure-tip .tip-row b { font-weight: 400; font-family: var(--serif); font-size: 13px; letter-spacing: 0; }
+@media (max-width: 560px) {
+  .hero-chart .val-zero-label { font-size: 9px; letter-spacing: 0.08em; }
+}
+
+/* Source and method under the figure. */
+.hero-source a { color: inherit; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--rule-dk-strong); }
+.hero-source a:hover { color: var(--on-dark); text-decoration-color: currentColor; }
+.hero-method {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  color: var(--on-dark-muted);
+}
+.hero-method summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--on-dark-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+}
+.hero-method summary::-webkit-details-marker { display: none; }
+.hero-method summary::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -3px;
+  transition: transform 0.2s var(--ease-out);
+}
+.hero-method[open] summary::before { transform: rotate(-135deg); margin-top: 3px; }
+.hero-method summary:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 3px; }
+.hero-method ul { margin: 8px 0 0; padding-left: 14px; max-width: 78ch; }
+.hero-method li + li { margin-top: 3px; }
+
+/* The cards: the four lines' latest values, keyed by the same stroke. */
+.strip.is-value .strip-market {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 9px;
+  white-space: nowrap; overflow-wrap: normal; word-break: normal;   /* the name drops under its key, never breaks mid-word */
+}
+@media (max-width: 900px) {
+  /* four cells are too narrow for the industry names on a tablet: two by two */
+  .strip.is-value .strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .strip.is-value .strip-cell { border-right: 0; border-bottom: 1px solid var(--rule-dk); padding-left: 0; }
+  .strip.is-value .strip-cell + .strip-cell { padding-left: 0; }
+  .strip.is-value .strip-cell:nth-child(odd) { border-right: 1px solid var(--rule-dk); padding-right: var(--s3); }
+  .strip.is-value .strip-cell:nth-child(even) { padding-left: var(--s3); }
+  .strip.is-value .strip-cell:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (max-width: 560px) {
+  .strip.is-value .strip-market { font-size: 14px; gap: 4px 7px; }
+  .strip.is-value .strip-key { width: 18px; }
+}
+.strip-key { width: 22px; height: 6px; flex: none; overflow: visible; }
+.strip-key line { stroke: var(--on-dark-mid); stroke-width: 1.6; stroke-linecap: round; }
+.strip-cell[data-series="software"] .strip-key line { stroke: var(--val-software); stroke-width: 2.4; }
+.strip-cell[data-series="semiconductors"] .strip-key line { stroke: var(--val-semis); }
+.strip-cell[data-series="pharmaceuticals"] .strip-key line { stroke: var(--val-pharma); stroke-dasharray: 7 4; }
+.strip-cell[data-series="automotive"] .strip-key line { stroke: var(--val-auto); stroke-width: 1.7; stroke-dasharray: 2 4; }
+.strip.is-value .strip-value .unit { margin-left: 3px; }
+.strip.is-value .strip-note { margin-top: 10px; }
+.strip-foot .strip-lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: var(--on-dark);
+  margin-right: 4px;
+}
+@media (max-width: 380px) {
+  .strip.is-value .strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .strip.is-value .strip-cell { border-right: 0; border-bottom: 1px solid var(--rule-dk); padding-left: 0; padding-right: 0; }
+  .strip.is-value .strip-cell:nth-child(odd) { border-right: 1px solid var(--rule-dk); padding-right: var(--s2); }
+  .strip.is-value .strip-cell:nth-child(even) { padding-left: var(--s2); }
+  .strip.is-value .strip-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .strip.is-value .strip-note { font-size: 9.5px; letter-spacing: 0.03em; }
+}

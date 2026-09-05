@@ -10,7 +10,12 @@
 
 const { method, requireJson, readBody, text, email, escapeHtml, clientIp, rateLimit, isSeen, markSeen, mailConfig, sendEmail, inboxAddress, ok, fail, HttpError } = require('./_lib/http');
 
-const SERVICES = ['Emerging Markets Desk', 'India Desk', 'Research', 'Consulting', 'Other / not sure'];
+const SERVICES = [
+  'Research-led Consulting', 'Commissioned Research', 'Retained Research',
+  'Emerging Markets Desk', 'India Desk', 'Not sure',
+  /* Labels from the previous contact form, still accepted so nothing in flight breaks. */
+  'Research', 'Consulting', 'Other / not sure'
+];
 const CONFIRM = 'Received. You will hear back within two working days.';
 
 /* Production's persistence path: the Supabase edge function that writes the
