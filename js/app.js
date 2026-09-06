@@ -116,6 +116,11 @@
     /* Over the dark hero the masthead has no ground of its own; it takes
        one the moment the hero has scrolled past. */
     var hero = doc.querySelector('.hero-dark');
+    /* Once the reader has scrolled, the masthead takes a translucent ground
+       so it stays legible over whatever part of the hero sits beneath it. */
+    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 24); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
     if (hero && ST) {
       ST.create({
         trigger: hero,
@@ -350,6 +355,7 @@
           });
           g.set(h1, { opacity: 1, y: 0 });
           tl.from(split.lines, { yPercent: 118, duration: 1.0, stagger: 0.09, ease: 'power4.out' }, 0.12);
+          window.__krSplit = split;
           usedSplit = true;
         } catch (e) { usedSplit = false; }
       }
@@ -368,11 +374,23 @@
     };
     /* Split after the webfonts have settled, so lines break where they
        will stay. The race keeps a slow font from holding the page. */
-    var started = false;
+    var started = false, fontsSettled = false;
     var kick = function () { if (!started) { started = true; run(); } };
     if (doc.fonts && doc.fonts.ready) {
-      doc.fonts.ready.then(kick);
-      window.setTimeout(kick, 400);
+      doc.fonts.ready.then(function () {
+        var late = started && !fontsSettled;
+        fontsSettled = true;
+        kick();
+        /* The split ran on fallback metrics; once the real faces are in,
+           hand the headline back to normal flow so it breaks where it should. */
+        if (late && window.__krSplit) {
+          try { window.__krSplit.revert(); } catch (e) {}
+          window.__krSplit = null;
+          var h = heroEl.querySelector('h1');
+          if (h) g.set(h, { opacity: 1, y: 0, clearProps: 'transform' });
+        }
+      });
+      window.setTimeout(function () { if (!fontsSettled) kick(); }, 1200);
     } else {
       kick();
     }
@@ -476,40 +494,77 @@
 
   var FALLBACK = 'We could not record that just now. Please email inquiries@kakderesearch.com and it will be picked up directly.';
 
+  var TIMEOUT_MSG = 'That is taking longer than it should. Your enquiry may still have gone through; if you do not hear back, please email inquiries@kakderesearch.com.';
+
   function confirmOnSubmit(formId, endpoint) {
     var form = doc.getElementById(formId);
     if (!form) return;
+    var busy = false;
+    /* The status region is always in the document; a message is an update
+       to it, and it takes focus on completion so the outcome is the next
+       thing a keyboard or screen-reader user meets. */
+    var note = form.querySelector('.form-confirm') ||
+               (form.parentElement && form.parentElement.querySelector('.form-confirm'));
+    if (note) { note.hidden = false; note.setAttribute('tabindex', '-1'); }
+    function tell(text, isError) {
+      if (!note) return;
+      note.textContent = text;
+      note.classList.toggle('is-error', !!isError);
+      try { note.focus(); } catch (e) {}
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (busy) return;
       if (!form.reportValidity()) return;
       var submit = form.querySelector('button[type="submit"]');
-      var note = form.querySelector('.form-confirm') ||
-                 (form.parentElement && form.parentElement.querySelector('.form-confirm'));
       var values = Object.fromEntries(new FormData(form).entries());
       Object.assign(values, contextFields());
-      if (submit) { submit.disabled = true; submit.setAttribute('aria-busy', 'true'); }
+      busy = true;
+      form.setAttribute('aria-busy', 'true');
+      if (submit) submit.setAttribute('aria-busy', 'true');
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var timer = ctrl ? window.setTimeout(function () { ctrl.abort(); }, 20000) : null;
       fetch(endpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values), keepalive: true
+        body: JSON.stringify(values), keepalive: true, signal: ctrl ? ctrl.signal : undefined
       }).then(function (response) {
         return response.json().catch(function () { return {}; }).then(function (result) {
+          if (timer) window.clearTimeout(timer);
           if (!response.ok) {
             /* Only a 4xx tells the visitor something they can act on ("Enter a
                valid email address"). A 5xx is our problem, not theirs: never
                show them server internals, and never let the enquiry vanish. */
             throw new Error(response.status < 500 && result.error ? result.error : FALLBACK);
           }
-          if (note) { note.textContent = result.message || 'Received.'; note.hidden = false; }
+          busy = false;
+          form.removeAttribute('aria-busy');
+          if (submit) submit.removeAttribute('aria-busy');
           Array.prototype.slice.call(form.querySelectorAll('input, textarea, select, button')).forEach(function (n) { n.disabled = true; });
+          tell(result.message || 'Received.', false);
         });
       }).catch(function (error) {
-        if (note) { note.textContent = error.message || FALLBACK; note.hidden = false; }
-        if (submit) { submit.disabled = false; submit.removeAttribute('aria-busy'); }
+        if (timer) window.clearTimeout(timer);
+        busy = false;
+        form.removeAttribute('aria-busy');
+        if (submit) submit.removeAttribute('aria-busy');
+        tell(error && error.name === 'AbortError' ? TIMEOUT_MSG : (error.message || FALLBACK), true);
       });
     });
   }
   confirmOnSubmit('contactForm', '/api/contact');
   confirmOnSubmit('listForm', '/api/newsletter');
+
+  /* A link from a service page names the service; the form starts there.
+     Nothing confidential travels in the URL, only the label. */
+  (function () {
+    var select = doc.getElementById('cf-service');
+    if (!select) return;
+    var wanted = new URLSearchParams(window.location.search).get('service');
+    if (!wanted) return;
+    for (var i = 0; i < select.options.length; i++) {
+      if (select.options[i].value === wanted) { select.value = wanted; break; }
+    }
+  })();
 
   /* Analytics note: the earlier bespoke /api/events beacon (session id +
      per-click tracking) was removed for a privacy-light footprint. The site

@@ -36,7 +36,20 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var motion = !!g && !reduce && doc.documentElement.classList.contains('anim');
   var S = EM.series;
-  var RETRIEVED = '13 August 2026';
+  /* The retrieval date comes from the dataset itself, never from a string
+     typed here, so every caption on the desk agrees with the data file. */
+  var RETRIEVED = (function () {
+    var iso = EM._meta && EM._meta.retrieved;
+    if (!iso) return 'the date in the data file';
+    var d = new Date(iso + 'T00:00:00Z');
+    try { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }); }
+    catch (e) { return iso; }
+  })();
+
+  /* Ranking window: a country is ranked only when its latest observation is
+     within this many years of the newest observation in the row. Older
+     values are shown as n/a rather than compared as if current. */
+  var RANK_WINDOW_YEARS = 3;
 
   /* ---------- the reading frame ---------- */
 
@@ -48,10 +61,22 @@
   var EM_SET = ['IDN', 'BRA', 'MEX', 'ZAF', 'VNM'];
   var MAX_PEERS = 3;
 
-  /* Peer tones are assigned by selection order from the fixed ladder, so
-     the chart never has to hold more than four lines apart. */
-  var PEER_TONES = ['var(--series-peer)', 'var(--series-peer-2)', 'var(--series-peer-3)'];
-  var INDIA_TONE = 'var(--series-india)';
+  /* Every country keeps one tone and one dash pattern wherever it appears,
+     so a reader never has to relearn the key between selections or pages.
+     Dash tells the lines apart without colour; India is the subject and is
+     drawn last, on top, in the accent. */
+  var COUNTRY_STYLE = {
+    IND: { tone: 'var(--series-india)',  dash: '' },
+    CHN: { tone: 'var(--series-peer)',   dash: '' },
+    USA: { tone: 'var(--series-peer-2)', dash: '7 4' },
+    IDN: { tone: 'var(--series-peer)',   dash: '7 4' },
+    BRA: { tone: 'var(--series-peer-2)', dash: '' },
+    MEX: { tone: 'var(--series-peer-3)', dash: '2 4' },
+    ZAF: { tone: 'var(--series-peer)',   dash: '2 4' },
+    VNM: { tone: 'var(--series-peer-3)', dash: '' }
+  };
+  function styleFor(iso) { return COUNTRY_STYLE[iso] || { tone: 'var(--series-peer)', dash: '' }; }
+  var INDIA_TONE = COUNTRY_STYLE.IND.tone;
 
   /* Chartable indicators. minFresh is the oldest observation year the
      ranking will accept before a country reads n/a; a chart shows the
@@ -224,35 +249,58 @@
       svg.appendChild(t);
     }
 
+    /* A missing year breaks the line: successive points are only joined
+       when they are consecutive observations. */
+    var gaps = false;
     function d(pts) {
-      return pts.map(function (p, i) {
-        return (i ? 'L' : 'M') + X(p.year).toFixed(2) + ' ' + Y(p.value).toFixed(2);
-      }).join(' ');
+      var out = '';
+      pts.forEach(function (p, i) {
+        var move = i === 0 || (p.year - pts[i - 1].year) > 1;
+        if (move && i > 0) gaps = true;
+        out += (move ? 'M' : 'L') + X(p.year).toFixed(2) + ' ' + Y(p.value).toFixed(2) + ' ';
+      });
+      return out.trim();
     }
 
     var paths = [];
-    seriesList.forEach(function (s, i) {
+    /* Peers first, the subject last so it sits on top. */
+    var ordered = seriesList.slice().sort(function (a, b) { return (a.iso === 'IND' ? 1 : 0) - (b.iso === 'IND' ? 1 : 0); });
+    ordered.forEach(function (s) {
       var isSubject = s.iso === 'IND';
       var p = el('path', { d: d(s.pts), class: isSubject ? 'series-line' : 'series-peer' });
       if (!isSubject) p.style.stroke = s.tone;
+      if (s.dash) p.style.strokeDasharray = s.dash;
       svg.appendChild(p);
       paths.push(p);
     });
+    frame.setAttribute('data-has-gaps', gaps ? 'true' : 'false');
 
     frame.appendChild(svg);
 
     if (motion && animate) {
+      /* A dashed stroke cannot be drawn with a dash offset, so every line is
+         revealed by a clip that sweeps left to right instead. */
+      var defs = el('defs', {});
+      svg.insertBefore(defs, svg.firstChild);
       paths.forEach(function (p, i) {
-        var L = p.getTotalLength();
-        p.style.strokeDasharray = L;
-        p.style.strokeDashoffset = L;
-        g.to(p, { strokeDashoffset: 0, duration: 0.9, delay: 0.08 * i, ease: 'power2.inOut' });
+        var cid = 'dashClip' + (++clipSeq);
+        var cp = el('clipPath', { id: cid });
+        var rect = el('rect', { x: PAD.l - 6, y: 0, width: 0, height: H });
+        cp.appendChild(rect);
+        defs.appendChild(cp);
+        p.setAttribute('clip-path', 'url(#' + cid + ')');
+        g.to(rect, { attr: { width: W - PAD.r - PAD.l + 12 }, duration: 0.9, delay: 0.08 * i, ease: 'power2.inOut' });
       });
     }
 
     buildHover(frame, svg, ind, seriesList, X, Y, x0, x1, PAD, W, H);
   }
 
+  var clipSeq = 0;
+
+  /* Reading a year: pointer, touch and keyboard all arrive here. The flag
+     is rebuilt only when the year changes; the arrow keys announce the
+     reading through a live region that is always in the document. */
   function buildHover(frame, svg, ind, seriesList, X, Y, x0, x1, PAD, W, H) {
     var hover = el('g', {});
     var rule = el('line', { class: 'hover-rule', y1: PAD.t, y2: H - PAD.b });
@@ -271,45 +319,85 @@
     tip.className = 'figure-tip';
     tip.setAttribute('aria-hidden', 'true');
     frame.appendChild(tip);
+    var live = frame.querySelector('.figure-live');
+    if (!live) {
+      live = doc.createElement('p');
+      live.className = 'visually-hidden figure-live';
+      live.setAttribute('aria-live', 'polite');
+      frame.appendChild(live);
+    }
+    svg.setAttribute('tabindex', '0');
+    svg.setAttribute('aria-label', svg.getAttribute('aria-label') + ' Use the left and right arrow keys to read each year.');
+
+    var shown = null, focusYear = x1;
 
     function hide() {
+      shown = null;
       rule.style.opacity = 0;
       dots.forEach(function (c) { c.style.opacity = 0; });
       tip.classList.remove('is-on');
     }
-
-    svg.addEventListener('pointermove', function (ev) {
-      var rect = svg.getBoundingClientRect();
-      var px = (ev.clientX - rect.left) / rect.width * W;
-      if (px < PAD.l || px > W - PAD.r) { hide(); return; }
-      var year = Math.round(x0 + (px - PAD.l) / (W - PAD.r - PAD.l) * (x1 - x0));
+    function show(year, announce) {
       year = Math.max(x0, Math.min(x1, year));
+      focusYear = year;
+      if (year === shown && !announce) return;
+      shown = year;
       var cx = X(year);
       rule.setAttribute('x1', cx); rule.setAttribute('x2', cx);
       rule.style.opacity = 1;
-
       var rows = '<span class="tip-year">' + year + '</span>';
+      var spoken = [];
       seriesList.forEach(function (s, i) {
         var pt = null;
         for (var j = 0; j < s.pts.length; j++) if (s.pts[j].year === year) { pt = s.pts[j]; break; }
-        if (!pt) { dots[i].style.opacity = 0; return; }
+        if (!pt) { dots[i].style.opacity = 0; spoken.push(s.label + ' no observation'); return; }
         dots[i].setAttribute('cx', cx);
         dots[i].setAttribute('cy', Y(pt.value));
         dots[i].style.opacity = 1;
         rows += '<span class="tip-row"><span class="tip-swatch" style="background:' + s.tone + '"></span>' +
                 s.label + '&nbsp;&nbsp;' + fmt(ind, pt.value) + '</span>';
+        spoken.push(s.label + ' ' + fmt(ind, pt.value));
       });
       tip.innerHTML = rows;
       tip.classList.add('is-on');
-
       var fr = frame.getBoundingClientRect();
       var tx = (cx / W) * fr.width;
       var flip = tx > fr.width * 0.66;
       tip.style.left = tx + 'px';
       tip.style.top = '8px';
       tip.style.transform = 'translateX(' + (flip ? 'calc(-100% - 14px)' : '14px') + ')';
+      if (announce && live) live.textContent = year + ', ' + ind.label + ' (' + ind.unit + '): ' + spoken.join(', ') + '.';
+    }
+    function yearAt(ev) {
+      var rect = svg.getBoundingClientRect();
+      var px = (ev.clientX - rect.left) / rect.width * W;
+      if (px < PAD.l - 8 || px > W - PAD.r + 8) return null;
+      return Math.round(x0 + (px - PAD.l) / (W - PAD.r - PAD.l) * (x1 - x0));
+    }
+
+    svg.addEventListener('pointermove', function (ev) {
+      if (ev.pointerType === 'touch') return;
+      var y = yearAt(ev);
+      if (y === null) hide(); else show(y, false);
     });
-    svg.addEventListener('pointerleave', hide);
+    svg.addEventListener('pointerdown', function (ev) {
+      if (ev.pointerType !== 'touch') return;
+      var y = yearAt(ev);
+      if (y !== null) { if (shown === y) hide(); else show(y, false); }
+    });
+    svg.addEventListener('pointerleave', function (ev) { if (ev.pointerType !== 'touch') hide(); });
+    svg.addEventListener('keydown', function (ev) {
+      var k = ev.key;
+      var cur = shown === null ? focusYear : shown;
+      if (k === 'ArrowRight' || k === 'ArrowUp') show(Math.min(x1, cur + (shown === null ? 0 : 1)), true);
+      else if (k === 'ArrowLeft' || k === 'ArrowDown') show(Math.max(x0, cur - (shown === null ? 0 : 1)), true);
+      else if (k === 'Home') show(x0, true);
+      else if (k === 'End') show(x1, true);
+      else if (k === 'Escape') hide();
+      else return;
+      ev.preventDefault();
+    });
+    svg.addEventListener('blur', hide);
   }
 
   /* ---------- the dashboard ---------- */
@@ -340,19 +428,34 @@
                                         spent only where it can be seen */
     };
 
-    /* Mode tabs. */
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var mode = tab.getAttribute('data-mode');
-        if (mode === state.mode) return;
-        state.mode = mode;
-        state.animate = true;
-        tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t === tab)); });
-        if (state.mode === 'global' && byKey(state.indicator).derived === 'fx') {
-          /* fx index has no US line; it stays available in EM mode. */
-        }
-        buildCountryChips();
-        render();
+    /* Mode tabs: the full tab pattern. One tab stop; the arrow keys move
+       between tabs and select; Home and End reach the ends. */
+    function selectTab(tab, focus) {
+      var mode = tab.getAttribute('data-mode');
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      if (focus) tab.focus();
+      if (mode === state.mode) return;
+      state.mode = mode;
+      state.animate = true;
+      buildCountryChips();
+      render();
+    }
+    tabs.forEach(function (tab, i) {
+      tab.setAttribute('tabindex', tab.getAttribute('aria-selected') === 'true' ? '0' : '-1');
+      tab.addEventListener('click', function () { selectTab(tab, false); });
+      tab.addEventListener('keydown', function (ev) {
+        var k = ev.key, to = null;
+        if (k === 'ArrowRight' || k === 'ArrowDown') to = tabs[(i + 1) % tabs.length];
+        else if (k === 'ArrowLeft' || k === 'ArrowUp') to = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (k === 'Home') to = tabs[0];
+        else if (k === 'End') to = tabs[tabs.length - 1];
+        if (!to) return;
+        ev.preventDefault();
+        selectTab(to, true);
       });
     });
 
@@ -399,7 +502,7 @@
         var iso = chip.getAttribute('data-iso');
         var at = state.peers.indexOf(iso);
         chip.setAttribute('aria-pressed', String(at !== -1));
-        chip.style.setProperty('--sw', at !== -1 ? PEER_TONES[at] : 'transparent');
+        chip.style.setProperty('--sw', at !== -1 ? styleFor(iso).tone : 'transparent');
       });
     }
 
@@ -438,7 +541,8 @@
         seriesList.push({
           iso: iso,
           label: COUNTRIES[iso],
-          tone: iso === 'IND' ? INDIA_TONE : PEER_TONES[(i - 1 + PEER_TONES.length) % PEER_TONES.length],
+          tone: styleFor(iso).tone,
+          dash: styleFor(iso).dash,
           pts: pts
         });
       });
@@ -450,8 +554,13 @@
         legendEl.innerHTML = '';
         seriesList.forEach(function (s) {
           var li = doc.createElement('li');
-          var sw = htm('span', 'legend-swatch');
-          sw.style.background = s.tone;
+          /* The swatch is the line itself: same tone, same dash. */
+          var sw = el('svg', { class: 'legend-swatch legend-line', viewBox: '0 0 28 6', 'aria-hidden': 'true', focusable: 'false' });
+          var ln = el('line', { x1: 1, y1: 3, x2: 27, y2: 3 });
+          ln.style.stroke = s.tone;
+          ln.style.strokeWidth = s.iso === 'IND' ? 2.4 : 1.8;
+          if (s.dash) ln.style.strokeDasharray = s.dash;
+          sw.appendChild(ln);
           li.appendChild(sw);
           li.appendChild(doc.createTextNode(s.label));
           legendEl.appendChild(li);
@@ -467,6 +576,7 @@
           var li = htm('li', 'dash-read');
           var sw = htm('span', 'read-swatch');
           sw.style.setProperty('--sw', s.tone);
+          if (s.dash) sw.classList.add('is-dashed');
           li.appendChild(sw);
           li.appendChild(htm('span', 'read-name', s.label));
           li.appendChild(htm('span', 'read-val', fmt(ind, last.value)));
@@ -489,6 +599,7 @@
         seriesList.forEach(function (s) { freshest = Math.max(freshest, s.pts[s.pts.length - 1].year); });
         sourceEl.textContent = 'Source: World Bank Open Data, ' + id + ', retrieved ' + RETRIEVED +
           '. Reported annual observations to ' + freshest + '; each country’s own latest year is shown beside its value.' +
+          (frame.getAttribute('data-has-gaps') === 'true' ? ' A line breaks where a year is not reported; nothing is bridged.' : '') +
           (ind.derived === 'fx' ? ' Indexed here from annual-average official rates; 2000 = 100.' : '');
       }
 
@@ -524,8 +635,11 @@
     var rows = INDICATORS.filter(function (i) { return i.heat; });
 
     var wrap = htm('div', 'rank-scroll');
+    wrap.setAttribute('tabindex', '0');
+    wrap.setAttribute('role', 'region');
+    wrap.setAttribute('aria-label', 'Ranking table; scrolls sideways on a narrow screen');
     var table = htm('table', 'rank-table');
-    var caption = htm('caption', null, 'Latest reported observation per country. Shading runs from the highest value in each row (darkest) to the lowest; a rank is a reading order, not a verdict.');
+    var caption = htm('caption', null, 'Latest reported observation per country. A country is ranked only when its latest observation is within ' + RANK_WINDOW_YEARS + ' years of the newest in the row; older values read n/a. Shading runs from the highest value in each row (strongest tint) to the lowest, on one scale for every country; a rank is a reading order, not a verdict.');
     table.appendChild(caption);
 
     var thead = doc.createElement('thead');
@@ -553,10 +667,14 @@
       th.appendChild(htm('span', 'row-unit', ind.unit));
       tr.appendChild(th);
 
+      /* Freshness: the row's newest observation sets the window. */
+      var newest = 0;
+      cols.forEach(function (iso) { var l = latestFor(ind.key, iso); if (l && l.year > newest) newest = l.year; });
+      var floor = Math.max(ind.minFresh || 0, newest - RANK_WINDOW_YEARS);
       var cells = cols.map(function (iso) {
         var last = latestFor(ind.key, iso);
-        var ok = last && last.year >= ind.minFresh;
-        return { iso: iso, last: ok ? last : null };
+        var ok = last && last.year >= floor;
+        return { iso: iso, last: ok ? last : null, stale: last && !ok ? last : null };
       });
       var ranked = cells.filter(function (c) { return c.last; })
         .slice().sort(function (a, b) { return b.last.value - a.last.value; });
@@ -567,14 +685,12 @@
         if (!c.last) {
           td.classList.add('is-na');
           td.appendChild(htm('span', 'cell-val', 'n/a'));
+          if (c.stale) td.appendChild(htm('span', 'cell-yr', 'latest ' + c.stale.year));
         } else {
           var rank = ranked.findIndex(function (r) { return r.iso === c.iso; }) + 1;
-          var alpha = ranked.length > 1
-            ? 0.03 + 0.13 * (1 - (rank - 1) / (ranked.length - 1))
-            : 0.08;
-          td.style.background = c.iso === 'IND'
-            ? 'rgba(88, 190, 150, ' + (0.05 + alpha * 0.7).toFixed(3) + ')'
-            : 'rgba(244, 240, 230, ' + alpha.toFixed(3) + ')';
+          /* One scale for every country; India is marked by its edge, not a
+             different ramp, so the shading means the same thing in every cell. */
+          td.style.background = shade(rank, ranked.length);
           td.appendChild(htm('span', 'cell-val', fmt(ind, c.last.value)));
           td.appendChild(htm('span', 'cell-yr', String(c.last.year)));
           if (c.iso === 'IND') td.appendChild(htm('span', 'rank-badge', rank + ' of ' + ranked.length));
@@ -586,6 +702,28 @@
     table.appendChild(tbody);
     wrap.appendChild(table);
     hostEl.appendChild(wrap);
+
+    /* The legend is drawn from the same function as the cells. */
+    var key = htm('p', 'rank-key');
+    key.appendChild(htm('span', 'rank-key-label', 'Highest'));
+    for (var k = 1; k <= 5; k++) {
+      var swatch = htm('span', 'rank-key-swatch');
+      swatch.style.background = shade(k, 5);
+      swatch.setAttribute('aria-hidden', 'true');
+      key.appendChild(swatch);
+    }
+    key.appendChild(htm('span', 'rank-key-label', 'Lowest'));
+    key.appendChild(htm('span', 'rank-key-note', 'One scale for every country; India is marked by its edge.'));
+    hostEl.appendChild(key);
+  }
+
+  /* Cell tint for a rank among n ranked countries: strongest for the
+     highest value, fading to almost none for the lowest. Used by the cells
+     and by the legend, so the two can never disagree. */
+  function shade(rank, n) {
+    var t = n > 1 ? 1 - (rank - 1) / (n - 1) : 0.5;
+    var alpha = 0.04 + 0.16 * t;
+    return 'rgba(244, 240, 230, ' + alpha.toFixed(3) + ')';
   }
 
   /* ---------- copy fillers: real values quoted inline ----------

@@ -48,6 +48,14 @@
       "headers": [ { "key": "Cache-Control", "value": "public, max-age=2592000" } ]
     },
     {
+      "source": "/(css|js|assets/data)/(.*)",
+      "headers": [ { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" } ]
+    },
+    {
+      "source": "/assets/img/og/(.*)",
+      "headers": [ { "key": "Cache-Control", "value": "public, max-age=604800" } ]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [ { "key": "Cache-Control", "value": "no-store" } ]
     }

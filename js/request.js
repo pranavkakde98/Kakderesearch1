@@ -46,13 +46,18 @@
     });
   }
 
+  var busy = false;
   function reset() {
     form.reset();
+    busy = false;
     modal.classList.remove('is-done');
-    if (status) { status.hidden = true; status.textContent = ''; status.classList.remove('is-error'); }
+    /* The status region stays in the document, empty, so a later message
+       is an update to something assistive technology already knows about. */
+    if (status) { status.textContent = ''; status.classList.remove('is-error'); }
     if (emailErr) emailErr.hidden = true;
     if (emailInput) emailInput.removeAttribute('aria-invalid');
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.removeAttribute('aria-busy'); }
+    if (submitBtn) submitBtn.removeAttribute('aria-busy');
+    form.removeAttribute('aria-busy');
     if (doneBody) doneBody.innerHTML = doneBodyDefault;
     if (doneTitle) doneTitle.textContent = 'Check your inbox. The report has been sent.';
   }
@@ -116,13 +121,13 @@
     if (!status) return;
     status.textContent = text;
     status.classList.toggle('is-error', !!isError);
-    status.hidden = false;
   }
 
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (busy) return;
     var email = (emailInput && emailInput.value || '').trim();
     if (!validEmail(email)) {
       if (emailErr) emailErr.hidden = false;
@@ -136,7 +141,11 @@
     values.page_path = window.location.pathname;
     values.referrer = doc.referrer || '';
 
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.setAttribute('aria-busy', 'true'); }
+    /* The button keeps focus and stays enabled while sending; a second press
+       is ignored rather than the control vanishing under the reader. */
+    busy = true;
+    if (submitBtn) submitBtn.setAttribute('aria-busy', 'true');
+    form.setAttribute('aria-busy', 'true');
     say('Sending the report to ' + email + '…', false);
 
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
@@ -163,18 +172,23 @@
           if (doneTitle) doneTitle.textContent = 'Check your inbox. The report has been sent.';
           if (doneBody && data.message) doneBody.textContent = data.message;
         }
+        busy = false;
+        if (submitBtn) submitBtn.removeAttribute('aria-busy');
+        form.removeAttribute('aria-busy');
         modal.classList.add('is-done');
-        var doneBtn = modal.querySelector('.req-done [data-req-close]');
-        window.setTimeout(function () { if (doneBtn) doneBtn.focus(); }, 30);
-        /* The form (and its live region) is now display:none, so the
-           outcome is announced from the done panel's own live region. */
+        /* The dialog's own title and the report name stay visible above the
+           outcome, so its accessible name and description do not change.
+           Focus moves to the outcome heading, which is what happened. */
+        window.setTimeout(function () { if (doneTitle) doneTitle.focus(); }, 30);
         var announce = modal.querySelector('.req-done [role="status"]');
         if (announce) announce.textContent = (doneTitle ? doneTitle.textContent : 'Sent.') + ' ' + (doneBody ? doneBody.textContent : '');
       });
     }).catch(function (err) {
       if (timer) window.clearTimeout(timer);
+      busy = false;
       say(err && err.name === 'AbortError' ? FALLBACK : (err && err.message) || FALLBACK, true);
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.removeAttribute('aria-busy'); }
+      if (submitBtn) submitBtn.removeAttribute('aria-busy');
+      form.removeAttribute('aria-busy');
     });
   });
 })();

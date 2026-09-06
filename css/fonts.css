@@ -9,14 +9,14 @@
                     Source Serif was drawn for reading, holds its colour at
                     text sizes, and looks like a publication.
    Inter            interface. Navigation, body copy, buttons, forms.
-                    400 and 500 only — nothing on this site is set bolder,
-                    so the 600 file was dropped.
+                    One variable file covers 400 and 500; nothing on this
+                    site is set bolder.
    JetBrains Mono   the technical register. Dates, page counts, themes,
                     section indices — the metadata of a research publication.
                     It appears only where something is being recorded.
 
    Source Serif and JetBrains Mono are variable, so one file covers each
-   weight range. Five files, 200 KB, against nine files and 338 KB before.
+   weight range. Four files, about 150 KB.
    ========================================================================== */
 
 @font-face {
@@ -34,19 +34,16 @@
   src: url('../assets/fonts/SourceSerif4-Italic.woff2') format('woff2');
 }
 
+/* Inter ships as one variable file (the same binary Google Fonts serves for
+   every weight); declaring the range lets the browser draw a true Medium
+   instead of reusing Regular. The former Inter-500 file was a byte-for-byte
+   copy and has been removed. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   font-display: swap;
-  src: url('../assets/fonts/Inter-400.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../assets/fonts/Inter-500.woff2') format('woff2');
+  src: url('../assets/fonts/Inter.woff2') format('woff2');
 }
 
 @font-face {

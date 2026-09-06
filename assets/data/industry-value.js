@@ -11,7 +11,13 @@
    underlying company data are collected and aggregated by NYU Stern; the
    selection, comparison, presentation and interpretation are Kakde
    Research's. Stored here so the page never fetches the source
-   spreadsheets. Not live data, not a forecast, not a recommendation. */
+   spreadsheets. Not live data, not a forecast, not a recommendation.
+
+   Record: the two workbooks as downloaded on 6 September 2026 are kept
+   outside the repository with their SHA-256 (EVAGlobal.xls 55cc6cfa…,
+   histgrGlobal.xls 8688b566…) and a reproduction note; the four latest
+   spreads and CAGRs were independently matched to them after rounding.
+   Each annual value is a snapshot of the companies then in the group. */
 window.INDUSTRY_VALUE = {
   source: {
     name: 'Aswath Damodaran, NYU Stern, Global Industry Data',

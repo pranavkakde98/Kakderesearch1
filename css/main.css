@@ -4626,3 +4626,142 @@ html, body { max-width: 100%; overflow-x: clip; }
   .strip.is-value .strip-cell:nth-last-child(-n+2) { border-bottom: 0; }
   .strip.is-value .strip-note { font-size: 9.5px; letter-spacing: 0.03em; }
 }
+
+
+/* ==========================================================================
+   V14 · audit round (September 2026)
+   Forms, the request dialog, the dashboard, the service grid, the masthead
+   over the hero, print and forced colours. Nothing above is rewritten; the
+   rules below take precedence by order.
+   ========================================================================== */
+
+/* ---------- Forms: a boundary that meets 3:1, a real focus ring, a distinct
+   error state, and status regions that are always present. ---------- */
+.field input, .field select, .field textarea {
+  border-color: var(--rule-strong);            /* ≈3.4:1 against the paper */
+  background: var(--paper-up);
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ink); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"], .field select[aria-invalid="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 4px 0 0 var(--ink);        /* an edge, not just a darker line */
+}
+.field-dark .field input, .field-dark .field select, .field-dark .field textarea,
+.field-abyss .field input, .field-abyss .field select, .field-abyss .field textarea { border-color: var(--rule-dk-strong); }
+.field-dark .field input:focus-visible, .field-abyss .field input:focus-visible,
+.field-dark .field select:focus-visible, .field-abyss .field select:focus-visible,
+.field-dark .field textarea:focus-visible, .field-abyss .field textarea:focus-visible { outline-color: var(--accent-bright); }
+.field-error { margin-top: 6px; font-size: 13px; color: var(--ink); }
+.field-error[hidden] { display: none; }
+
+/* The status region is in the document from the start, empty and silent;
+   it takes its box only once it says something. */
+.form-confirm:empty, .req-status:empty { padding: 0; border: 0; margin: 0; min-height: 0; }
+.form-confirm { outline: none; }
+.form-confirm.is-error { border-left-color: var(--rule-strong); }
+.form-confirm:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.req-status { outline: none; }
+.req-status[hidden] { display: block; }
+
+/* ---------- The request dialog: title and report above the form, the
+   metadata in the content column (the 3px column held only the edge). ---------- */
+.req-head { margin-bottom: var(--s2); }
+.req-report { grid-template-rows: auto auto; }
+.req-report::before { grid-row: 1 / span 2; grid-column: 1; }
+.req-report-name, .req-report-meta { grid-column: 2; }
+.req-modal.is-done .req-head { display: block; }
+.req-done h3:focus { outline: none; }
+.req-done h3:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.req-form[aria-busy="true"] button[type="submit"] { opacity: 0.7; cursor: progress; }
+form[aria-busy="true"] button[type="submit"] { cursor: progress; }
+
+/* ---------- The masthead over the hero: a ground once the page has moved. ---------- */
+.site-header.on-hero.is-scrolled {
+  background: rgba(14, 29, 56, 0.86);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom-color: var(--rule-dk);
+}
+
+/* ---------- Service grid: four equal measures, labels on one line. ---------- */
+/* Every column carries the same padding and the grid carries the gutter, so
+   the four measures are equal; the rule sits on the column's outer edge. */
+.paths { column-gap: var(--s4); }
+.path { margin-right: 0; padding-right: var(--s4); }
+.path:last-child { padding-right: var(--s4); margin-right: 0; border-right: 0; }
+.path-kicker { white-space: nowrap; gap: var(--s2); }
+.path-kicker .path-mode { letter-spacing: 0.08em; }
+@media (max-width: 1180px) and (min-width: 901px) {
+  .path-kicker { font-size: 10px; }
+  .path-kicker .path-mode { letter-spacing: 0.06em; }
+}
+@media (max-width: 900px) {
+  .path:last-child { padding-right: 0; }
+}
+
+/* ---------- Dashboard: dashed legend swatches, a named scroll region, one
+   shading scale with its own key, and India marked by an edge. ---------- */
+.figure-legend .legend-line { width: 28px; height: 6px; overflow: visible; flex: none; display: inline-block; }
+.figure-legend .legend-line line { stroke-linecap: round; }
+.read-swatch.is-dashed { background-image: repeating-linear-gradient(90deg, var(--sw) 0 6px, transparent 6px 10px); background-color: transparent; }
+.rank-scroll:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 4px; }
+.rank-table td.is-india { box-shadow: inset 3px 0 0 var(--accent-bright); }
+.rank-table td.is-na .cell-yr { display: block; font-family: var(--mono); font-size: 10px; color: var(--on-dark-muted); margin-top: 2px; }
+.rank-key {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px;
+  margin-top: var(--s2);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-dark-muted);
+}
+.rank-key-swatch { width: 22px; height: 12px; border: 1px solid var(--rule-dk); display: inline-block; }
+.rank-key-note { flex-basis: 100%; letter-spacing: 0.05em; text-transform: none; }
+.dash-tab:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 3px; }
+.figure-frame svg:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 6px; }
+
+/* ---------- Print: the research pages on paper. ---------- */
+@media print {
+  .site-header, .site-footer, .nav-toggle, .skip-link, .cta-band, .closing,
+  .rail-nav, .rail-toggle, .req-modal, .progress-bar, .hero-plate, .btn, .text-link .arrow { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  .hero-dark, .field-dark, .field-abyss, .desk-hero, .strip, .dash { background: #fff !important; color: #000 !important; }
+  .hero-dark *, .field-dark *, .field-abyss *, .desk-hero * { color: #000 !important; }
+  .hero-chart, .figure-frame { break-inside: avoid; }
+  .hero-chart .axis-label, .hero-chart .val-label, .figure-frame .axis-label { fill: #000 !important; }
+  .hero-chart .gridline, .figure-frame .gridline { stroke: #999 !important; }
+  .hero-chart .val-zero { stroke: #000 !important; }
+  .a-rise, .a-hero-el, html.anim .a-rise, html.anim .a-hero-el { opacity: 1 !important; transform: none !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; }
+  .container { max-width: none; padding: 0; }
+  h1, h2, h3 { break-after: avoid; }
+  .rail-viewport { overflow: visible !important; mask-image: none !important; -webkit-mask-image: none !important; }
+  .rail-track { transform: none !important; flex-wrap: wrap; animation: none !important; }
+  .rail-card.is-dup { display: none !important; }
+  details { display: block; }
+  details > summary { list-style: none; }
+  details:not([open]) > *:not(summary) { display: block; }
+}
+
+/* ---------- Forced colours: keep edges and lines where the palette goes. ---------- */
+@media (forced-colors: active) {
+  .btn, .rail-arrow, .rail-toggle, .chip, .dash-tab, .filter-btn, .req-close { border: 1px solid ButtonText; forced-color-adjust: auto; }
+  .field input, .field select, .field textarea { border: 1px solid FieldText; }
+  .hero-chart .val-line, .hero-chart .val-zero, .series-line, .series-peer, .spark-line { stroke: CanvasText; }
+  .hero-chart .val-end-dot, .hover-dot, .map-pin, .strip-key line { fill: CanvasText; stroke: CanvasText; }
+  .rank-table td { border: 1px solid CanvasText; }
+  .rail-card { border: 1px solid CanvasText; }
+}
+
+/* ---------- Flagship page: exhibits reproduced as tables ---------- */
+.exhibit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s5); }
+.exhibit figcaption p { font-family: var(--serif); font-size: 18px; line-height: 1.3; color: var(--ink); margin: 6px 0 var(--s2); }
+.exhibit-table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.exhibit-table th, .exhibit-table td { text-align: left; padding: 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.exhibit-table th[scope="col"] { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.exhibit-table th[scope="row"] { font-weight: 400; color: var(--body-c); padding-right: var(--s3); }
+.exhibit-table td { font-family: var(--serif); font-size: 16px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.exhibit-table tr.is-total th, .exhibit-table tr.is-total td { border-top: 1px solid var(--rule-strong); border-bottom: 0; color: var(--ink); font-weight: 500; }
+.exhibit .figure-source { margin-top: var(--s2); }
+@media (max-width: 760px) { .exhibit-grid { grid-template-columns: 1fr; } }
