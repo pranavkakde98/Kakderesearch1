@@ -4765,3 +4765,17 @@ form[aria-busy="true"] button[type="submit"] { cursor: progress; }
 .exhibit-table tr.is-total th, .exhibit-table tr.is-total td { border-top: 1px solid var(--rule-strong); border-bottom: 0; color: var(--ink); font-weight: 500; }
 .exhibit .figure-source { margin-top: var(--s2); }
 @media (max-width: 760px) { .exhibit-grid { grid-template-columns: 1fr; } }
+
+/* ---------- The founder: one photograph, beside the biography and the byline ---------- */
+.founder-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--s4) var(--s6); align-items: start; }
+.founder-grid .prose { grid-column: 1; grid-row: 1; }
+.founder-portrait { grid-column: 2; grid-row: 1; margin: 0; width: 100%; max-width: 380px; justify-self: end; }
+.founder-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border: 1px solid var(--rule); background: var(--paper-dn); }
+.founder-portrait figcaption { margin-top: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 900px) {
+  .founder-grid { grid-template-columns: 1fr; gap: var(--s3); }
+  .founder-portrait { grid-column: 1; grid-row: 1; max-width: 260px; justify-self: start; }
+  .founder-grid .prose { grid-row: 2; }
+}
+.who-byline .founder-thumb { display: block; width: 200px; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border: 1px solid var(--rule-dk); margin-bottom: var(--s3); }
+@media (max-width: 900px) { .who-byline .founder-thumb { width: 140px; } }
