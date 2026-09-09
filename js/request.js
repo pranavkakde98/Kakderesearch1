@@ -146,7 +146,7 @@
     busy = true;
     if (submitBtn) submitBtn.setAttribute('aria-busy', 'true');
     form.setAttribute('aria-busy', 'true');
-    say('Sending the report to ' + email + '…', false);
+    say('Checking your request…', false);
 
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
     var timer = ctrl ? window.setTimeout(function () { ctrl.abort(); }, 20000) : null;
@@ -165,7 +165,10 @@
         }
         /* The server distinguishes "sent" from "recorded, will follow by
            email" — the dialog says exactly which. */
-        if (data.delivered === false) {
+        if (data.preview) {
+          if (doneTitle) doneTitle.textContent = 'V15 preview complete.';
+          if (doneBody) doneBody.textContent = data.message;
+        } else if (data.delivered === false) {
           if (doneTitle) doneTitle.textContent = 'Request noted.';
           if (doneBody) doneBody.textContent = data.message || 'This report is nearing completion. We will send it to your email once it is published. Thank you for your interest.';
         } else {

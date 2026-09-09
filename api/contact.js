@@ -14,6 +14,8 @@
 
 'use strict';
 
+const { isPreview, previewResult } = require('./_lib/preview');
+
 const {
   method, requireBody, readBody, text, required, email, escapeHtml, clientIp, sha256,
   rateLimit, isSeen, markSeen, mailConfig, sendEmail, inboxAddress, fetchWithTimeout,
@@ -86,6 +88,7 @@ module.exports = async function handler(req, res) {
       source: [text(data.page_path, 200), text(data.referrer, 300), text(data.utm_source, 80)].filter(Boolean).join(' · ')
     };
     if (!SERVICES.includes(contact.service)) throw new HttpError(422, 'Please choose a service.');
+    if (isPreview()) return previewResult(req, res);
 
     /* One enquiry is the whole of what was written, not its first line. */
     const dupKey = 'contact:' + sha256([contact.email, contact.service, contact.organisation, contact.question].join('\n'));
@@ -117,7 +120,7 @@ module.exports = async function handler(req, res) {
             <tr><td style="padding:4px 12px 4px 0;color:#5C6370">Stored</td><td>${stored.ok ? 'yes' : stored.skipped ? 'not configured' : 'FAILED'}</td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#5C6370">Request</td><td>${escapeHtml(id)}</td></tr>
           </table>
-          <p style="margin-top:12px;color:#5C6370;font-size:13px">What they are trying to understand</p>
+          <p style="margin-top:12px;color:#5C6370;font-size:13px">What they are trying to decide or understand</p>
           <p style="white-space:pre-wrap">${escapeHtml(contact.question)}</p>
         </div>`;
       const plain = `New project enquiry\nName: ${contact.name}\nEmail: ${contact.email}\nOrganisation: ${contact.organisation}\nService: ${contact.service}\nRole: ${contact.role}\nCountry: ${contact.country}\nTimeframe: ${contact.timeframe}\nStored: ${stored.ok ? 'yes' : stored.skipped ? 'not configured' : 'FAILED'}\nRequest: ${id}\n\n${contact.question}`;

@@ -16,7 +16,7 @@ jobs:
       - name: Syntax-check every script
         run: for f in api/*.js api/_lib/*.js js/*.js; do node --check "$f"; done
       - name: Run the API regression tests
-        run: node --test tests/
+        run: node --test tests/*.test.js
       - name: Check the HTML for leftover placeholders
         run: |
           ! grep -rn -E 'lorem ipsum|TODO|XXX|localhost:50' --include=*.html . || (echo "placeholder text found" && exit 1)

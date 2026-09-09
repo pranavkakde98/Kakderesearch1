@@ -25,6 +25,8 @@
 
 'use strict';
 
+const { isPreview, previewResult } = require('./_lib/preview');
+
 const {
   method, requireBody, readBody, text, email, escapeHtml, clientIp, hashIp, sha256,
   rateLimit, isSeen, markSeen, mailConfig, sendEmail, inboxAddress, ok, fail, HttpError,
@@ -139,7 +141,7 @@ function requestPage(req, res) {
   }
   const body = `
   <p>${escapeHtml(report.title)}${report.meta ? ' &middot; ' + escapeHtml(report.meta) : ''}</p>
-  <form method="post" action="${BASE}/api/request-report/">
+  <form method="post" action="/api/request-report/">
     <input type="hidden" name="reportId" value="${escapeHtml(report.id)}">
     <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
     <label for="email">Work email</label>
@@ -186,6 +188,7 @@ module.exports = async function handler(req, res) {
 
     report = getReport(reportId);
     if (!report) throw new HttpError(404, 'That report is not available for request.');
+    if (isPreview()) return previewResult(req, res);
 
     /* Idempotency: the same address asking for the same report inside ten
        minutes gets one delivery and one honest reply. Only marked after a
@@ -314,7 +317,7 @@ module.exports = async function handler(req, res) {
     const status = error instanceof HttpError ? error.status : 500;
     /* Only an unexpected failure is worth an internal email; a 4xx is the
        visitor's (or a bot's) doing and must not be able to generate mail. */
-    if (status >= 500 && !(error instanceof HttpError && status === 503 && error.message === MSG.notCaptured) && mailConfig().configured) {
+    if (!isPreview() && status >= 500 && !(error instanceof HttpError && status === 503 && error.message === MSG.notCaptured) && mailConfig().configured) {
       await notifyInside({
         report: { title: (report && report.title) || 'Unknown', id: reportId || 'unknown' },
         to, name, org, outcome: 'ERROR — ' + (error && error.message || 'unknown failure'), recordId, context

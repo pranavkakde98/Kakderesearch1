@@ -9,6 +9,8 @@
 
 'use strict';
 
+const { isPreview, previewResult } = require('./_lib/preview');
+
 const {
   method, requireBody, readBody, text, email, escapeHtml, clientIp, hmac,
   rateLimit, isSeen, markSeen, mailConfig, sendEmail, inboxAddress,
@@ -40,6 +42,7 @@ module.exports = async function handler(req, res) {
 
     const to = email(data.email);
     const topic = text(data.topic, 160);
+    if (isPreview()) return previewResult(req, res);
     const dupKey = `news:${to}`;
     if (isSeen(dupKey)) return ok(req, res, { ok: true, message: CONFIRM });
 
@@ -78,11 +81,11 @@ module.exports = async function handler(req, res) {
           subject: `You are subscribed — Kakde Research`,
           html: `<div style="font-family:Georgia,serif;color:#232837;max-width:560px">
             <p>Thanks — you are subscribed${topic ? ' (' + escapeHtml(topic) + ')' : ''}.</p>
-            <p>You will receive the monthly research note, and nothing else.</p>
+            <p>You will receive selected research notes and new publication updates from Kakde Research.</p>
             <p style="color:#5C6370;font-size:13px"><a href="${escapeHtml(link)}" style="color:#14294B">Unsubscribe</a> at any time, or reply to any note.</p>
             <p style="color:#5C6370;font-size:13px">Kakde Research &middot; inquiries@kakderesearch.com</p>
           </div>`,
-          text: `Thanks — you are subscribed. You will receive the monthly research note, and nothing else.\nUnsubscribe at any time: ${link}\nKakde Research · inquiries@kakderesearch.com`
+          text: `Thanks — you are subscribed. You will receive selected research notes and new publication updates from Kakde Research.\nUnsubscribe at any time: ${link}\nKakde Research · inquiries@kakderesearch.com`
         });
         mailed = true;
       } catch (e) {

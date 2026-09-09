@@ -6,3 +6,4 @@ supabase
 BACKEND_SETUP.md
 js/vendor/VERSIONS.md
 .env.example
+V15_NOTES.md

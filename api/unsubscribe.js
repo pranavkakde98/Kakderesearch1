@@ -6,6 +6,8 @@
 
 'use strict';
 
+const { isPreview } = require('./_lib/preview');
+
 const { method, text, hmac, clientIp, rateLimit, escapeHtml, sendHtml, htmlPage, HttpError, requestId, log, BASE_URL } = require('./_lib/http');
 const db = require('./_lib/db');
 
@@ -37,6 +39,7 @@ module.exports = async function handler(req, res) {
       log('info', id, 'unsubscribe_bad_link');
       return page(res, 400, 'That link is not valid.', `<p>The unsubscribe link may have been cut short. Reply to any note, or email <a href="mailto:inquiries@kakderesearch.com">inquiries@kakderesearch.com</a>, and you will be removed by hand.</p>`);
     }
+    if (isPreview()) return page(res, 200, 'V15 preview complete.', '<p>No subscription has been changed. This is a test deployment.</p>');
     if (!db.configured()) throw new HttpError(503, 'Unavailable');
     await db.update('newsletter_subscribers', `email=eq.${encodeURIComponent(address)}`, { status: 'unsubscribed', unsubscribed_at: new Date().toISOString() }, id);
     log('info', id, 'unsubscribed');
